@@ -55,7 +55,11 @@ const AuthenticatedRoute = ({ children }: Props) => {
 
 	const getElement = () => {
 		if (isAuthenticating) {
-			return <div>Loading...</div>
+			return (
+				<div className="h-screen w-full flex items-center justify-center">
+					<div>Loading...</div>
+				</div>
+			)
 		}
 
 		if (!authenticated && isAuthRoute()) {

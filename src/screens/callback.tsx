@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import apiClient from '../lib/axios'
-import Login from '../components/shared/ui/login'
 
 const Callback = () => {
 	const navigate = useNavigate()
@@ -18,9 +17,10 @@ const Callback = () => {
 						code,
 					},
 				})
-				navigate('/expenses')
 			} catch (error) {
 				console.log(error)
+			} finally {
+				navigate('/')
 			}
 		}
 
@@ -28,10 +28,9 @@ const Callback = () => {
 	}, [code, navigate])
 
 	return (
-		<>
+		<div className="h-screen w-full flex items-center justify-center">
 			<div>Loading...</div>
-			<Login />
-		</>
+		</div>
 	)
 }
 

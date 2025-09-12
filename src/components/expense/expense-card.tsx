@@ -1,4 +1,4 @@
-import { cn } from '@/lib/cn'
+import cn from '@/lib/cn'
 import type { ExpenseResponse } from '@/types/expense'
 import { formatToINR } from '@/utils/numbers'
 import type { FC } from 'react'

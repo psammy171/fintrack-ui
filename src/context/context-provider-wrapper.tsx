@@ -4,6 +4,7 @@ import { EditTagProvider } from './tags/edit-tag'
 import { EditTagBudgetProvider } from './tags/edit-tag-budget'
 import { CreateExpenseProvider } from './expenses/create-expense'
 import { ExpenseProvider } from './expenses/expenses'
+import Layout from '@/components/shared/ui/layout'
 
 const ContextProviderWrapper = () => {
 	return (
@@ -12,7 +13,9 @@ const ContextProviderWrapper = () => {
 				<EditTagBudgetProvider>
 					<ExpenseProvider>
 						<CreateExpenseProvider>
-							<Outlet />
+							<Layout>
+								<Outlet />
+							</Layout>
 						</CreateExpenseProvider>
 					</ExpenseProvider>
 				</EditTagBudgetProvider>

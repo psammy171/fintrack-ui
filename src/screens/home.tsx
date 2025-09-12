@@ -4,10 +4,13 @@ import SetGoalIcon from '@/components/shared/icons/set-goal'
 import BarGraphIcon from '@/components/shared/icons/bar-graph'
 import WalletIcon from '@/components/shared/icons/wallet'
 import { Link } from 'react-router-dom'
+import Header from '@/components/shared/ui/header'
 
 export default function Homepage() {
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+		<div className="bg-gradient-to-br from-blue-50 to-indigo-100">
+			<Header />
+
 			{/* Hero Section */}
 			<section className="text-center pt-28 pb-20 px-6">
 				<motion.h1

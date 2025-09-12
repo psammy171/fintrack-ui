@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useAuth } from '../../../auth/hooks/use-auth'
 import apiClient from '../../../lib/axios'
-import SettingsIcon from '../icons/settings'
 import Login from './login'
 import Button from './button'
 
@@ -43,7 +42,7 @@ const Header = () => {
 	}
 
 	return (
-		<header className="flex items-center h-[50px] w-full  gap-x-4 fixed z-10 top-0">
+		<header className="flex items-center h-[50px] w-full gap-x-4 fixed z-10 top-0">
 			{/* <Link to={'/'}>
 				<p className="text-xl font-bold">Welcome to FinTrack</p>
 			</Link> */}
@@ -51,14 +50,14 @@ const Header = () => {
 			{userContext ? (
 				<div className="relative flex items-center p-3 justify-end gap-x-4 text-white bg-indigo-600 flex-grow">
 					<Link to={'/'}>
-						<p className="text-xl font-bold">Welcome to FinTrack</p>
+						<p className="text-xl font-bold">FinTrack</p>
 					</Link>
 					<span className="flex-grow"></span>
-					<Link to="/dashboard">Dashboard</Link>
+					{/* <Link to="/dashboard">Dashboard</Link>
 					<Link to="/expenses">Expenses</Link>
 					<Link to={'/settings'}>
 						<SettingsIcon className="w-5 h-5 hover:rotate-180 duration-300 cursor-pointer" />
-					</Link>
+					</Link> */}
 					<span
 						className="border-2 w-7 h-7 rounded-full flex items-center justify-center cursor-pointer"
 						onClick={toggleProfile}

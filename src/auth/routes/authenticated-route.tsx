@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import type { UserContext } from '../../types/user-context'
 import apiClient from '../../lib/axios'
 import { useLocation } from 'react-router-dom'
-import Header from '../../components/shared/ui/header'
 
 interface Props {
 	children: React.ReactNode
@@ -66,12 +65,7 @@ const AuthenticatedRoute = ({ children }: Props) => {
 			window.location.href = import.meta.env.VITE_API_LOGIN_URL
 		}
 
-		return (
-			<>
-				<Header />
-				{children}
-			</>
-		)
+		return children
 	}
 
 	return <>{getElement()} </>

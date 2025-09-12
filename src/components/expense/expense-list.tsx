@@ -3,7 +3,6 @@ import Loader from '../shared/ui/loader'
 import { useEffect } from 'react'
 import ExpenseCard from './expense-card'
 import Button from '../shared/ui/button'
-import ArrowIcon from '../shared/icons/arrow'
 
 const ExpenseList = () => {
 	const {
@@ -15,11 +14,13 @@ const ExpenseList = () => {
 		prevPage,
 		isLastPage,
 		isFirstPage,
+		total,
+		pageSize,
 	} = useExpenses()
 
 	useEffect(() => {
 		fetchExpenses()
-	}, [fetchExpenses])
+	}, [fetchExpenses, pageNumber])
 
 	const getExpenseList = () => {
 		return expenses.length > 0 ? (
@@ -46,7 +47,7 @@ const ExpenseList = () => {
 
 	return (
 		<>
-			<div className=" rounded-sm overflow-hidden mb-4 shadow-md">
+			<div className=" rounded-xs overflow-hidden mb-16 shadow-md">
 				<span className="flex border-b py-2 px-3 font-semibold bg-indigo-600 text-[18px] text-white">
 					<p className="w-[3%]"></p>
 					<p className="w-[19%]">Tag</p>
@@ -56,27 +57,42 @@ const ExpenseList = () => {
 				</span>
 				{getLoaderOrExpenseList()}
 			</div>
-			<p className="text-right">Page Number</p>
-			<div className="flex justify-end items-center mb-6">
-				<Button
-					onClick={prevPage}
-					variant="ghost"
-					className="mx-0 bg-transparent hover:bg-gray-100 border-y border-l rounded-l-md"
-					disabled={isFirstPage}
-				>
-					<ArrowIcon className="-rotate-90" />
-				</Button>
-				<span className="border-y h-9 px-3 flex items-center">
-					{pageNumber}
-				</span>
-				<Button
-					variant="ghost"
-					onClick={nextPage}
-					className="mx-0 bg-transparent hover:bg-gray-100 border-y border-r rounded-r-md"
-					disabled={isLastPage}
-				>
-					<ArrowIcon className="rotate-90" />
-				</Button>
+
+			<div className="fixed bottom-0 left-12 z-10 right-0 bg-gray-100">
+				<div className="flex justify-end items-center my-2 mr-2">
+					<p className="text-sm text-gray-600 mr-2">
+						Showing results from {pageNumber * pageSize + 1} to{' '}
+						{Math.min((pageNumber + 1) * pageSize, total)} of{' '}
+						{total}
+					</p>
+					<Button
+						onClick={prevPage}
+						variant="ghost"
+						className={`mx-0 bg-transparent hover:bg-gray-100 border-y border-l rounded-l-md ${
+							isFirstPage
+								? 'text-gray-400 hover:text-gray-400'
+								: ''
+						}`}
+						disabled={isFirstPage}
+					>
+						&laquo;
+					</Button>
+					<span className="border-y h-9 px-3 flex items-center">
+						{pageNumber + 1}
+					</span>
+					<Button
+						variant="ghost"
+						onClick={nextPage}
+						className={`mx-0 bg-transparent hover:bg-gray-100 border-y border-r rounded-r-md ${
+							isLastPage
+								? 'text-gray-400 hover:text-gray-400'
+								: ''
+						}`}
+						disabled={isLastPage}
+					>
+						&raquo;
+					</Button>
+				</div>
 			</div>
 		</>
 	)

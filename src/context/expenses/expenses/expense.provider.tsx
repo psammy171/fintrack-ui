@@ -9,16 +9,19 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const [fetching, setFetching] = useState<boolean>(false)
 	const [fetchError, setFetchError] = useState<string | undefined>(undefined)
 	const [pageNumber, setPageNumber] = useState<number>(0)
+	const [pageSize] = useState<number>(50)
+	const [totalPages, setTotalPages] = useState<number>(0)
+	const [total, setTotal] = useState<number>(0)
 	const [isLastPage, setIsLastPage] = useState<boolean>(false)
 	const [isFirstPage, setIsFirstPage] = useState<boolean>(true)
 
 	const fetchExpenses = useCallback(async () => {
 		setFetching(true)
 		try {
-			if (expenses.length > 0) return
 			const response = await apiClient.get('/expenses', {
 				params: {
 					pageNumber,
+					pageSize,
 				},
 			})
 
@@ -26,6 +29,8 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 			setExpenses(data.content)
 			setIsFirstPage(data.first)
 			setIsLastPage(data.last)
+			setTotal(data.totalElements)
+			setTotalPages(data.totalPages)
 		} catch (error) {
 			setFetchError(
 				'Error fetching expenses : ' + (error as Error).message,
@@ -33,7 +38,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		} finally {
 			setFetching(false)
 		}
-	}, [expenses.length, pageNumber])
+	}, [pageNumber, pageSize])
 
 	const nextPage = () => {
 		if (!isLastPage) setPageNumber((prevPage) => prevPage + 1)
@@ -71,6 +76,9 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				pageNumber,
 				isLastPage,
 				isFirstPage,
+				total,
+				totalPages,
+				pageSize,
 			}}
 		>
 			{children}

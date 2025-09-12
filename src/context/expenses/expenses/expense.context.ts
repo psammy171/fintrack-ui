@@ -5,9 +5,12 @@ interface IExpenseContext {
 	fetching: boolean
 	fetchError?: string
 	expenses: ExpenseResponse[]
+	total: number
 	pageNumber: number
 	isLastPage: boolean
 	isFirstPage: boolean
+	totalPages: number
+	pageSize: number
 
 	fetchExpenses: () => void
 

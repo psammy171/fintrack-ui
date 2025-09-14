@@ -3,6 +3,7 @@ import ExpenseForm from '../components/expense/expense-form'
 import { useCreateExpense } from '../hooks/expenses/use-create-expense'
 import Button from '@/components/shared/ui/button'
 import ExpensePagination from '@/components/expense/expense-pagination'
+import ExpenseFolders from '@/components/expense/expense-folders'
 
 const Expenses = () => {
 	const { openCreateExpensePopUp } = useCreateExpense()
@@ -15,7 +16,11 @@ const Expenses = () => {
 				<Button onClick={openCreateExpensePopUp}>Add Expense</Button>
 			</span>
 
-			<ExpenseList />
+			<div className=" rounded-xs overflow-hidden m-4 shadow-md flex-grow overflow-y-scroll bg-gray-50 relative flex flex-row">
+				<ExpenseFolders />
+				<ExpenseList className="flex-grow" />
+			</div>
+
 			<ExpenseForm />
 
 			<ExpensePagination />

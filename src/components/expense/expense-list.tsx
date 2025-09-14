@@ -2,8 +2,9 @@ import { useExpenses } from '@/hooks/expenses/use-expenses'
 import Loader from '../shared/ui/loader'
 import { useEffect } from 'react'
 import ExpenseCard from './expense-card'
+import cn from '@/lib/cn'
 
-const ExpenseList = () => {
+const ExpenseList = ({ className }: { className?: string }) => {
 	const { expenses, fetching, fetchExpenses, pageNumber } = useExpenses()
 
 	useEffect(() => {
@@ -34,8 +35,8 @@ const ExpenseList = () => {
 	}
 
 	return (
-		<div className=" rounded-xs overflow-hidden m-4 shadow-md flex-grow overflow-y-scroll bg-gray-50 relative">
-			<span className="flex border-b py-2 px-3 font-semibold bg-indigo-600 text-[18px] text-white sticky top-0">
+		<div className={cn('', className)}>
+			<span className="flex py-2 px-3 font-semibold bg-indigo-600 text-[18px] text-white sticky top-0">
 				<p className="w-[3%]"></p>
 				<p className="w-[19%]">Tag</p>
 				<p className="w-[40%]">Remark</p>

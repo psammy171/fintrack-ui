@@ -68,7 +68,7 @@ const AuthenticatedRoute = ({ children }: Props) => {
 		return children
 	}
 
-	return <>{getElement()} </>
+	return getElement()
 }
 
 export default AuthenticatedRoute

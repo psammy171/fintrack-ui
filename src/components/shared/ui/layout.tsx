@@ -44,7 +44,7 @@ const Layout: FC<Props> = ({ children }) => {
 	]
 
 	return (
-		<div className="w-full h-screen flex overflow-hidden overflow-y-scroll relative">
+		<div className="w-full h-screen flex overflow-hidden overflow-y-scroll fixed">
 			<Header />
 			<div className="fixed top-[50px] bg-gray-200 left-0 bottom-0 w-12 hover:w-52 z-20 overflow-hidden transition-all duration-200">
 				{menuItems.map((item) => (
@@ -64,7 +64,7 @@ const Layout: FC<Props> = ({ children }) => {
 					</Link>
 				))}
 			</div>
-			<div className="w-full h-full overflow-scroll flex-grow pl-14 pr-2 py-2">
+			<div className="w-full h-full overflow-scroll flex-grow ml-12">
 				{children}
 			</div>
 		</div>

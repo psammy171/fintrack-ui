@@ -15,7 +15,7 @@ const Loader = forwardRef<HTMLDivElement, LoaderProps>(
 				className={cn(
 					`w-5 h-5 rounded-full border-[3px] ${
 						variant === 'primary'
-							? 'border-[#0458ad]'
+							? 'border-indigo-600'
 							: 'border-white'
 					} border-t-transparent animate-spin bg-transparent`,
 					className,

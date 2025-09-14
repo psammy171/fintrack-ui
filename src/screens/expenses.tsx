@@ -7,8 +7,8 @@ const Expenses = () => {
 	const { openCreateExpensePopUp } = useCreateExpense()
 
 	return (
-		<div className="mx-auto pt-10">
-			<span className="flex items-center mt-10 mb-5 pl-2">
+		<div className="mx-auto py-10 h-full overflow-hidden overflow-y-scroll flex flex-col">
+			<span className="flex items-center my-4 pl-2">
 				<p className="text-2xl font-semibold">All your expenses here</p>
 				<span className="flex-grow"></span>
 				<Button onClick={openCreateExpensePopUp}>Add Expense</Button>

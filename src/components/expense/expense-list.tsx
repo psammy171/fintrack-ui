@@ -47,8 +47,8 @@ const ExpenseList = () => {
 
 	return (
 		<>
-			<div className=" rounded-xs overflow-hidden mb-16 shadow-md">
-				<span className="flex border-b py-2 px-3 font-semibold bg-indigo-600 text-[18px] text-white">
+			<div className=" rounded-xs overflow-hidden mb-5 shadow-md flex-grow overflow-y-scroll bg-gray-200 relative">
+				<span className="flex border-b py-2 px-3 font-semibold bg-indigo-600 text-[18px] text-white sticky top-0">
 					<p className="w-[3%]"></p>
 					<p className="w-[19%]">Tag</p>
 					<p className="w-[40%]">Remark</p>

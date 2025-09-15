@@ -7,6 +7,7 @@ interface ICreateFolderContext {
 	editFolderId?: string
 	folderNameErr?: string
 
+	setFolderNameErr: (err: string) => void
 	setFolderName: (name: string) => void
 	openCreateForm: () => void
 	closeForm: () => void

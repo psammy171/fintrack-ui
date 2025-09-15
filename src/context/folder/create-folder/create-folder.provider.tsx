@@ -24,7 +24,10 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 
 	const openCreateForm = () => setFormModal(true)
 
-	const openEditForm = (folder: Folder) => setEditFolderId(folder.id)
+	const openEditForm = (folder: Folder) => {
+		setEditFolderId(folder.id)
+		setFolderName(folder.name)
+	}
 
 	const submitForm = () => {
 		if (!folderName || folderName.trim() === '' || folderName.length < 3) {
@@ -87,6 +90,7 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 				submitForm,
 				setFolderName,
 				folderNameErr,
+				setFolderNameErr,
 			}}
 		>
 			{children}

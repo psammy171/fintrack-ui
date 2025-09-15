@@ -35,7 +35,7 @@ const ExpenseList = ({ className }: { className?: string }) => {
 	}
 
 	return (
-		<div className={cn('', className)}>
+		<div className={cn('overflow-y-scroll', className)}>
 			<span className="flex py-2 px-3 font-semibold bg-indigo-600 text-[18px] text-white sticky top-0">
 				<p className="w-[3%]"></p>
 				<p className="w-[19%]">Tag</p>

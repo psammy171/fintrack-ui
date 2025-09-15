@@ -16,7 +16,7 @@ const Expenses = () => {
 				<Button onClick={openCreateExpensePopUp}>Add Expense</Button>
 			</span>
 
-			<div className=" rounded-xs overflow-hidden m-4 shadow-md flex-grow overflow-y-scroll bg-gray-50 relative flex flex-row">
+			<div className=" rounded-xs overflow-hidden m-4 shadow-md flex-grow bg-gray-50 relative flex flex-row justify-start">
 				<ExpenseFolders />
 				<ExpenseList className="flex-grow" />
 			</div>

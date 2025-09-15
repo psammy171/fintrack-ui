@@ -1,5 +1,6 @@
 import type { Folder } from '@/types/folder'
 import type { FC } from 'react'
+import FolderIcon from '../shared/icons/folder'
 
 interface Props {
 	folders: Folder[]
@@ -13,7 +14,13 @@ const ExpenseFolderList: FC<Props> = ({ folders }) => {
 			) : (
 				<>
 					{folders.map((folder) => (
-						<div key={folder.id}>{folder.name}</div>
+						<div
+							key={folder.id}
+							className="flex border-b p-2 items-center gap-x-4 cursor-pointer hover:bg-gray-200"
+						>
+							<FolderIcon />
+							{folder.name}
+						</div>
 					))}
 				</>
 			)}

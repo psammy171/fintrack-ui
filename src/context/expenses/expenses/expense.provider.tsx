@@ -14,6 +14,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const [total, setTotal] = useState<number>(0)
 	const [isLastPage, setIsLastPage] = useState<boolean>(false)
 	const [isFirstPage, setIsFirstPage] = useState<boolean>(true)
+	const [folderId, setFolderId] = useState<string | undefined>(undefined)
 
 	const fetchExpenses = useCallback(async () => {
 		setFetching(true)
@@ -22,6 +23,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				params: {
 					pageNumber,
 					pageSize,
+					folderId,
 				},
 			})
 
@@ -38,7 +40,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		} finally {
 			setFetching(false)
 		}
-	}, [pageNumber, pageSize])
+	}, [pageNumber, pageSize, folderId])
 
 	const nextPage = () => {
 		if (!isLastPage) setPageNumber((prevPage) => prevPage + 1)
@@ -79,6 +81,8 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				total,
 				totalPages,
 				pageSize,
+				folderId,
+				setFolderId,
 			}}
 		>
 			{children}

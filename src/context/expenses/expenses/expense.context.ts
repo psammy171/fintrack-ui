@@ -11,6 +11,7 @@ interface IExpenseContext {
 	isFirstPage: boolean
 	totalPages: number
 	pageSize: number
+	folderId?: string
 
 	fetchExpenses: () => void
 
@@ -19,6 +20,7 @@ interface IExpenseContext {
 
 	setFetching: (isFetching: boolean) => void
 	setFetchError: (error: string) => void
+	setFolderId: (folderId?: string) => void
 
 	nextPage: () => void
 	prevPage: () => void

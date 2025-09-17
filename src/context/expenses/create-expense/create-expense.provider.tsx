@@ -13,7 +13,7 @@ import { useExpenses } from '@/hooks/expenses/use-expenses'
 export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 	children,
 }) => {
-	const { addExpense } = useExpenses()
+	const { addExpense, folderId } = useExpenses()
 	const [createExpense, setCreateExpense] = useState<CreateExpense>({
 		remark: '',
 		amount: 0,
@@ -92,6 +92,7 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 					amount: createExpense.amount,
 					time: new Date(createExpense.date).toISOString(),
 					tagId: createExpense.tag!.id,
+					folderId: folderId,
 				})
 				closeCreateExpensePopUp()
 				toast.promise(req, {

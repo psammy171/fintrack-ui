@@ -29,7 +29,7 @@ export const FoldersProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const updateFolder = (folderId: string, folder: Folder) => {
 		setFolders((prevFolders) =>
 			prevFolders.map((f) =>
-				f.id === folderId ? { ...f, ...folder } : folder,
+				f.id === folderId ? { ...f, ...folder } : f,
 			),
 		)
 	}

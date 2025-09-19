@@ -25,7 +25,7 @@ const ExpenseFolderForm = () => {
 		<PopUp
 			open={formModal}
 			close={closeForm}
-			title={editFolderId ? 'Update Folder' : 'Create Folder'}
+			title={editFolderId ? 'Edit Folder' : 'Create Folder'}
 		>
 			<form onSubmit={submitHandler} className="flex flex-col">
 				<label htmlFor="folderName" className="text-[13px]">
@@ -46,7 +46,7 @@ const ExpenseFolderForm = () => {
 					</p>
 				)}
 				<Button className="mx-0 mt-4" type="submit">
-					Create Folder
+					{editFolderId ? 'Update Folder' : 'Create Folder'}
 				</Button>
 			</form>
 		</PopUp>

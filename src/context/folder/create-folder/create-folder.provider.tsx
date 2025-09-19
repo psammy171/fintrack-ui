@@ -20,14 +20,35 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 	)
 	const [formModal, setFormModal] = useState<boolean>(false)
 
+	const [deleteFolder, setDeleteFolder] = useState<Folder | undefined>(
+		undefined,
+	)
+	const [deleteConfirmationModal, setDeleteConfirmationModal] =
+		useState<boolean>(false)
+
+	const openDeleteConfirmationPopUp = (folder: Folder) => {
+		setDeleteFolder(folder)
+		setDeleteConfirmationModal(true)
+	}
+
 	const closeForm = () => setFormModal(false)
 
-	const openCreateForm = () => setFormModal(true)
+	const openCreateForm = () => {
+		setFolderName('')
+		setEditFolderId(undefined)
+		setFormModal(true)
+	}
+
+	const closeConfirmationForm = () => setDeleteConfirmationModal(false)
 
 	const openEditForm = (folder: Folder) => {
 		setEditFolderId(folder.id)
 		setFolderName(folder.name)
+		setFormModal(true)
 	}
+
+	const closeDeleteConfirmationPopUp = (): void =>
+		setDeleteConfirmationModal(false)
 
 	const submitForm = () => {
 		if (!folderName || folderName.trim() === '' || folderName.length < 3) {
@@ -75,7 +96,7 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 
 		const folder = res.data as Folder
 
-		updateFolder(folderId, folder)
+		updateFolder(folder.id, folder)
 	}
 
 	return (
@@ -91,6 +112,11 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 				setFolderName,
 				folderNameErr,
 				setFolderNameErr,
+				deleteFolder,
+				openDeleteConfirmationPopUp,
+				closeDeleteConfirmationPopUp,
+				deleteConfirmationModal,
+				closeConfirmationForm,
 			}}
 		>
 			{children}

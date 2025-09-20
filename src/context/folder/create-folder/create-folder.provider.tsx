@@ -5,11 +5,17 @@ import apiClient from '@/lib/axios'
 import toast from 'react-hot-toast'
 import { useFolders } from '@/hooks/folders/use-folders'
 import type { IDefaultComponentProps } from '@/interfaces/default-component-props.interface'
+import { useExpenses } from '@/hooks/expenses/use-expenses'
 
 export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 	children,
 }) => {
-	const { addFolder, updateFolder } = useFolders()
+	const {
+		addFolder,
+		updateFolder,
+		deleteFolder: deleteFolderFromList,
+	} = useFolders()
+	const { folderId: currentFolderId, setFolderId } = useExpenses()
 
 	const [folderName, setFolderName] = useState<string>('')
 	const [folderNameErr, setFolderNameErr] = useState<string | undefined>(
@@ -99,6 +105,22 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 		updateFolder(folder.id, folder)
 	}
 
+	const deleteFolderById = (folderId: string) => {
+		const req = apiClient.delete(`/folders/${folderId}`)
+
+		toast.promise(req, {
+			success: 'Folder deleted successfully!',
+			error: 'Failed to delete folder.',
+			loading: 'Deleting folder',
+		})
+
+		if (folderId === currentFolderId) {
+			setFolderId(undefined)
+		}
+
+		deleteFolderFromList(folderId)
+	}
+
 	return (
 		<CreateFolderContext.Provider
 			value={{
@@ -117,6 +139,7 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 				closeDeleteConfirmationPopUp,
 				deleteConfirmationModal,
 				closeConfirmationForm,
+				deleteFolderById,
 			}}
 		>
 			{children}

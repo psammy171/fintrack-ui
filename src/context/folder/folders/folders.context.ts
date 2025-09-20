@@ -13,6 +13,8 @@ interface IFoldersContext {
 
 	setFetching: (isFetching: boolean) => void
 	setFetchError: (error: string) => void
+
+	deleteFolder: (folderId: string) => void
 }
 
 export const FoldersContext = createContext<IFoldersContext | undefined>(

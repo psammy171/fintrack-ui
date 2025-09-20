@@ -5,6 +5,7 @@ import Loader from '../shared/ui/loader'
 import ExpenseFolderList from './expense-folder-list'
 import ExpenseFolderForm from './expense-folder-form'
 import { useCreateFolders } from '@/hooks/folders/use-create-folder'
+import DeleteFolderConfirmation from './delete-folder-comfirmation'
 
 const ExpenseFolders = () => {
 	const { fetchFolders, fetching, folders } = useFolders()
@@ -35,6 +36,7 @@ const ExpenseFolders = () => {
 				<ExpenseFolderList folders={folders} />
 			)}
 			<ExpenseFolderForm />
+			<DeleteFolderConfirmation />
 		</div>
 	)
 }

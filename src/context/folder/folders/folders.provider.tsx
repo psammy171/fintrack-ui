@@ -12,7 +12,6 @@ export const FoldersProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const fetchFolders = useCallback(async () => {
 		setFetching(true)
 		try {
-			if (folders.length > 0) return
 			const response = await apiClient.get('/folders')
 			setFolders(response.data)
 		} catch (error) {
@@ -20,7 +19,7 @@ export const FoldersProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		} finally {
 			setFetching(false)
 		}
-	}, [folders.length])
+	}, [])
 
 	const addFolder = (folder: Folder) => {
 		setFolders((prevFolders) => [...prevFolders, folder])
@@ -31,6 +30,12 @@ export const FoldersProvider: FC<IDefaultComponentProps> = ({ children }) => {
 			prevFolders.map((f) =>
 				f.id === folderId ? { ...f, ...folder } : f,
 			),
+		)
+	}
+
+	const deleteFolder = (folderId: string): void => {
+		setFolders((folders) =>
+			folders.filter((folder) => folder.id !== folderId),
 		)
 	}
 
@@ -45,6 +50,7 @@ export const FoldersProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				updateFolder,
 				setFetchError,
 				setFetching,
+				deleteFolder,
 			}}
 		>
 			{children}

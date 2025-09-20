@@ -21,9 +21,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 				case 'secondary':
 					return 'border-2 py-[6px] border-indigo-600 hover:border-indigo-600 text-indigo-600 hover:text-indigo-600 bg-transparent disabled:bg-transparent border-indigo-600 disabled:hover:border-indigo-600 hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-gray-500'
 				case 'ghost':
-					return 'py-2 text-indigo-600 hover:text-indigo-600 bg-transparent disabled:bg-transparent hover:bg-indigo-600'
+					return 'py-2 text-indigo-600 hover:text-indigo-600 bg-transparent disabled:bg-transparent hover:bg-indigo-100'
 				case 'error':
-					return 'py-2 bg-error/90 disabled:bg-error/90 hover:bg-error text-white border-2 border-error/90 disabled:hover:border-error/90 hover:border-error'
+					return 'py-2 bg-red-700 disabled:bg-red-600 hover:bg-red-800 text-white border-2 border-red-700 disabled:hover:border-red-600 hover:border-red-800'
 			}
 		}
 

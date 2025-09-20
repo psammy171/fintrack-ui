@@ -22,6 +22,8 @@ interface ICreateFolderContext {
 
 	closeDeleteConfirmationPopUp: () => void
 
+	deleteFolderById: (folderId: string) => void
+
 	submitForm: () => void
 }
 

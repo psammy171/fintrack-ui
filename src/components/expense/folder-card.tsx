@@ -4,6 +4,7 @@ import FolderIcon from '../shared/icons/folder'
 import { useExpenses } from '@/hooks/expenses/use-expenses'
 import EditIcon from '../shared/icons/edit'
 import { useCreateFolders } from '@/hooks/folders/use-create-folder'
+import DeleteIcon from '../shared/icons/options'
 
 interface Props {
 	folder: Folder
@@ -11,7 +12,7 @@ interface Props {
 
 const FolderCard: FC<Props> = ({ folder }) => {
 	const { setFolderId, folderId } = useExpenses()
-	const { openEditForm } = useCreateFolders()
+	const { openEditForm, openDeleteConfirmationPopUp } = useCreateFolders()
 	const [showOptions, setShowOptions] = useState(false)
 
 	const closeOptions = () => setShowOptions(false)
@@ -45,7 +46,13 @@ const FolderCard: FC<Props> = ({ folder }) => {
 					openEditForm(folder)
 				}}
 			/>
-			{/* <DeleteIcon className="text-red-800 hidden group-hover:block" /> */}
+			<DeleteIcon
+				onClick={(e) => {
+					e.stopPropagation()
+					openDeleteConfirmationPopUp(folder)
+				}}
+				className="text-red-800 hidden group-hover:block"
+			/>
 		</div>
 	)
 }

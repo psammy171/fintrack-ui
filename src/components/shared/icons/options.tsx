@@ -1,19 +1,23 @@
-const DeleteIcon = (props: React.SVGAttributes<SVGElement>) => {
+const OptionsIcon = (props: React.SVGAttributes<SVGElement>) => {
 	return (
 		<svg
 			stroke="currentColor"
-			fill="currentColor"
-			strokeWidth="0"
+			fill="none"
+			strokeWidth="2"
 			viewBox="0 0 24 24"
+			aria-hidden="true"
 			height="1em"
 			width="1em"
 			xmlns="http://www.w3.org/2000/svg"
 			{...props}
 		>
-			<path fill="none" d="M0 0h24v24H0z"></path>
-			<path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
+			<path
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+			></path>
 		</svg>
-	)
-}
+	);
+};
 
-export default DeleteIcon
+export default OptionsIcon;

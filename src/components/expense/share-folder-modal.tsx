@@ -9,11 +9,13 @@ const ShareFolderModal = () => {
 		shareFolder,
 		closeShareFolderModal,
 		shareFolderById,
+		openAddUserModal,
 	} = useCreateFolders();
 
-	const shareFolderHandler = () => {
+	const shareFolderHandler = async () => {
 		if (shareFolder) {
-			shareFolderById(shareFolder.id);
+			await shareFolderById(shareFolder.id);
+			openAddUserModal(shareFolder);
 		}
 		closeShareFolderModal();
 	};

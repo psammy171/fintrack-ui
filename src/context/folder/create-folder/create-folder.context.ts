@@ -10,10 +10,12 @@ interface ICreateFolderContext {
 	shareFolder?: Folder;
 
 	shareFolderModal: boolean;
+	addUserModal: boolean;
 	deleteConfirmationModal: boolean;
 
 	closeConfirmationForm: (folder: Folder) => void;
 	closeShareFolderModal: () => void;
+	closeAddUserModal: () => void;
 
 	setFolderNameErr: (err: string) => void;
 	setFolderName: (name: string) => void;
@@ -22,12 +24,13 @@ interface ICreateFolderContext {
 
 	openEditForm: (folder: Folder) => void;
 	openShareFolderModal: (folder: Folder) => void;
+	openAddUserModal: (folder: Folder) => void;
 	openDeleteConfirmationPopUp: (folder: Folder) => void;
 
 	closeDeleteConfirmationPopUp: () => void;
 
 	deleteFolderById: (folderId: string) => void;
-	shareFolderById: (folderId: string) => void;
+	shareFolderById: (folderId: string) => Promise<void>;
 
 	submitForm: () => void;
 }

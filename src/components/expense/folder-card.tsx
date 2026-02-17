@@ -13,7 +13,7 @@ import OptionsIcon from "../shared/icons/options";
 import DeleteIcon from "../shared/icons/delete";
 import EditIcon from "../shared/icons/edit";
 import ShareIcon from "../shared/icons/share";
-import AddUserIcon from "../shared/icons/add-user";
+import SharedUserIcon from "../shared/icons/shared-user";
 
 interface Props {
 	folder: Folder;
@@ -23,8 +23,12 @@ const FolderCard: FC<Props> = ({ folder }) => {
 	const folderCardRef = useRef<HTMLDivElement>(null);
 	const folderOptionsRef = useRef<HTMLDivElement>(null);
 	const { setFolderId, folderId } = useExpenses();
-	const { openEditForm, openDeleteConfirmationPopUp, openShareFolderModal } =
-		useCreateFolders();
+	const {
+		openEditForm,
+		openDeleteConfirmationPopUp,
+		openShareFolderModal,
+		openAddUserModal,
+	} = useCreateFolders();
 	const [showOptions, setShowOptions] = useState(false);
 
 	const isClickOutside = (
@@ -99,11 +103,11 @@ const FolderCard: FC<Props> = ({ folder }) => {
 				</span>
 				{folder.shared && (
 					<span
-						// onClick={() => openEditForm(folder)}
+						onClick={() => openAddUserModal(folder)}
 						className="flex items-center px-2 py-1.5 gap-x-2 border-t border-t-gray-300 hover:bg-gray-200 cursor-pointer text-green-700"
 					>
-						<AddUserIcon />
-						<p>Add user</p>
+						<SharedUserIcon />
+						<p>Users</p>
 					</span>
 				)}
 				<span

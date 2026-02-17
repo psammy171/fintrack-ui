@@ -33,6 +33,7 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 		undefined,
 	);
 	const [shareFolderModal, setShareFolderModal] = useState<boolean>(false);
+	const [addUserModal, setAddUserModal] = useState<boolean>(false);
 
 	const [deleteConfirmationModal, setDeleteConfirmationModal] =
 		useState<boolean>(false);
@@ -146,11 +147,18 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 		setShareFolderModal(true);
 	};
 
+	const openAddUserModal = (folder: Folder) => {
+		setShareFolder(folder);
+		setAddUserModal(true);
+	};
+
 	const closeShareFolderModal = () => setShareFolderModal(false);
+	const closeAddUserModal = () => setAddUserModal(false);
 
 	return (
 		<CreateFolderContext.Provider
 			value={{
+				addUserModal,
 				shareFolderModal,
 				shareFolder,
 				shareFolderById,
@@ -168,9 +176,11 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 				setFolderNameErr,
 				deleteFolder,
 				openDeleteConfirmationPopUp,
+				openAddUserModal,
 				closeDeleteConfirmationPopUp,
 				deleteConfirmationModal,
 				closeConfirmationForm,
+				closeAddUserModal,
 				deleteFolderById,
 			}}
 		>

@@ -12,6 +12,7 @@ export const TagFormProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const [tagName, setTagName] = useState<string>("");
 	const [tagFormPopup, setTagFormPopup] = useState<boolean>(false);
 	const [tagError, setTagError] = useState<string | undefined>(undefined);
+	const [folderId, setFolderId] = useState<string | undefined>(undefined);
 
 	const validateForm = () => {
 		if (!tagName) {
@@ -54,9 +55,15 @@ export const TagFormProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		if (!isFormValid) return;
 		setTagFormPopup(false);
 
-		const request = apiClient.post(`/tags`, {
+		const createBody: { name: string; folderId?: string } = {
 			name: tagName,
-		});
+		};
+
+		if (folderId) {
+			createBody.folderId = folderId;
+		}
+
+		const request = apiClient.post(`/tags`, createBody);
 
 		toast.promise(request, {
 			success: "Tag created successfully",
@@ -91,6 +98,7 @@ export const TagFormProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	return (
 		<TagFormContext.Provider
 			value={{
+				folderId,
 				tagName,
 				editTagId,
 				tagFormPopup,
@@ -102,6 +110,7 @@ export const TagFormProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				closeTagFormPopup,
 				openCreateTagPopup,
 				createTag,
+				setFolderId,
 			}}
 		>
 			{children}

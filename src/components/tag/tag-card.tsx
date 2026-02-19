@@ -1,8 +1,7 @@
 import type { FC } from "react";
 import type { Tag } from "../../types/tag";
 import EditIcon from "../shared/icons/edit";
-import GoalIcon from "../shared/icons/goal";
-import { useEditTagBudget, useTagForm } from "../../hooks/tags";
+import { useTagForm } from "../../hooks/tags";
 import { formatToINR } from "../../utils/numbers";
 import { getDisplayValueOfEnum } from "../../utils/enums";
 import cn from "../../lib/cn";
@@ -15,7 +14,6 @@ interface Props {
 
 const TagCard: FC<Props> = ({ tag, index, className }) => {
 	const { openEditTagPopup } = useTagForm();
-	const { openEditTagBudgetPopup } = useEditTagBudget();
 
 	return (
 		<div
@@ -43,13 +41,13 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 			>
 				<EditIcon className="text-blue-800" />
 			</span>
-			<span
+			{/* <span
 				className="w-7 h-7 rounded-lg bg-gray-300 flex items-center justify-center invisible group-hover:visible"
 				onClick={() => openEditTagBudgetPopup(tag)}
 				title="Edit tag budget"
 			>
 				<GoalIcon className="text-[#11710D]" />
-			</span>
+			</span> */}
 		</div>
 	);
 };

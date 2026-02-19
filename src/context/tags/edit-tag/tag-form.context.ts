@@ -13,6 +13,7 @@ interface ITagFormContext {
 	createTag: () => void;
 
 	setTagError: (value: string) => void;
+	setFolderId: (value: string) => void;
 
 	openEditTagPopup: (tag: Tag) => void;
 	openCreateTagPopup: () => void;

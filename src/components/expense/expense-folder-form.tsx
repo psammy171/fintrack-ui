@@ -58,7 +58,7 @@ const ExpenseFolderForm = () => {
 							className="mt-4"
 							onChange={(checked) => setIsShared(checked)}
 						/>
-						<span className="flex items-center gap-x-2 text-sm">
+						<span className="flex items-center gap-x-2 text-sm text-gray-600">
 							<WarnIcon className="inline w-4 h-4 text-yellow-500 shrink-0" />
 							<p className="leading-none">
 								Once you share a folder, you won't be able to

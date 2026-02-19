@@ -92,7 +92,7 @@ const UserComponent = ({
 				{user.firstName} {user.lastName}
 			</span>
 			{isUserAlreadyShared && (
-				<span className="text-sm border rounded-lg px-2 bg-indigo-100 text-indigo-600 border-indigo-600">
+				<span className="text-xs border rounded-lg px-2 bg-indigo-100 text-indigo-600 border-indigo-600">
 					Shared
 				</span>
 			)}

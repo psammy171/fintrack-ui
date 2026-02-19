@@ -1,66 +1,97 @@
-import { useCallback, useState, type FC } from 'react'
-import type { IDefaultComponentProps } from '../../../interfaces/default-component-props.interface'
-import apiClient from '../../../lib/axios'
-import { ExpenseContext } from './expense.context'
-import type { ExpenseResponse } from '@/types/expense'
+import { useCallback, useState, type FC } from "react";
+import type { IDefaultComponentProps } from "../../../interfaces/default-component-props.interface";
+import apiClient from "../../../lib/axios";
+import { ExpenseContext } from "./expense.context";
+import type { ExpenseResponse } from "@/types/expense";
 
 export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
-	const [expenses, setExpenses] = useState<ExpenseResponse[]>([])
-	const [fetching, setFetching] = useState<boolean>(false)
-	const [fetchError, setFetchError] = useState<string | undefined>(undefined)
-	const [pageNumber, setPageNumber] = useState<number>(0)
-	const [pageSize] = useState<number>(50)
-	const [totalPages, setTotalPages] = useState<number>(0)
-	const [total, setTotal] = useState<number>(0)
-	const [isLastPage, setIsLastPage] = useState<boolean>(false)
-	const [isFirstPage, setIsFirstPage] = useState<boolean>(true)
-	const [folderId, setFolderId] = useState<string | undefined>(undefined)
+	const [expenses, setExpenses] = useState<ExpenseResponse[]>([]);
+	const [fetching, setFetching] = useState<boolean>(false);
+	const [fetchError, setFetchError] = useState<string | undefined>(undefined);
+	const [pageNumber, setPageNumber] = useState<number>(0);
+	const [pageSize] = useState<number>(50);
+	const [totalPages, setTotalPages] = useState<number>(0);
+	const [total, setTotal] = useState<number>(0);
+	const [isLastPage, setIsLastPage] = useState<boolean>(false);
+	const [isFirstPage, setIsFirstPage] = useState<boolean>(true);
+	const [folderId, setFolderId] = useState<string | undefined>(undefined);
 
 	const fetchExpenses = useCallback(async () => {
-		setFetching(true)
+		setFetching(true);
 		try {
-			const response = await apiClient.get('/expenses', {
+			const response = await apiClient.get("/expenses", {
 				params: {
 					pageNumber,
 					pageSize,
 					folderId,
 				},
-			})
+			});
 
-			const data = response.data
-			setExpenses(data.content)
-			setIsFirstPage(data.first)
-			setIsLastPage(data.last)
-			setTotal(data.totalElements)
-			setTotalPages(data.totalPages)
+			const data = response.data;
+			setExpenses(data.content);
+			setIsFirstPage(data.first);
+			setIsLastPage(data.last);
+			setTotal(data.totalElements);
+			setTotalPages(data.totalPages);
 		} catch (error) {
 			setFetchError(
-				'Error fetching expenses : ' + (error as Error).message,
-			)
+				"Error fetching expenses : " + (error as Error).message,
+			);
 		} finally {
-			setFetching(false)
+			setFetching(false);
 		}
-	}, [pageNumber, pageSize, folderId])
+	}, [pageNumber, pageSize, folderId]);
 
 	const nextPage = () => {
-		if (!isLastPage) setPageNumber((prevPage) => prevPage + 1)
-	}
+		if (!isLastPage) setPageNumber((prevPage) => prevPage + 1);
+	};
 
 	const prevPage = () => {
-		if (!isFirstPage) setPageNumber((prevPage) => Math.max(prevPage - 1, 0))
-	}
+		if (!isFirstPage)
+			setPageNumber((prevPage) => Math.max(prevPage - 1, 0));
+	};
 
 	const addExpense = (expense: ExpenseResponse) => {
-		setExpenses((prevExpenses) => [...prevExpenses, expense])
-	}
+		setExpenses((prevExpenses) => [...prevExpenses, expense]);
+	};
 
 	const updateExpense = (expenseId: string, expense: ExpenseResponse) => {
 		setExpenses((prevExpenses) =>
 			prevExpenses.map((e) =>
 				e.id === expenseId ? { ...e, ...expense } : e,
 			),
-		)
-	}
+		);
+	};
+
+	// const selectFolder = (id?: string) => {
+	// 	setFolderId(id);
+
+	// 	if (!id) {
+	// 		setSharedFolderUsers([]);
+	// 		return;
+	// 	}
+
+	// 	const folder = folders.find((f) => f.id === id);
+	// 	if (!folder) return;
+
+	// 	// if (folder.shared) {
+	// 	// 	fetchSharedFolderUsers(id);
+	// 	// }
+	// };
+
+	// const fetchSharedFolderUsers = async (folderId: string) => {
+	// 	try {
+	// 		const response = await apiClient.get(
+	// 			`/folders/${folderId}/shared-users`,
+	// 		);
+	// 		setSharedFolderUsers(response.data);
+	// 	} catch (error) {
+	// 		console.error(
+	// 			"Error fetching shared folder users: " +
+	// 				(error as Error).message,
+	// 		);
+	// 	}
+	// };
 
 	return (
 		<ExpenseContext.Provider
@@ -83,9 +114,10 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				pageSize,
 				folderId,
 				setFolderId,
+				// sharedFolderUsers,
 			}}
 		>
 			{children}
 		</ExpenseContext.Provider>
-	)
-}
+	);
+};

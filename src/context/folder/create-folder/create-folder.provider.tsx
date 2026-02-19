@@ -15,7 +15,7 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 		updateFolder,
 		deleteFolder: deleteFolderFromList,
 	} = useFolders();
-	const { folderId: currentFolderId, setFolderId } = useExpenses();
+	const { folder: currentFolder, setFolder } = useExpenses();
 
 	const [folderName, setFolderName] = useState<string>("");
 	const [folderNameErr, setFolderNameErr] = useState<string | undefined>(
@@ -135,8 +135,8 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 			loading: "Deleting folder",
 		});
 
-		if (folderId === currentFolderId) {
-			setFolderId(undefined);
+		if (folderId === currentFolder?.id) {
+			setFolder(undefined);
 		}
 
 		deleteFolderFromList(folderId);

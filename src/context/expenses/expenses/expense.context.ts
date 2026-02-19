@@ -1,31 +1,32 @@
-import { createContext } from 'react'
-import type { ExpenseResponse } from '@/types/expense'
+import { createContext } from "react";
+import type { ExpenseResponse } from "@/types/expense";
+import type { Folder } from "@/types/folder";
 
 interface IExpenseContext {
-	fetching: boolean
-	fetchError?: string
-	expenses: ExpenseResponse[]
-	total: number
-	pageNumber: number
-	isLastPage: boolean
-	isFirstPage: boolean
-	totalPages: number
-	pageSize: number
-	folderId?: string
+	fetching: boolean;
+	fetchError?: string;
+	expenses: ExpenseResponse[];
+	total: number;
+	pageNumber: number;
+	isLastPage: boolean;
+	isFirstPage: boolean;
+	totalPages: number;
+	pageSize: number;
+	folder?: Folder;
 
-	fetchExpenses: () => void
+	fetchExpenses: () => void;
 
-	addExpense: (expense: ExpenseResponse) => void
-	updateExpense: (expenseId: string, expense: ExpenseResponse) => void
+	addExpense: (expense: ExpenseResponse) => void;
+	updateExpense: (expenseId: string, expense: ExpenseResponse) => void;
 
-	setFetching: (isFetching: boolean) => void
-	setFetchError: (error: string) => void
-	setFolderId: (folderId?: string) => void
+	setFetching: (isFetching: boolean) => void;
+	setFetchError: (error: string) => void;
+	setFolder: (folder?: Folder) => void;
 
-	nextPage: () => void
-	prevPage: () => void
+	nextPage: () => void;
+	prevPage: () => void;
 }
 
 export const ExpenseContext = createContext<IExpenseContext | undefined>(
 	undefined,
-)
+);

@@ -22,7 +22,7 @@ interface Props {
 const FolderCard: FC<Props> = ({ folder }) => {
 	const folderCardRef = useRef<HTMLDivElement>(null);
 	const folderOptionsRef = useRef<HTMLDivElement>(null);
-	const { setFolderId, folderId } = useExpenses();
+	const { setFolder, folder: selectedFolder } = useExpenses();
 	const {
 		openEditForm,
 		openDeleteConfirmationPopUp,
@@ -60,7 +60,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 			isClickOutside(e, folderOptionsRef.current) &&
 			!isClickOutside(e, folderCardRef.current)
 		) {
-			setFolderId(folder.id);
+			setFolder(folder);
 		}
 	};
 
@@ -68,7 +68,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 		<div
 			key={folder.id}
 			className={`flex group border-b border-l-[3px] py-2 pr-1 pl-2 items-center cursor-pointer relative ${
-				folder.id === folderId
+				folder.id === selectedFolder?.id
 					? "border-l-indigo-600 bg-indigo-100 text-indigo-600 font-semibold"
 					: "border-l-transparent hover:bg-gray-200"
 			}`}

@@ -1,2 +1,2 @@
-export { EditTagContext } from './edit-tag.context'
-export { EditTagProvider } from './edit-tag.provider'
+export { TagFormContext } from "./tag-form.context";
+export { TagFormProvider } from "./tag-form.provider";

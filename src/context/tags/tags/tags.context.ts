@@ -1,18 +1,18 @@
-import { createContext } from 'react'
-import type { Tag } from '../../../types/tag'
+import { createContext } from "react";
+import type { Tag } from "../../../types/tag";
 
 interface ITagsContext {
-	fetching: boolean
-	fetchError?: string
-	tags: Tag[]
+	fetching: boolean;
+	fetchError?: string;
+	tags: Tag[];
 
-	fetchTags: () => void
+	fetchTags: () => void;
 
-	addTag: (tag: Tag) => void
-	updateTag: (tagId: string, tag: Tag) => void
+	addTag: (tag: Tag) => void;
+	updateTag: (tagId: string, tag: Tag) => void;
 
-	setFetching: (isFetching: boolean) => void
-	setFetchError: (error: string) => void
+	setFetching: (isFetching: boolean) => void;
+	setFetchError: (error: string) => void;
 }
 
-export const TagsContext = createContext<ITagsContext | undefined>(undefined)
+export const TagsContext = createContext<ITagsContext | undefined>(undefined);

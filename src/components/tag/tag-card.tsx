@@ -1,28 +1,28 @@
-import type { FC } from 'react'
-import type { Tag } from '../../types/tag'
-import EditIcon from '../shared/icons/edit'
-import GoalIcon from '../shared/icons/goal'
-import { useEditTag, useEditTagBudget } from '../../hooks/tags'
-import { formatToINR } from '../../utils/numbers'
-import { getDisplayValueOfEnum } from '../../utils/enums'
-import cn from '../../lib/cn'
+import type { FC } from "react";
+import type { Tag } from "../../types/tag";
+import EditIcon from "../shared/icons/edit";
+import GoalIcon from "../shared/icons/goal";
+import { useEditTagBudget, useTagForm } from "../../hooks/tags";
+import { formatToINR } from "../../utils/numbers";
+import { getDisplayValueOfEnum } from "../../utils/enums";
+import cn from "../../lib/cn";
 
 interface Props {
-	tag: Tag
-	index: number
-	className?: string
+	tag: Tag;
+	index: number;
+	className?: string;
 }
 
 const TagCard: FC<Props> = ({ tag, index, className }) => {
-	const { openEditTagPopup } = useEditTag()
-	const { openEditTagBudgetPopup } = useEditTagBudget()
+	const { openEditTagPopup } = useTagForm();
+	const { openEditTagBudgetPopup } = useEditTagBudget();
 
 	return (
 		<div
 			key={tag.id}
 			className={cn(
 				`border-b border-b-gray-200 py-1.5 pl-4 pr-5 cursor-pointer hover:bg-gray-200 transition-colors duration-300 flex items-center group gap-x-4 ${
-					index % 2 === 0 ? 'bg-white' : 'bg-gray-100'
+					index % 2 === 0 ? "bg-white" : "bg-gray-100"
 				}`,
 				className,
 			)}
@@ -31,7 +31,7 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 			<span className="w-1/2"> {tag.name}</span>
 			{tag.budget && tag.tagBudgetPeriod && (
 				<span className="w-1/4">
-					{formatToINR(tag.budget)} /{' '}
+					{formatToINR(tag.budget)} /{" "}
 					{getDisplayValueOfEnum(tag.tagBudgetPeriod)}
 				</span>
 			)}
@@ -51,7 +51,7 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 				<GoalIcon className="text-[#11710D]" />
 			</span>
 		</div>
-	)
-}
+	);
+};
 
-export default TagCard
+export default TagCard;

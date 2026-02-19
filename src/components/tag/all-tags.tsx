@@ -1,10 +1,9 @@
-import { useTags } from '../../hooks/tags'
-import EditTagBudgetModal from './edit-tag-budget-modal'
-import EditTagModal from './edit-tag-modal'
-import TagCard from './tag-card'
+import { useTags } from "../../hooks/tags";
+import EditTagBudgetModal from "./edit-tag-budget-modal";
+import TagCard from "./tag-card";
 
 const AllTags = () => {
-	const { tags } = useTags()
+	const { tags } = useTags();
 
 	return (
 		<>
@@ -33,10 +32,9 @@ const AllTags = () => {
 					</div>
 				)}
 			</div>
-			<EditTagModal />
 			<EditTagBudgetModal />
 		</>
-	)
-}
+	);
+};
 
-export default AllTags
+export default AllTags;

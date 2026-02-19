@@ -1,17 +1,17 @@
-import { Outlet } from 'react-router-dom'
-import { TagsProvider } from './tags/tags'
-import { EditTagProvider } from './tags/edit-tag'
-import { EditTagBudgetProvider } from './tags/edit-tag-budget'
-import { CreateExpenseProvider } from './expenses/create-expense'
-import { ExpenseProvider } from './expenses/expenses'
-import Layout from '@/components/shared/ui/layout'
-import { FoldersProvider } from './folder/folders'
-import { CreateFolderProvider } from './folder/create-folder'
+import { Outlet } from "react-router-dom";
+import { TagsProvider } from "./tags/tags";
+import { TagFormProvider } from "./tags/edit-tag";
+import { EditTagBudgetProvider } from "./tags/edit-tag-budget";
+import { CreateExpenseProvider } from "./expenses/create-expense";
+import { ExpenseProvider } from "./expenses/expenses";
+import Layout from "@/components/shared/ui/layout";
+import { FoldersProvider } from "./folder/folders";
+import { CreateFolderProvider } from "./folder/create-folder";
 
 const ContextProviderWrapper = () => {
 	return (
 		<TagsProvider>
-			<EditTagProvider>
+			<TagFormProvider>
 				<EditTagBudgetProvider>
 					<ExpenseProvider>
 						<CreateExpenseProvider>
@@ -25,9 +25,9 @@ const ContextProviderWrapper = () => {
 						</CreateExpenseProvider>
 					</ExpenseProvider>
 				</EditTagBudgetProvider>
-			</EditTagProvider>
+			</TagFormProvider>
 		</TagsProvider>
-	)
-}
+	);
+};
 
-export default ContextProviderWrapper
+export default ContextProviderWrapper;

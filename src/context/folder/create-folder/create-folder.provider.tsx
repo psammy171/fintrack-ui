@@ -33,7 +33,6 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 	const [shareFolder, setShareFolder] = useState<Folder | undefined>(
 		undefined,
 	);
-	const [shareFolderModal, setShareFolderModal] = useState<boolean>(false);
 	const [addUserModal, setAddUserModal] = useState<boolean>(false);
 
 	const [deleteConfirmationModal, setDeleteConfirmationModal] =
@@ -116,21 +115,6 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 		updateFolder(folder.id, folder);
 	};
 
-	const shareFolderById = async (folderId: string) => {
-		const req = apiClient.patch(`/folders/${folderId}/share`);
-
-		toast.promise(req, {
-			success: "Folder shared successfully!",
-			error: "Failed to share folder.",
-			loading: "Sharing folder",
-		});
-
-		const res = await req;
-
-		const folder = res.data as Folder;
-		updateFolder(folder.id, folder);
-	};
-
 	const deleteFolderById = (folderId: string) => {
 		const req = apiClient.delete(`/folders/${folderId}`);
 
@@ -147,28 +131,18 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 		deleteFolderFromList(folderId);
 	};
 
-	const openShareFolderModal = (folder: Folder) => {
-		setShareFolder(folder);
-		setShareFolderModal(true);
-	};
-
 	const openAddUserModal = (folder: Folder) => {
 		setShareFolder(folder);
 		setAddUserModal(true);
 	};
 
-	const closeShareFolderModal = () => setShareFolderModal(false);
 	const closeAddUserModal = () => setAddUserModal(false);
 
 	return (
 		<CreateFolderContext.Provider
 			value={{
 				addUserModal,
-				shareFolderModal,
 				shareFolder,
-				shareFolderById,
-				closeShareFolderModal,
-				openShareFolderModal,
 				folderName,
 				formModal,
 				closeForm,

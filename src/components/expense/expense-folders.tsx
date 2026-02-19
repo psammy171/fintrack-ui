@@ -6,7 +6,6 @@ import ExpenseFolderList from "./expense-folder-list";
 import ExpenseFolderForm from "./expense-folder-form";
 import { useCreateFolders } from "@/hooks/folders/use-create-folder";
 import DeleteFolderConfirmation from "./delete-folder-comfirmation";
-import ShareFolderModal from "./share-folder-modal";
 import AddUserModal from "./add-user-modal";
 
 const ExpenseFolders = () => {
@@ -38,7 +37,6 @@ const ExpenseFolders = () => {
 				<ExpenseFolderList folders={folders} />
 			)}
 			<ExpenseFolderForm />
-			<ShareFolderModal />
 			<AddUserModal />
 			<DeleteFolderConfirmation />
 		</div>

@@ -12,7 +12,6 @@ import { useCreateFolders } from "@/hooks/folders/use-create-folder";
 import OptionsIcon from "../shared/icons/options";
 import DeleteIcon from "../shared/icons/delete";
 import EditIcon from "../shared/icons/edit";
-import ShareIcon from "../shared/icons/share";
 import SharedUserIcon from "../shared/icons/shared-user";
 
 interface Props {
@@ -23,12 +22,8 @@ const FolderCard: FC<Props> = ({ folder }) => {
 	const folderCardRef = useRef<HTMLDivElement>(null);
 	const folderOptionsRef = useRef<HTMLDivElement>(null);
 	const { setFolder, folder: selectedFolder } = useExpenses();
-	const {
-		openEditForm,
-		openDeleteConfirmationPopUp,
-		openShareFolderModal,
-		openAddUserModal,
-	} = useCreateFolders();
+	const { openEditForm, openDeleteConfirmationPopUp, openAddUserModal } =
+		useCreateFolders();
 	const [showOptions, setShowOptions] = useState(false);
 
 	const isClickOutside = (
@@ -104,22 +99,12 @@ const FolderCard: FC<Props> = ({ folder }) => {
 				{folder.shared && (
 					<span
 						onClick={() => openAddUserModal(folder)}
-						className="flex items-center px-2 py-1.5 gap-x-2 border-t border-t-gray-300 hover:bg-gray-200 cursor-pointer text-green-700"
+						className="flex items-center px-2 py-1.5 gap-x-2 border-y border-y-gray-300 hover:bg-gray-200 cursor-pointer text-green-700"
 					>
 						<SharedUserIcon />
 						<p>Users</p>
 					</span>
 				)}
-				<span
-					title={folder.shared ? "Folder is already shared" : ""}
-					onClick={() => {
-						if (!folder.shared) openShareFolderModal(folder);
-					}}
-					className={`flex items-center px-2 py-1.5 gap-x-2 border-y border-y-gray-300 ${folder.shared ? "cursor-not-allowed bg-gray-100 text-gray-400" : "cursor-pointer text-yellow-500 hover:bg-gray-200"}`}
-				>
-					<ShareIcon />
-					<p>Share</p>
-				</span>
 				<span
 					onClick={() => {
 						if (!folder.shared) openDeleteConfirmationPopUp(folder);

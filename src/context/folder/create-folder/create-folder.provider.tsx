@@ -18,6 +18,7 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 	const { folder: currentFolder, setFolder } = useExpenses();
 
 	const [folderName, setFolderName] = useState<string>("");
+	const [isShared, setIsShared] = useState<boolean>(false);
 	const [folderNameErr, setFolderNameErr] = useState<string | undefined>(
 		undefined,
 	);
@@ -46,6 +47,7 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 	const closeForm = () => setFormModal(false);
 
 	const openCreateForm = () => {
+		setIsShared(false);
 		setFolderName("");
 		setEditFolderId(undefined);
 		setFormModal(true);
@@ -78,7 +80,10 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 	};
 
 	const createFolder = async () => {
-		const req = apiClient.post("/folders", { name: folderName });
+		const req = apiClient.post("/folders", {
+			name: folderName,
+			shared: isShared,
+		});
 
 		toast.promise(req, {
 			success: "Folder created successfully!",
@@ -182,6 +187,8 @@ export const CreateFolderProvider: FC<IDefaultComponentProps> = ({
 				closeConfirmationForm,
 				closeAddUserModal,
 				deleteFolderById,
+				isShared,
+				setIsShared,
 			}}
 		>
 			{children}

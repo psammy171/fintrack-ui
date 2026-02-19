@@ -4,6 +4,7 @@ import { createContext } from "react";
 interface ICreateFolderContext {
 	formModal: boolean;
 	folderName: string;
+	isShared: boolean;
 	editFolderId?: string;
 	folderNameErr?: string;
 	deleteFolder?: Folder;
@@ -19,6 +20,7 @@ interface ICreateFolderContext {
 
 	setFolderNameErr: (err: string) => void;
 	setFolderName: (name: string) => void;
+	setIsShared: (isShared: boolean) => void;
 	openCreateForm: () => void;
 	closeForm: () => void;
 

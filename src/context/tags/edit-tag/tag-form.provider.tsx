@@ -81,10 +81,12 @@ export const TagFormProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		setTagError(undefined);
 		setEditTagId(undefined);
 		setTagName("");
+		setFolderId(undefined);
 		setTagFormPopup(true);
 	};
 
 	const openEditTagPopup = (tag: Tag) => {
+		setFolderId(undefined);
 		setTagError(undefined);
 		setEditTagId(tag.id);
 		setTagName(tag.name);

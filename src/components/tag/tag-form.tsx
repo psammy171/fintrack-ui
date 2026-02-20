@@ -9,6 +9,7 @@ import WarnIcon from "../shared/icons/warn";
 
 const TagForm = () => {
 	const {
+		folderId,
 		tagFormPopup,
 		closeTagFormPopup,
 		editTagId,
@@ -30,6 +31,13 @@ const TagForm = () => {
 			updateTagValue();
 		} else {
 			createTag();
+		}
+	};
+
+	const getDropdownValue = () => {
+		if (folderId) {
+			const folder = folders.find((f) => f.id === folderId);
+			return folder ? { id: folder.id, option: folder.name } : undefined;
 		}
 	};
 
@@ -67,6 +75,7 @@ const TagForm = () => {
 									option: folder.name,
 								}))}
 							onChange={(option) => setFolderId(option.id)}
+							value={getDropdownValue()}
 						/>
 						<span className="flex items-center gap-x-2 text-sm text-gray-600 mt-1">
 							<WarnIcon className="inline w-4 h-4 text-yellow-500 shrink-0" />

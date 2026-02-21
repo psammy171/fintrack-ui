@@ -13,12 +13,15 @@ import OptionsIcon from "../shared/icons/options";
 import DeleteIcon from "../shared/icons/delete";
 import EditIcon from "../shared/icons/edit";
 import SharedUserIcon from "../shared/icons/shared-user";
+import { useAuth } from "@/auth/hooks/use-auth";
 
 interface Props {
 	folder: Folder;
 }
 
 const FolderCard: FC<Props> = ({ folder }) => {
+	const { userContext } = useAuth();
+
 	const folderCardRef = useRef<HTMLDivElement>(null);
 	const folderOptionsRef = useRef<HTMLDivElement>(null);
 	const { setFolder, folder: selectedFolder } = useExpenses();
@@ -91,7 +94,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 			>
 				<span
 					onClick={() => openEditForm(folder)}
-					className="flex items-center px-2 py-1.5 gap-x-2 hover:bg-gray-200 cursor-pointer text-blue-700"
+					className={`flex items-center px-2 py-1.5 gap-x-2 ${userContext?.userId === folder.userId ? `hover:bg-gray-200 cursor-pointer text-blue-700` : "cursor-not-allowed bg-gray-100 text-gray-400"}`}
 				>
 					<EditIcon />
 					<p>Edit</p>
@@ -99,7 +102,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 				{folder.shared && (
 					<span
 						onClick={() => openAddUserModal(folder)}
-						className="flex items-center px-2 py-1.5 gap-x-2 border-y border-y-gray-300 hover:bg-gray-200 cursor-pointer text-green-700"
+						className={`flex items-center px-2 py-1.5 gap-x-2 border-y border-y-gray-300 ${userContext?.userId === folder.userId ? `hover:bg-gray-200 cursor-pointer text-green-700` : "cursor-not-allowed bg-gray-100 text-gray-400"}`}
 					>
 						<SharedUserIcon />
 						<p>Users</p>

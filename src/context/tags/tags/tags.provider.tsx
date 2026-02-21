@@ -52,11 +52,11 @@ export const TagsProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	}, [ownedTags.length]);
 
 	const addTag = (tag: Tag) => {
-		setTags((prevTags) => [...prevTags, tag]);
+		setOwnedTags((prevTags) => [...prevTags, tag]);
 	};
 
 	const updateTag = (tagId: string, tag: Tag) => {
-		setTags((prevTags) =>
+		setOwnedTags((prevTags) =>
 			prevTags.map((t) => (t.id === tagId ? { ...t, ...tag } : t)),
 		);
 	};

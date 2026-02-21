@@ -1,11 +1,10 @@
-import { useCreateExpense } from '../../hooks/expenses/use-create-expense'
-import { useTags } from '../../hooks/tags'
-import ErrorMessage from '../shared/ui/error-message'
-import PopUp from '../shared/ui/pop-up'
-import { useEffect } from 'react'
-import Dropdown from '../shared/ui/dropdown'
-import Input from '../shared/ui/input'
-import Button from '../shared/ui/button'
+import { useCreateExpense } from "../../hooks/expenses/use-create-expense";
+import { useTags } from "../../hooks/tags";
+import ErrorMessage from "../shared/ui/error-message";
+import PopUp from "../shared/ui/pop-up";
+import Dropdown from "../shared/ui/dropdown";
+import Input from "../shared/ui/input";
+import Button from "../shared/ui/button";
 
 const ExpenseForm = () => {
 	const {
@@ -16,18 +15,14 @@ const ExpenseForm = () => {
 		expenseError,
 		setExpensePropertyError,
 		createExpenseApi,
-	} = useCreateExpense()
+	} = useCreateExpense();
 
-	const { tags, fetchTags } = useTags()
-
-	useEffect(() => {
-		fetchTags()
-	}, [fetchTags])
+	const { tags } = useTags();
 
 	const onSubmitHandler = (e: React.FormEvent) => {
-		e.preventDefault()
-		createExpenseApi()
-	}
+		e.preventDefault();
+		createExpenseApi();
+	};
 
 	return (
 		<PopUp
@@ -41,8 +36,8 @@ const ExpenseForm = () => {
 					type="text"
 					value={createExpense.remark}
 					placeholder="Dinner at bluestone"
-					onFocus={() => setExpensePropertyError('remarkError', '')}
-					onChange={(e) => setExpenseValue('remark', e.target.value)}
+					onFocus={() => setExpensePropertyError("remarkError", "")}
+					onChange={(e) => setExpenseValue("remark", e.target.value)}
 				/>
 				{expenseError.remarkError && (
 					<ErrorMessage errorMessage={expenseError.remarkError} />
@@ -53,8 +48,8 @@ const ExpenseForm = () => {
 					type="number"
 					value={createExpense.amount}
 					placeholder="1345"
-					onFocus={() => setExpensePropertyError('amountError', '')}
-					onChange={(e) => setExpenseValue('amount', e.target.value)}
+					onFocus={() => setExpensePropertyError("amountError", "")}
+					onChange={(e) => setExpenseValue("amount", e.target.value)}
 				/>
 				{expenseError.amountError && (
 					<ErrorMessage errorMessage={expenseError.amountError} />
@@ -68,11 +63,11 @@ const ExpenseForm = () => {
 						const value = e.target.value
 							? new Date(e.target.value)
 									.toISOString()
-									.split('T')[0]
-							: ''
-						setExpenseValue('date', value)
+									.split("T")[0]
+							: "";
+						setExpenseValue("date", value);
 					}}
-					onFocus={() => setExpensePropertyError('dateError', '')}
+					onFocus={() => setExpensePropertyError("dateError", "")}
 				/>
 				{expenseError.dateError && (
 					<ErrorMessage errorMessage={expenseError.dateError} />
@@ -88,13 +83,15 @@ const ExpenseForm = () => {
 							? {
 									option: createExpense.tag.name,
 									...createExpense.tag,
-							  }
+								}
 							: undefined
 					}
 					onChange={(value) => {
-						const tagValue = tags.find((tag) => tag.id === value.id)
-						if (tagValue) setExpenseValue('tag', tagValue)
-						setExpensePropertyError('tagError', '')
+						const tagValue = tags.find(
+							(tag) => tag.id === value.id,
+						);
+						if (tagValue) setExpenseValue("tag", tagValue);
+						setExpensePropertyError("tagError", "");
 					}}
 				/>
 				{expenseError.tagError && (
@@ -103,7 +100,7 @@ const ExpenseForm = () => {
 				<Button className="mt-6 mx-0">Add</Button>
 			</form>
 		</PopUp>
-	)
-}
+	);
+};
 
-export default ExpenseForm
+export default ExpenseForm;

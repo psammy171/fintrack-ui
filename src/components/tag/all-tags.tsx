@@ -3,7 +3,7 @@ import EditTagBudgetModal from "./edit-tag-budget-modal";
 import TagCard from "./tag-card";
 
 const AllTags = () => {
-	const { tags } = useTags();
+	const { ownedTags } = useTags();
 
 	return (
 		<>
@@ -13,9 +13,9 @@ const AllTags = () => {
 					<p className="w-1/2">All Tags</p>
 					{/* <p className="w-1/4">Tag Budget</p> */}
 				</span>
-				{tags.length > 0 ? (
+				{ownedTags.length > 0 ? (
 					<>
-						{tags.map((tag, index) => (
+						{ownedTags.map((tag, index) => (
 							<TagCard
 								key={tag.id}
 								tag={tag}

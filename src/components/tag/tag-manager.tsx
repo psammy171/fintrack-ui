@@ -6,14 +6,14 @@ import Button from "../shared/ui/button";
 import { useFolders } from "@/hooks/folders/use-folders";
 
 const TagManager = () => {
-	const { fetchFolders } = useFolders();
-	const { fetching, fetchTags } = useTags();
+	const { fetchOwnFolders } = useFolders();
+	const { fetching, fetchOwnedTags } = useTags();
 	const { openCreateTagPopup } = useTagForm();
 
 	useEffect(() => {
-		fetchFolders();
-		fetchTags();
-	}, [fetchTags, fetchFolders]);
+		fetchOwnFolders();
+		fetchOwnedTags();
+	}, [fetchOwnedTags, fetchOwnFolders]);
 
 	return (
 		<div className="bg-gray-100 rounded-xl max-h-[400px] overflow-hidden overflow-y-scroll flex flex-col shadow-md">

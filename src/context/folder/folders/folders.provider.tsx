@@ -10,6 +10,8 @@ export const FoldersProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const [fetching, setFetching] = useState<boolean>(false);
 	const [fetchError, setFetchError] = useState<string | undefined>(undefined);
 
+	const [ownFolders, setOwnFolders] = useState<Folder[]>([]);
+
 	const { folder } = useExpenses();
 
 	useEffect(() => {
@@ -47,6 +49,19 @@ export const FoldersProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		}
 	}, []);
 
+	const fetchOwnFolders = useCallback(async () => {
+		try {
+			const response = await apiClient.get("/folders", {
+				params: { scope: "owned" },
+			});
+			setOwnFolders(response.data);
+		} catch (error) {
+			setFetchError(
+				"Error fetching own folders : " + (error as Error).message,
+			);
+		}
+	}, []);
+
 	const addFolder = (folder: Folder) => {
 		setFolders((prevFolders) => [...prevFolders, folder]);
 	};
@@ -68,10 +83,12 @@ export const FoldersProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	return (
 		<FoldersContext.Provider
 			value={{
+				ownFolders,
 				folders,
 				fetching,
 				fetchError,
 				fetchFolders,
+				fetchOwnFolders,
 				addFolder,
 				updateFolder,
 				setFetchError,

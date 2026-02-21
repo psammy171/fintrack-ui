@@ -1,6 +1,5 @@
 import { useFolders } from "@/hooks/folders/use-folders";
 import CreateFolderIcon from "../shared/icons/create-folder";
-import { useEffect } from "react";
 import Loader from "../shared/ui/loader";
 import ExpenseFolderList from "./expense-folder-list";
 import ExpenseFolderForm from "./expense-folder-form";
@@ -9,12 +8,8 @@ import DeleteFolderConfirmation from "./delete-folder-comfirmation";
 import AddUserModal from "./add-user-modal";
 
 const ExpenseFolders = () => {
-	const { fetchFolders, fetching, folders } = useFolders();
+	const { fetching, folders } = useFolders();
 	const { openCreateForm } = useCreateFolders();
-
-	useEffect(() => {
-		fetchFolders();
-	}, [fetchFolders]);
 
 	return (
 		<div className="w-44 border-r bg-gray-100 overflow-hidden overflow-y-scroll">

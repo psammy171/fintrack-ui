@@ -22,7 +22,7 @@ const TagForm = () => {
 		setFolderId,
 	} = useTagForm();
 
-	const { folders } = useFolders();
+	const { ownFolders } = useFolders();
 
 	const submitHandler = async (e: FormEvent) => {
 		e.preventDefault();
@@ -36,7 +36,7 @@ const TagForm = () => {
 
 	const getDropdownValue = () => {
 		if (folderId) {
-			const folder = folders.find((f) => f.id === folderId);
+			const folder = ownFolders.find((f) => f.id === folderId);
 			return folder ? { id: folder.id, option: folder.name } : undefined;
 		}
 	};
@@ -68,7 +68,7 @@ const TagForm = () => {
 					<div className="mt-4">
 						<label className="text-[12px]">Shared Folder</label>
 						<Dropdown
-							options={folders
+							options={ownFolders
 								.filter((folder) => folder.shared)
 								.map((folder) => ({
 									id: folder.id,

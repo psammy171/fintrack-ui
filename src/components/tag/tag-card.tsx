@@ -5,6 +5,8 @@ import { useTagForm } from "../../hooks/tags";
 import { formatToINR } from "../../utils/numbers";
 import { getDisplayValueOfEnum } from "../../utils/enums";
 import cn from "../../lib/cn";
+import { useFolders } from "@/hooks/folders/use-folders";
+import SharedFolderIcon from "../shared/icons/shared-folder";
 
 interface Props {
 	tag: Tag;
@@ -13,6 +15,7 @@ interface Props {
 }
 
 const TagCard: FC<Props> = ({ tag, index, className }) => {
+	const { ownFolders } = useFolders();
 	const { openEditTagPopup } = useTagForm();
 
 	return (
@@ -26,7 +29,16 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 			)}
 		>
 			<span className="w-4 inline-block">{index + 1}.</span>
-			<span className="w-1/2"> {tag.name}</span>
+			<span> {tag.name}</span>
+			{tag.folderId && (
+				<span className="relative w-4 h-4">
+					<SharedFolderIcon className="w-4 h-4 peer" />
+					<div className="hidden peer-hover:block whitespace-nowrap absolute shadow-md rounded-md bg-gray-200 border border-gray-400 px-2 text-gray-700 bottom-5 left-1/2 -translate-x-1/2">
+						{ownFolders.find((f) => f.id === tag.folderId)?.name ||
+							"Folder"}
+					</div>
+				</span>
+			)}
 			{tag.budget && tag.tagBudgetPeriod && (
 				<span className="w-1/4">
 					{formatToINR(tag.budget)} /{" "}

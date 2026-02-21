@@ -14,6 +14,7 @@ import DeleteIcon from "../shared/icons/delete";
 import EditIcon from "../shared/icons/edit";
 import SharedUserIcon from "../shared/icons/shared-user";
 import { useAuth } from "@/auth/hooks/use-auth";
+import SharedFolderIcon from "../shared/icons/shared-folder";
 
 interface Props {
 	folder: Folder;
@@ -73,7 +74,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 			ref={folderCardRef}
 			onClick={(e: React.MouseEvent) => openFolder(e)}
 		>
-			<FolderIcon />
+			{folder.shared ? <SharedFolderIcon /> : <FolderIcon />}
 			<span
 				className="flex-1 truncate text-ellipsis mr-1 ml-2"
 				title={folder.name}

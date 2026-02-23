@@ -4,6 +4,7 @@ import apiClient from "../../../lib/axios";
 import { ExpenseContext } from "./expense.context";
 import type { ExpenseResponse } from "@/types/expense";
 import type { Folder } from "@/types/folder";
+import type { Settlement } from "@/types/settlements";
 
 export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const [expenses, setExpenses] = useState<ExpenseResponse[]>([]);
@@ -16,6 +17,8 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const [isLastPage, setIsLastPage] = useState<boolean>(false);
 	const [isFirstPage, setIsFirstPage] = useState<boolean>(true);
 	const [folder, setFolder] = useState<Folder | undefined>(undefined);
+
+	const [settlements, setSettlements] = useState<Settlement[]>([]);
 
 	const fetchExpenses = useCallback(async () => {
 		setFetching(true);
@@ -64,35 +67,20 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		);
 	};
 
-	// const selectFolder = (id?: string) => {
-	// 	setFolderId(id);
-
-	// 	if (!id) {
-	// 		setSharedFolderUsers([]);
-	// 		return;
-	// 	}
-
-	// 	const folder = folders.find((f) => f.id === id);
-	// 	if (!folder) return;
-
-	// 	// if (folder.shared) {
-	// 	// 	fetchSharedFolderUsers(id);
-	// 	// }
-	// };
-
-	// const fetchSharedFolderUsers = async (folderId: string) => {
-	// 	try {
-	// 		const response = await apiClient.get(
-	// 			`/folders/${folderId}/shared-users`,
-	// 		);
-	// 		setSharedFolderUsers(response.data);
-	// 	} catch (error) {
-	// 		console.error(
-	// 			"Error fetching shared folder users: " +
-	// 				(error as Error).message,
-	// 		);
-	// 	}
-	// };
+	const fetchSettlements = async (folder?: Folder) => {
+		if (!folder || !folder.shared) return;
+		try {
+			const response = await apiClient.get(
+				`/folders/${folder.id}/settlements`,
+			);
+			const data = response.data;
+			setSettlements(data.settlements);
+		} catch (error: unknown) {
+			console.error(
+				"Error fetching settlements : " + (error as Error).message,
+			);
+		}
+	};
 
 	return (
 		<ExpenseContext.Provider
@@ -100,6 +88,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				expenses,
 				fetching,
 				fetchError,
+				settlements,
 				fetchExpenses,
 				addExpense,
 				updateExpense,
@@ -115,7 +104,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				pageSize,
 				folder,
 				setFolder,
-				// sharedFolderUsers,
+				fetchSettlements,
 			}}
 		>
 			{children}

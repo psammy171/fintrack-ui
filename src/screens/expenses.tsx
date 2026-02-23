@@ -10,7 +10,7 @@ import { useTags } from "@/hooks/tags";
 import { useExpenses } from "@/hooks/expenses/use-expenses";
 
 const Expenses = () => {
-	const { folder } = useExpenses();
+	const { folder, fetchSettlements } = useExpenses();
 	const { fetchFolders } = useFolders();
 	const { fetchUserOrSharedFolderTags } = useTags();
 	const { openCreateExpensePopUp } = useCreateExpense();
@@ -22,6 +22,10 @@ const Expenses = () => {
 	useEffect(() => {
 		fetchUserOrSharedFolderTags(folder);
 	}, [fetchUserOrSharedFolderTags, folder]);
+
+	useEffect(() => {
+		fetchSettlements(folder);
+	}, [folder, fetchSettlements]);
 
 	return (
 		<div className="mx-auto pt-13 h-full overflow-hidden overflow-y-scroll flex flex-col">

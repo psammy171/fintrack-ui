@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import type { ExpenseResponse } from "@/types/expense";
 import type { Folder } from "@/types/folder";
+import type { Settlement } from "@/types/settlements";
 
 interface IExpenseContext {
 	fetching: boolean;
@@ -13,8 +14,10 @@ interface IExpenseContext {
 	totalPages: number;
 	pageSize: number;
 	folder?: Folder;
+	settlements: Settlement[];
 
 	fetchExpenses: () => void;
+	fetchSettlements: (folder?: Folder) => void;
 
 	addExpense: (expense: ExpenseResponse) => void;
 	updateExpense: (expenseId: string, expense: ExpenseResponse) => void;

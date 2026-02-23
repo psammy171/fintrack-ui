@@ -49,6 +49,7 @@ const ExpenseForm = () => {
 		}
 
 		createExpenseApi();
+		setUserShareTab(false);
 	};
 
 	return (
@@ -57,7 +58,6 @@ const ExpenseForm = () => {
 			close={() => {
 				closeCreateExpensePopUp();
 				setUserShareTab(false);
-				setExpenseValue("userShares", []);
 			}}
 			title="Add Expense"
 		>

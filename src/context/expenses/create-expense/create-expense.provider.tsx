@@ -39,6 +39,11 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 			dateError: "",
 			tagError: "",
 		});
+		setCreateExpense({
+			remark: "",
+			amount: 0,
+			date: new Date().toISOString().split("T")[0],
+		});
 		setCreateExpensePopUp(true);
 	};
 
@@ -76,8 +81,6 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 
 	const validateSecondForm = (): boolean => {
 		if (folder && folder.shared) {
-			console.log("Validating second form for shared folder");
-
 			if (!createExpense.paidBy) {
 				setExpensePropertyError(
 					"paidByError",
@@ -86,15 +89,11 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 				return false;
 			}
 
-			console.log("Tag is set");
-
 			const shareSum =
 				createExpense.userShares?.reduce(
 					(sum, userShare) => sum + userShare.amount,
 					0,
 				) || 0;
-
-			console.log("Share sum:", shareSum, createExpense.amount);
 
 			if (Number(shareSum) !== Number(createExpense.amount)) {
 				setExpensePropertyError(

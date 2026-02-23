@@ -25,7 +25,7 @@ const Expenses = () => {
 
 	useEffect(() => {
 		fetchSettlements(folder);
-	}, [folder, fetchSettlements]);
+	}, [folder]);
 
 	return (
 		<div className="mx-auto pt-13 h-full overflow-hidden overflow-y-scroll flex flex-col">

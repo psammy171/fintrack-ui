@@ -94,7 +94,10 @@ const FolderCard: FC<Props> = ({ folder }) => {
 				className={`absolute text-sm group-hover:bg-gray-100 overflow-hidden bg-gray-100 w-28 shadow-lg z-10 top-8 rounded-lg border border-gray-300 right-5 ${showOptions ? "block" : "hidden"}`}
 			>
 				<span
-					onClick={() => openEditForm(folder)}
+					onClick={() => {
+						if (userContext?.userId === folder.userId)
+							openEditForm(folder);
+					}}
 					className={`flex items-center px-2 py-1.5 gap-x-2 ${userContext?.userId === folder.userId ? `hover:bg-gray-200 cursor-pointer text-blue-700` : "cursor-not-allowed bg-gray-100 text-gray-400"}`}
 				>
 					<EditIcon />
@@ -102,7 +105,10 @@ const FolderCard: FC<Props> = ({ folder }) => {
 				</span>
 				{folder.shared && (
 					<span
-						onClick={() => openAddUserModal(folder)}
+						onClick={() => {
+							if (userContext?.userId === folder.userId)
+								openAddUserModal(folder);
+						}}
 						className={`flex items-center px-2 py-1.5 gap-x-2 border-y border-y-gray-300 ${userContext?.userId === folder.userId ? `hover:bg-gray-200 cursor-pointer text-green-700` : "cursor-not-allowed bg-gray-100 text-gray-400"}`}
 					>
 						<SharedUserIcon />

@@ -15,9 +15,11 @@ interface IExpenseContext {
 	pageSize: number;
 	folder?: Folder;
 	settlements: Settlement[];
+	showSettlements: boolean;
 
 	fetchExpenses: () => void;
 	fetchSettlements: (folder?: Folder) => void;
+	setShowSettlements: (show: boolean) => void;
 
 	addExpense: (expense: ExpenseResponse) => void;
 	updateExpense: (expenseId: string, expense: ExpenseResponse) => void;

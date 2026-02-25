@@ -8,9 +8,10 @@ import { useEffect } from "react";
 import { useFolders } from "@/hooks/folders/use-folders";
 import { useTags } from "@/hooks/tags";
 import { useExpenses } from "@/hooks/expenses/use-expenses";
+import Settlements from "@/components/expense/settlements";
 
 const Expenses = () => {
-	const { folder, fetchSettlements } = useExpenses();
+	const { folder, fetchSettlements, setShowSettlements } = useExpenses();
 	const { fetchFolders } = useFolders();
 	const { fetchUserOrSharedFolderTags } = useTags();
 	const { openCreateExpensePopUp } = useCreateExpense();
@@ -32,6 +33,11 @@ const Expenses = () => {
 			<span className="flex items-center mt-4 mx-4">
 				<p className="text-2xl font-semibold">All your expenses here</p>
 				<span className="flex-grow"></span>
+				{folder && folder.shared && (
+					<Button onClick={() => setShowSettlements(true)}>
+						Settlements
+					</Button>
+				)}
 				<Button onClick={openCreateExpensePopUp}>Add Expense</Button>
 			</span>
 
@@ -41,6 +47,7 @@ const Expenses = () => {
 			</div>
 
 			<ExpenseForm />
+			<Settlements />
 
 			<ExpensePagination />
 		</div>

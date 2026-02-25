@@ -19,6 +19,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const [folder, setFolder] = useState<Folder | undefined>(undefined);
 
 	const [settlements, setSettlements] = useState<Settlement[]>([]);
+	const [showSettlements, setShowSettlements] = useState<boolean>(false);
 
 	const fetchExpenses = useCallback(async () => {
 		setFetching(true);
@@ -68,7 +69,10 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	};
 
 	const fetchSettlements = async (folder?: Folder) => {
-		if (!folder || !folder.shared) return;
+		if (!folder || !folder.shared) {
+			setSettlements([]);
+			return;
+		}
 		try {
 			const response = await apiClient.get(
 				`/folders/${folder.id}/settlements`,
@@ -85,6 +89,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	return (
 		<ExpenseContext.Provider
 			value={{
+				showSettlements,
 				expenses,
 				fetching,
 				fetchError,
@@ -96,6 +101,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				setFetching,
 				nextPage,
 				prevPage,
+				setShowSettlements,
 				pageNumber,
 				isLastPage,
 				isFirstPage,

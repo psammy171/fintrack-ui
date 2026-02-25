@@ -62,11 +62,11 @@ const ExpenseForm = () => {
 			title="Add Expense"
 		>
 			<form
-				className="relative h-100 overflow-hidden"
+				className="relative flex overflow-hidden"
 				onSubmit={onSubmitHandler}
 			>
 				<div
-					className={`flex flex-col p-1 absolute top-0 w-full h-full transition-all duration-200 ${userShareTab ? "right-full -left-full" : "right-0 left-0"}`}
+					className={`flex shrink-0 flex-col p-1 transform transition-transform top-0 w-full h-full duration-200 ${userShareTab ? "right-full -left-full -translate-x-full" : "right-0 left-0"}`}
 				>
 					<label className="text-[12px]">Remark</label>
 					<Input
@@ -147,7 +147,7 @@ const ExpenseForm = () => {
 					</Button>
 				</div>
 				<div
-					className={`p-1 absolute top-0 h-full w-full transition-all duration-200 ${userShareTab ? "right-0 left-0" : "-right-full left-full"}`}
+					className={`p-1 shrink-0 top-0 h-full w-full transform transition-transform duration-200 ${userShareTab ? "right-0 left-0 -translate-x-full" : "-right-full left-full"}`}
 				>
 					<span className="flex items-center gap-x-4">
 						<BackIcon

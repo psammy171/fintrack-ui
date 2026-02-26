@@ -105,11 +105,8 @@ const FolderCard: FC<Props> = ({ folder }) => {
 				</span>
 				{folder.shared && (
 					<span
-						onClick={() => {
-							if (userContext?.userId === folder.userId)
-								openAddUserModal(folder);
-						}}
-						className={`flex items-center px-2 py-1.5 gap-x-2 border-y border-y-gray-300 ${userContext?.userId === folder.userId ? `hover:bg-gray-200 cursor-pointer text-green-700` : "cursor-not-allowed bg-gray-100 text-gray-400"}`}
+						onClick={() => openAddUserModal(folder)}
+						className={`flex items-center px-2 py-1.5 gap-x-2 border-y border-y-gray-300 hover:bg-gray-200 cursor-pointer text-green-700`}
 					>
 						<SharedUserIcon />
 						<p>Users</p>

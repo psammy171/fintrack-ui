@@ -11,8 +11,10 @@ import PublicUserList from "./public-user-list";
 import shareWithUser from "@/assets/share-with-user.png";
 import BackIcon from "../shared/icons/back";
 import toast from "react-hot-toast";
+import { useAuth } from "@/auth/hooks/use-auth";
 
 const AddUserModal = () => {
+	const { userContext } = useAuth();
 	const [search, setSearch] = useState("");
 	const [searchedUsers, setSearchedUsers] = useState<PublicUser[]>([]);
 	const [selectedUsers, setSelectedUsers] = useState<PublicUser[]>([]);
@@ -119,7 +121,7 @@ const AddUserModal = () => {
 						<span className="font-semibold border-b py-1 px-2 bg-gray-200 flex items-center">
 							<p>Shared Users</p>
 							<span className="flex-grow"></span>
-							{sharedUsers.length > 0 && (
+							{shareFolder?.userId === userContext?.userId && (
 								<Button
 									variant="primary"
 									onClick={() => setAddUserTab(true)}

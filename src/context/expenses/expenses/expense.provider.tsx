@@ -5,6 +5,7 @@ import { ExpenseContext } from "./expense.context";
 import type { ExpenseResponse } from "@/types/expense";
 import type { Folder } from "@/types/folder";
 import type { Settlement } from "@/types/settlements";
+import toast from "react-hot-toast";
 
 export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const [expenses, setExpenses] = useState<ExpenseResponse[]>([]);
@@ -86,6 +87,29 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		}
 	};
 
+	const resolveSettlement = async (folderId: string, userId: string) => {
+		try {
+			const req = apiClient.patch(
+				`/folders/${folderId}/settlements/resolve`,
+				{
+					userId,
+				},
+			);
+			toast.promise(req, {
+				loading: "Resolving settlement...",
+				success: "Settlement resolved successfully!",
+				error: (err) =>
+					"Error resolving settlement : " + (err as Error).message,
+			});
+			await req;
+			fetchSettlements(folder);
+		} catch (error: unknown) {
+			console.error(
+				"Error resolving settlement : " + (error as Error).message,
+			);
+		}
+	};
+
 	return (
 		<ExpenseContext.Provider
 			value={{
@@ -111,6 +135,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				folder,
 				setFolder,
 				fetchSettlements,
+				resolveSettlement,
 			}}
 		>
 			{children}

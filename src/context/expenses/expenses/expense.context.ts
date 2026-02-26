@@ -20,6 +20,7 @@ interface IExpenseContext {
 	fetchExpenses: () => void;
 	fetchSettlements: (folder?: Folder) => void;
 	setShowSettlements: (show: boolean) => void;
+	resolveSettlement: (folderId: string, userId: string) => void;
 
 	addExpense: (expense: ExpenseResponse) => void;
 	updateExpense: (expenseId: string, expense: ExpenseResponse) => void;

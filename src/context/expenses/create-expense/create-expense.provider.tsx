@@ -135,12 +135,12 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 
 			if (folder && folder.shared) {
 				payLoad["paidBy"] = createExpense.paidBy!.userId;
-				payLoad["userShares"] = createExpense.userShares!.map(
-					(userShare) => ({
+				payLoad["userShares"] = createExpense
+					.userShares!.map((userShare) => ({
 						userId: userShare.userId,
 						amount: userShare.amount,
-					}),
-				);
+					}))
+					.filter((share) => share.amount > 0);
 			}
 
 			try {

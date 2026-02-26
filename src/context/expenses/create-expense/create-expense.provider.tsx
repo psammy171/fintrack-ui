@@ -98,7 +98,7 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 			if (Number(shareSum) !== Number(createExpense.amount)) {
 				setExpensePropertyError(
 					"userSharesError",
-					"User shares must sum to the total amount",
+					`User shares must sum to the total amount ${parseInt(createExpense.amount.toString())}`,
 				);
 				return false;
 			}
@@ -185,10 +185,11 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 		key: keyof CreateExpense,
 		value: string | number | Tag | Date | PublicUser | UserShareAmount[],
 	) => {
-		setCreateExpense({
-			...createExpense,
+		console.log("Setting expense value:", key, value);
+		setCreateExpense((prevValue) => ({
+			...prevValue,
 			[key]: value,
-		});
+		}));
 	};
 
 	const preFillUserShares = (folder?: Folder) => {
@@ -224,6 +225,16 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 		}
 	};
 
+	const updateUserShares = (userId: string, amount: number) => {
+		const updatedShares = createExpense.userShares?.map((share) => {
+			if (share.userId === userId) {
+				return { ...share, amount };
+			}
+			return share;
+		});
+		setExpenseValue("userShares", updatedShares || []);
+	};
+
 	return (
 		<CreateExpenseContext.Provider
 			value={{
@@ -239,6 +250,7 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 				validateFirstForm,
 				validateSecondForm,
 				preFillUserShares,
+				updateUserShares,
 			}}
 		>
 			{children}

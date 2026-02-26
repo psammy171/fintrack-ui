@@ -25,6 +25,7 @@ const ExpenseForm = () => {
 		validateFirstForm,
 		validateSecondForm,
 		preFillUserShares,
+		updateUserShares,
 	} = useCreateExpense();
 
 	const { tags } = useTags();
@@ -38,7 +39,9 @@ const ExpenseForm = () => {
 
 		if (folder && folder.shared) {
 			if (!userShareTab) {
-				if (userContext) setExpenseValue("paidBy", userContext);
+				if (userContext) {
+					setExpenseValue("paidBy", userContext);
+				}
 				preFillUserShares(folder);
 				setUserShareTab(true);
 				return;
@@ -59,15 +62,15 @@ const ExpenseForm = () => {
 				closeCreateExpensePopUp();
 				setUserShareTab(false);
 			}}
-			title="Add Expense"
 		>
 			<form
 				className="relative flex overflow-hidden"
 				onSubmit={onSubmitHandler}
 			>
 				<div
-					className={`flex shrink-0 flex-col p-1 transform transition-transform top-0 w-full h-full duration-200 ${userShareTab ? "right-full -left-full -translate-x-full" : "right-0 left-0"}`}
+					className={`flex shrink-0 flex-col p-1 transform transition-transform top-0 w-full h-full duration-200 ${userShareTab ? "-translate-x-full" : ""}`}
 				>
+					<h2 className="text-lg font-semibold mb-1">Add Expense</h2>
 					<label className="text-[12px]">Remark</label>
 					<Input
 						type="text"
@@ -147,16 +150,19 @@ const ExpenseForm = () => {
 					</Button>
 				</div>
 				<div
-					className={`p-1 shrink-0 top-0 h-full w-full transform transition-transform duration-200 ${userShareTab ? "right-0 left-0 -translate-x-full" : "-right-full left-full"}`}
+					className={`p-1 shrink-0 top-0 h-full w-full transform transition-transform duration-200 ${userShareTab ? "-translate-x-full" : ""}`}
 				>
 					<span className="flex items-center gap-x-4">
 						<BackIcon
 							className="cursor-pointer"
 							onClick={() => setUserShareTab(false)}
 						/>{" "}
-						User Shares
+						<h2 className="text-lg font-semibold mb-1">
+							User Shares
+						</h2>
 					</span>
 
+					<label className="text-[12px] mt-4">Paid By</label>
 					<Dropdown
 						options={
 							folder?.sharedUsers
@@ -188,16 +194,48 @@ const ExpenseForm = () => {
 								: undefined
 						}
 					/>
+					{expenseError.paidByError && (
+						<ErrorMessage errorMessage={expenseError.paidByError} />
+					)}
 
-					{createExpense.userShares?.map((userShare) => (
-						<div key={userShare.userId}>
-							<p>
-								{userShare.firstName} {userShare.lastName}
-							</p>
-							<input type="number" value={userShare.amount} />
-						</div>
-					))}
-					<Button className="mt-6 mx-0">Add</Button>
+					<div className="mt-4">
+						<label className="text-[12px]">User Shares</label>
+					</div>
+					<div className="border border-gray-200 rounded-sm">
+						{createExpense.userShares?.map((userShare) => (
+							<div
+								key={userShare.userId}
+								className="flex p-2 gap-x-4 items-center border-b last:border-b-0"
+							>
+								<p className="grow-1">
+									{userShare.firstName} {userShare.lastName}
+								</p>
+								<input
+									type="number"
+									value={userShare.amount}
+									onChange={(e) =>
+										updateUserShares(
+											userShare.userId,
+											parseInt(e.target.value),
+										)
+									}
+									className="border border-gray-200 p-1 rounded-sm w-24"
+									onFocus={() =>
+										setExpensePropertyError(
+											"userSharesError",
+											"",
+										)
+									}
+								/>
+							</div>
+						))}
+					</div>
+					{expenseError.userSharesError && (
+						<ErrorMessage
+							errorMessage={expenseError.userSharesError}
+						/>
+					)}
+					<Button className="mt-6 mx-0 w-full">Add</Button>
 				</div>
 			</form>
 		</PopUp>

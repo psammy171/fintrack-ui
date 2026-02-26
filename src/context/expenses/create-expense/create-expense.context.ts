@@ -30,6 +30,7 @@ interface ICreateExpenseContext {
 	createExpenseApi: () => Promise<void>;
 	validateFirstForm: () => boolean;
 	validateSecondForm: () => boolean;
+	updateUserShares: (userId: string, amount: number) => void;
 
 	setExpenseValue: (
 		key: keyof CreateExpense,

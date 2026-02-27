@@ -1,18 +1,24 @@
-import { createContext } from 'react'
-import type { Tag } from '../../../types/tag'
+import { createContext } from "react";
+import type { Tag } from "../../../types/tag";
+import type { Folder } from "@/types/folder";
 
 interface ITagsContext {
-	fetching: boolean
-	fetchError?: string
-	tags: Tag[]
+	fetching: boolean;
+	fetchingOwnedTags: boolean;
+	fetchError?: string;
+	fetchOwnedTagsError?: string;
 
-	fetchTags: () => void
+	tags: Tag[];
+	ownedTags: Tag[];
 
-	addTag: (tag: Tag) => void
-	updateTag: (tagId: string, tag: Tag) => void
+	fetchUserOrSharedFolderTags: (folder?: Folder) => void;
+	fetchOwnedTags: () => void;
 
-	setFetching: (isFetching: boolean) => void
-	setFetchError: (error: string) => void
+	addTag: (tag: Tag) => void;
+	updateTag: (tagId: string, tag: Tag) => void;
+
+	setFetching: (isFetching: boolean) => void;
+	setFetchError: (error: string) => void;
 }
 
-export const TagsContext = createContext<ITagsContext | undefined>(undefined)
+export const TagsContext = createContext<ITagsContext | undefined>(undefined);

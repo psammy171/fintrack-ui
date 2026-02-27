@@ -1,18 +1,43 @@
-import ExpenseList from '@/components/expense/expense-list'
-import ExpenseForm from '../components/expense/expense-form'
-import { useCreateExpense } from '../hooks/expenses/use-create-expense'
-import Button from '@/components/shared/ui/button'
-import ExpensePagination from '@/components/expense/expense-pagination'
-import ExpenseFolders from '@/components/expense/expense-folders'
+import ExpenseList from "@/components/expense/expense-list";
+import ExpenseForm from "../components/expense/expense-form";
+import { useCreateExpense } from "../hooks/expenses/use-create-expense";
+import Button from "@/components/shared/ui/button";
+import ExpensePagination from "@/components/expense/expense-pagination";
+import ExpenseFolders from "@/components/expense/expense-folders";
+import { useEffect } from "react";
+import { useFolders } from "@/hooks/folders/use-folders";
+import { useTags } from "@/hooks/tags";
+import { useExpenses } from "@/hooks/expenses/use-expenses";
+import Settlements from "@/components/expense/settlements";
 
 const Expenses = () => {
-	const { openCreateExpensePopUp } = useCreateExpense()
+	const { folder, fetchSettlements, setShowSettlements } = useExpenses();
+	const { fetchFolders } = useFolders();
+	const { fetchUserOrSharedFolderTags } = useTags();
+	const { openCreateExpensePopUp } = useCreateExpense();
+
+	useEffect(() => {
+		fetchFolders();
+	}, [fetchFolders]);
+
+	useEffect(() => {
+		fetchUserOrSharedFolderTags(folder);
+	}, [fetchUserOrSharedFolderTags, folder]);
+
+	useEffect(() => {
+		fetchSettlements(folder);
+	}, [folder]);
 
 	return (
 		<div className="mx-auto pt-13 h-full overflow-hidden overflow-y-scroll flex flex-col">
 			<span className="flex items-center mt-4 mx-4">
 				<p className="text-2xl font-semibold">All your expenses here</p>
 				<span className="flex-grow"></span>
+				{folder && folder.shared && (
+					<Button onClick={() => setShowSettlements(true)}>
+						Settlements
+					</Button>
+				)}
 				<Button onClick={openCreateExpensePopUp}>Add Expense</Button>
 			</span>
 
@@ -22,10 +47,11 @@ const Expenses = () => {
 			</div>
 
 			<ExpenseForm />
+			<Settlements />
 
 			<ExpensePagination />
 		</div>
-	)
-}
+	);
+};
 
-export default Expenses
+export default Expenses;

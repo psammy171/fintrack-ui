@@ -1,67 +1,97 @@
-import { useState, type FormEvent } from 'react'
-import apiClient from '../../lib/axios'
-import toast from 'react-hot-toast'
-import { useTags } from '../../hooks/tags'
-import Input from '../shared/ui/input'
-import Button from '../shared/ui/button'
+import { type FormEvent } from "react";
+import { useTagForm } from "../../hooks/tags";
+import Input from "../shared/ui/input";
+import PopUp from "../shared/ui/pop-up";
+import Button from "../shared/ui/button";
+import { useFolders } from "@/hooks/folders/use-folders";
+import Dropdown from "../shared/ui/dropdown";
+import WarnIcon from "../shared/icons/warn";
 
 const TagForm = () => {
-	const { addTag } = useTags()
-	const [name, setName] = useState('')
-	const [nameErr, setNameErr] = useState('')
+	const {
+		folderId,
+		tagFormPopup,
+		closeTagFormPopup,
+		editTagId,
+		tagName,
+		setTagName,
+		tagError,
+		setTagError,
+		createTag,
+		updateTagValue,
+		setFolderId,
+	} = useTagForm();
+
+	const { ownFolders } = useFolders();
 
 	const submitHandler = async (e: FormEvent) => {
-		e.preventDefault()
-		if (name.trim().length === 0) {
-			setNameErr('Please enter a tag name')
-			return
+		e.preventDefault();
+
+		if (editTagId) {
+			updateTagValue();
+		} else {
+			createTag();
 		}
-		if (name.trim().length < 3) {
-			setNameErr('Tag name must be at least 3 characters long')
-			return
+	};
+
+	const getDropdownValue = () => {
+		if (folderId) {
+			const folder = ownFolders.find((f) => f.id === folderId);
+			return folder ? { id: folder.id, option: folder.name } : undefined;
 		}
-		setNameErr('')
-		const request = apiClient.post('/tags', { name })
-		toast.promise(request, {
-			loading: 'Creating tag...',
-			success: 'Tag created successfully!',
-			error: 'Error creating tag',
-		})
-		try {
-			const response = await request
-			const tag = response.data
-			addTag(tag)
-			setName('')
-		} catch (error) {
-			console.error('Error creating tag:', error)
-		}
-	}
+	};
 
 	return (
-		<form
-			onSubmit={submitHandler}
-			className="bg-gray-100 flex gap-x-4 p-4 mb-2"
+		<PopUp
+			open={tagFormPopup}
+			close={closeTagFormPopup}
+			title={editTagId ? "Edit Tag" : "Create Tag"}
 		>
-			<span className="relative">
-				<Input
-					type="text"
-					placeholder="Enter tag"
-					value={name}
-					// className="h-8 bg-gray-300 p-2 rounded-sm focus:outline-none focus:ring-2 focus:ring-violet-700 min-w-72"
-					onFocus={() => setNameErr('')}
-					onChange={(e) => setName(e.target.value)}
-				/>
-				{nameErr && (
-					<p className="error absolute text-red-800 text-[12px]">
-						{nameErr}
-					</p>
+			<form onSubmit={submitHandler} className="max-w-[380px]">
+				<span>
+					<label className="text-[12px]">Tag Name</label>
+					<Input
+						type="text"
+						placeholder="Enter tag"
+						value={tagName}
+						className="w-full"
+						onFocus={() => setTagError("")}
+						onChange={(e) => setTagName(e.target.value)}
+					/>
+					{tagError && (
+						<p className=" text-red-800 text-[13px] text-right">
+							{tagError}
+						</p>
+					)}
+				</span>
+				{!editTagId && (
+					<div className="mt-4">
+						<label className="text-[12px]">Shared Folder</label>
+						<Dropdown
+							options={ownFolders
+								.filter((folder) => folder.shared)
+								.map((folder) => ({
+									id: folder.id,
+									option: folder.name,
+								}))}
+							onChange={(option) => setFolderId(option.id)}
+							value={getDropdownValue()}
+						/>
+						<span className="flex items-center gap-x-2 text-sm text-gray-600 mt-1">
+							<WarnIcon className="inline w-4 h-4 text-yellow-500 shrink-0" />
+							<p className="leading-none">
+								You can link a tag to a shared folder only. And
+								won't be able to change the linked folder later.
+							</p>
+						</span>
+					</div>
 				)}
-			</span>
-			<Button type="submit" variant="primary" className="my-0">
-				Create Tag
-			</Button>
-		</form>
-	)
-}
+				<Button className="w-full mx-0 mt-4">
+					{editTagId ? "Update Tag" : "Create Tag"}
+				</Button>
+			</form>
+		</PopUp>
+	);
+};
 
-export default TagForm
+export default TagForm;

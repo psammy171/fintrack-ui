@@ -1,5 +1,5 @@
-import cn from '@/lib/cn'
-import { type InputHTMLAttributes, forwardRef } from 'react'
+import cn from "@/lib/cn";
+import { type InputHTMLAttributes, forwardRef } from "react";
 
 const CheckBox = forwardRef<
 	HTMLInputElement,
@@ -10,14 +10,14 @@ const CheckBox = forwardRef<
 			ref={ref}
 			type="checkbox"
 			className={cn(
-				'bg-gray-200 dark:bg-gray-800 p-2 border-none rounded-sm focus:ring-2 text-primary-700 cursor-pointer focus:ring-blue-700 focus:outline-none transition-all',
+				"bg-gray-200 dark:bg-gray-800 p-2 border-none rounded-sm focus:ring-0 text-primary-700 cursor-pointer accent-indigo-600 focus:outline-none transition-all",
 				className,
 			)}
 			{...props}
 		/>
-	)
-})
+	);
+});
 
-CheckBox.displayName = 'CheckBox'
+CheckBox.displayName = "CheckBox";
 
-export default CheckBox
+export default CheckBox;

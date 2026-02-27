@@ -1,22 +1,22 @@
-import type { FC } from 'react'
-import type React from 'react'
-import CloseIcon from '../icons/close'
+import type { FC } from "react";
+import type React from "react";
+import CloseIcon from "../icons/close";
 
 interface Props {
-	open: boolean
-	title?: string
-	close: () => void
-	children: React.ReactNode
+	open: boolean;
+	title?: string;
+	close: () => void;
+	children: React.ReactNode;
 }
 
 const PopUp: FC<Props> = ({ open, close, children, title }) => {
 	return (
 		<div
 			className={`inset-0 fixed top-0 left-0 right-0 bottom-0 z-20 bg-black/50 flex items-center justify-center ${
-				open ? 'visible opacity-100' : 'invisible opacity-0'
+				open ? "visible opacity-100" : "invisible opacity-0"
 			}`}
 		>
-			<div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full relative">
+			<div className="bg-white rounded-lg shadow-lg p-6 min-w-sm relative">
 				{title ? (
 					<h2 className="text-lg font-semibold mb-1">{title}</h2>
 				) : null}
@@ -27,7 +27,7 @@ const PopUp: FC<Props> = ({ open, close, children, title }) => {
 				{children}
 			</div>
 		</div>
-	)
-}
+	);
+};
 
-export default PopUp
+export default PopUp;

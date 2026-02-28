@@ -31,7 +31,7 @@ const Settlements = () => {
 								settlement.creditor.userId +
 								settlement.debitor.userId
 							}
-							className="border-b last:border-b-0 py-1.5 px-2 flex items-center"
+							className="border-b last:border-b-0 py-1.5 px-2 flex items-center gap-x-4"
 						>
 							<p>
 								{settlement.debitor.firstName} owes{" "}

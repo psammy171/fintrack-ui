@@ -54,7 +54,7 @@ const Expenses = () => {
 				<Button onClick={openCreateExpensePopUp}>Add Expense</Button>
 			</span>
 
-			<div className="rounded-xs overflow-hidden m-4 shadow-md flex-grow bg-gray-50 relative sm:flex flex-row justify-start">
+			<div className="rounded-xs overflow-hidden m-2 sm:m-4 shadow-md flex-grow bg-gray-50 relative sm:flex flex-row justify-start">
 				<ExpenseFolders
 					className={`absolute sm:relative w-full transition-all duration-200 ${isFolderSection ? "right-0 top-0 bottom-0" : " right-full sm:right-0 top-0 bottom-0"}`}
 				/>

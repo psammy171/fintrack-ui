@@ -2,8 +2,6 @@ import type { FC } from "react";
 import type { Tag } from "../../types/tag";
 import EditIcon from "../shared/icons/edit";
 import { useTagForm } from "../../hooks/tags";
-import { formatToINR } from "../../utils/numbers";
-import { getDisplayValueOfEnum } from "../../utils/enums";
 import cn from "../../lib/cn";
 import { useFolders } from "@/hooks/folders/use-folders";
 import SharedFolderIcon from "../shared/icons/shared-folder";
@@ -29,7 +27,7 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 			)}
 		>
 			<span className="w-4 inline-block">{index + 1}.</span>
-			<span> {tag.name}</span>
+			<span className="text-ellipsis line-clamp-1"> {tag.name}</span>
 			{tag.folderId && (
 				<span className="relative w-4 h-4">
 					<SharedFolderIcon className="w-4 h-4 peer" />
@@ -39,15 +37,15 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 					</div>
 				</span>
 			)}
-			{tag.budget && tag.tagBudgetPeriod && (
+			{/* {tag.budget && tag.tagBudgetPeriod && (
 				<span className="w-1/4">
 					{formatToINR(tag.budget)} /{" "}
 					{getDisplayValueOfEnum(tag.tagBudgetPeriod)}
 				</span>
-			)}
+			)} */}
 			<span className="flex-grow"></span>
 			<span
-				className="w-7 h-7 rounded-lg bg-gray-300 flex items-center justify-center invisible group-hover:visible"
+				className="shrink-0 w-7 h-7 rounded-lg bg-gray-300 flex items-center justify-center invisible group-hover:visible"
 				onClick={() => openEditTagPopup(tag)}
 				title="Edit tag value"
 			>

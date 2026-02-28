@@ -16,7 +16,7 @@ const PopUp: FC<Props> = ({ open, close, children, title }) => {
 				open ? "visible opacity-100" : "invisible opacity-0"
 			}`}
 		>
-			<div className="bg-white rounded-lg shadow-lg p-6 min-w-sm relative">
+			<div className="bg-white rounded-lg shadow-lg p-6 sm:min-w-sm sm:max-w-fit relative mx-2">
 				{title ? (
 					<h2 className="text-lg font-semibold mb-1">{title}</h2>
 				) : null}

@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ExpenseFolderList: FC<Props> = ({ folders }) => {
-	const { setFolder, folder } = useExpenses();
+	const { setFolder, folder, setIsFolderSection } = useExpenses();
 
 	return (
 		<>
@@ -20,7 +20,10 @@ const ExpenseFolderList: FC<Props> = ({ folders }) => {
 						? "border-l-indigo-600 bg-indigo-100 text-indigo-600 font-semibold"
 						: "border-l-transparent hover:bg-gray-200"
 				}`}
-				onClick={() => setFolder(undefined)}
+				onClick={() => {
+					setFolder(undefined);
+					setIsFolderSection(false);
+				}}
 			>
 				<FolderIcon />
 				Root

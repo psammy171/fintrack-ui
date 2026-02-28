@@ -16,14 +16,14 @@ const TagManager = () => {
 	}, [fetchOwnedTags, fetchOwnFolders]);
 
 	return (
-		<div className="bg-gray-100 rounded-xs max-h-[400px] overflow-hidden overflow-y-scroll flex flex-col shadow-md">
+		<div className="bg-gray-100 rounded-xs overflow-hidden overflow-y-scroll flex flex-col shadow-md m-2">
 			<div className="flex items-center py-2">
 				<p className="text-2xl font-semibold pl-2">Tags</p>
 				<span className="flex-grow"></span>
 				<Button
 					type="button"
 					variant="primary"
-					className="my-0 pr-1"
+					className="my-0 px-2"
 					onClick={openCreateTagPopup}
 				>
 					Create Tag

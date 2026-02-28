@@ -1,14 +1,14 @@
-import { Toaster } from 'react-hot-toast'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import AuthenticatedRoute from './auth/routes/authenticated-route'
-import Dashboard from './screens/dashboard'
-import Home from './screens/home'
-import Expenses from './screens/expenses'
-import NotFound from './screens/not-found'
-import AuthProvider from './auth/context/auth.provider'
-import Callback from './screens/callback'
-import Settings from './screens/settings'
-import ContextProviderWrapper from './context/context-provider-wrapper'
+import { Toaster } from "react-hot-toast";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AuthenticatedRoute from "./auth/routes/authenticated-route";
+import Dashboard from "./screens/dashboard";
+import Home from "./screens/home";
+import Expenses from "./screens/expenses";
+import NotFound from "./screens/not-found";
+import AuthProvider from "./auth/context/auth.provider";
+import Callback from "./screens/callback";
+import Tags from "./screens/tags";
+import ContextProviderWrapper from "./context/context-provider-wrapper";
 
 function App() {
 	return (
@@ -43,10 +43,10 @@ function App() {
 								}
 							/>
 							<Route
-								path="/settings"
+								path="/tags"
 								element={
 									<AuthenticatedRoute>
-										<Settings />
+										<Tags />
 									</AuthenticatedRoute>
 								}
 							/>
@@ -57,7 +57,7 @@ function App() {
 			</Router>
 			<Toaster position="top-right" />
 		</AuthProvider>
-	)
+	);
 }
 
-export default App
+export default App;

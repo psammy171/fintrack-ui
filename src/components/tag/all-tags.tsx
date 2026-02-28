@@ -8,11 +8,6 @@ const AllTags = () => {
 	return (
 		<>
 			<div className="flex-grow h-full overflow-hidden overflow-y-scroll relative">
-				<span className="flex items-center text-[18px] font-semibold px-3 py-2 gap-x-4 border-y border-y-gray-200 bg-indigo-600 text-white sticky top-0">
-					<span className="w-4"></span>
-					<p className="w-1/2">All Tags</p>
-					{/* <p className="w-1/4">Tag Budget</p> */}
-				</span>
 				{ownedTags.length > 0 ? (
 					<>
 						{ownedTags.map((tag, index) => (

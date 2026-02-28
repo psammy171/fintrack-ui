@@ -31,7 +31,7 @@ const Expenses = () => {
 	return (
 		<div className="mx-auto pt-13 h-full overflow-hidden overflow-y-scroll flex flex-col">
 			<span className="flex items-center mt-4 mx-4">
-				<p className="text-2xl font-semibold">All your expenses here</p>
+				<p className="text-2xl font-semibold">Expenses</p>
 				<span className="flex-grow"></span>
 				{folder && folder.shared && (
 					<Button onClick={() => setShowSettlements(true)}>

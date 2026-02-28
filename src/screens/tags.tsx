@@ -1,6 +1,6 @@
 import TagManager from "../components/tag/tag-manager";
 
-const Settings = () => {
+const Tags = () => {
 	return (
 		<div className="max-w-[1024px] mx-auto pt-12">
 			<TagManager />
@@ -8,4 +8,4 @@ const Settings = () => {
 	);
 };
 
-export default Settings;
+export default Tags;

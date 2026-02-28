@@ -25,7 +25,11 @@ const FolderCard: FC<Props> = ({ folder }) => {
 
 	const folderCardRef = useRef<HTMLDivElement>(null);
 	const folderOptionsRef = useRef<HTMLDivElement>(null);
-	const { setFolder, folder: selectedFolder } = useExpenses();
+	const {
+		setFolder,
+		folder: selectedFolder,
+		setIsFolderSection,
+	} = useExpenses();
 	const { openEditForm, openDeleteConfirmationPopUp, openAddUserModal } =
 		useCreateFolders();
 	const [showOptions, setShowOptions] = useState(false);
@@ -60,6 +64,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 			!isClickOutside(e, folderCardRef.current)
 		) {
 			setFolder(folder);
+			setIsFolderSection(false);
 		}
 	};
 

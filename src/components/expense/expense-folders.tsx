@@ -6,13 +6,19 @@ import ExpenseFolderForm from "./expense-folder-form";
 import { useCreateFolders } from "@/hooks/folders/use-create-folder";
 import DeleteFolderConfirmation from "./delete-folder-comfirmation";
 import AddUserModal from "./add-user-modal";
+import cn from "@/lib/cn";
 
-const ExpenseFolders = () => {
+const ExpenseFolders = ({ className }: { className?: string }) => {
 	const { fetching, folders } = useFolders();
 	const { openCreateForm } = useCreateFolders();
 
 	return (
-		<div className="w-44 border-r bg-gray-100 overflow-hidden overflow-y-scroll">
+		<div
+			className={cn(
+				`sm:w-44 border-r bg-gray-100 overflow-hidden overflow-y-scroll`,
+				className,
+			)}
+		>
 			<span className="bg-indigo-600 w-full py-2 text-[18px] px-2 text-white flex justify-between items-center sticky top-0">
 				<p className="font-semibold">Folders</p>
 				<span

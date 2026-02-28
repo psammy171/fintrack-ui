@@ -1,15 +1,15 @@
-import { useExpenses } from '@/hooks/expenses/use-expenses'
-import Loader from '../shared/ui/loader'
-import { useEffect } from 'react'
-import ExpenseCard from './expense-card'
-import cn from '@/lib/cn'
+import { useExpenses } from "@/hooks/expenses/use-expenses";
+import Loader from "../shared/ui/loader";
+import { useEffect } from "react";
+import ExpenseCard from "./expense-card";
+import cn from "@/lib/cn";
 
 const ExpenseList = ({ className }: { className?: string }) => {
-	const { expenses, fetching, fetchExpenses, pageNumber } = useExpenses()
+	const { expenses, fetching, fetchExpenses, pageNumber } = useExpenses();
 
 	useEffect(() => {
-		fetchExpenses()
-	}, [fetchExpenses, pageNumber])
+		fetchExpenses();
+	}, [fetchExpenses, pageNumber]);
 
 	const getExpenseList = () => {
 		return expenses.length > 0 ? (
@@ -20,8 +20,8 @@ const ExpenseList = ({ className }: { className?: string }) => {
 			<p className="text-center my-[10%] text-indigo-700">
 				No expenses found!
 			</p>
-		)
-	}
+		);
+	};
 
 	const getLoaderOrExpenseList = () => {
 		if (fetching)
@@ -29,13 +29,13 @@ const ExpenseList = ({ className }: { className?: string }) => {
 				<span className="w-full">
 					<Loader className="mx-auto my-[10%]" />
 				</span>
-			)
+			);
 
-		return getExpenseList()
-	}
+		return getExpenseList();
+	};
 
 	return (
-		<div className={cn('overflow-y-scroll', className)}>
+		<div className={cn("overflow-y-scroll w-full", className)}>
 			<span className="flex py-2 px-3 font-semibold bg-indigo-600 text-[18px] text-white sticky top-0">
 				<p className="w-[3%]"></p>
 				<p className="w-[19%]">Tag</p>
@@ -45,7 +45,7 @@ const ExpenseList = ({ className }: { className?: string }) => {
 			</span>
 			{getLoaderOrExpenseList()}
 		</div>
-	)
-}
+	);
+};
 
-export default ExpenseList
+export default ExpenseList;

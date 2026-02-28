@@ -16,11 +16,14 @@ interface IExpenseContext {
 	folder?: Folder;
 	settlements: Settlement[];
 	showSettlements: boolean;
+	isFolderSection: boolean;
 
 	fetchExpenses: () => void;
 	fetchSettlements: (folder?: Folder) => void;
 	setShowSettlements: (show: boolean) => void;
 	resolveSettlement: (folderId: string, userId: string) => void;
+
+	setIsFolderSection: (value: boolean) => void;
 
 	addExpense: (expense: ExpenseResponse) => void;
 	updateExpense: (expenseId: string, expense: ExpenseResponse) => void;

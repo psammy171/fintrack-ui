@@ -9,9 +9,16 @@ import { useFolders } from "@/hooks/folders/use-folders";
 import { useTags } from "@/hooks/tags";
 import { useExpenses } from "@/hooks/expenses/use-expenses";
 import Settlements from "@/components/expense/settlements";
+import BackIcon from "@/components/shared/icons/back";
 
 const Expenses = () => {
-	const { folder, fetchSettlements, setShowSettlements } = useExpenses();
+	const {
+		folder,
+		fetchSettlements,
+		setShowSettlements,
+		isFolderSection,
+		setIsFolderSection,
+	} = useExpenses();
 	const { fetchFolders } = useFolders();
 	const { fetchUserOrSharedFolderTags } = useTags();
 	const { openCreateExpensePopUp } = useCreateExpense();
@@ -31,6 +38,12 @@ const Expenses = () => {
 	return (
 		<div className="mx-auto pt-13 h-full overflow-hidden overflow-y-scroll flex flex-col">
 			<span className="flex items-center mt-4 mx-4">
+				{!isFolderSection && (
+					<BackIcon
+						className="sm:hidden shrink-0 mr-2 cursor-pointer"
+						onClick={() => setIsFolderSection(true)}
+					/>
+				)}
 				<p className="text-2xl font-semibold">Expenses</p>
 				<span className="flex-grow"></span>
 				{folder && folder.shared && (
@@ -41,9 +54,13 @@ const Expenses = () => {
 				<Button onClick={openCreateExpensePopUp}>Add Expense</Button>
 			</span>
 
-			<div className=" rounded-xs overflow-hidden m-4 shadow-md flex-grow bg-gray-50 relative flex flex-row justify-start">
-				<ExpenseFolders />
-				<ExpenseList className="flex-grow" />
+			<div className="rounded-xs overflow-hidden m-4 shadow-md flex-grow bg-gray-50 relative sm:flex flex-row justify-start">
+				<ExpenseFolders
+					className={`absolute sm:relative w-full transition-all duration-200 ${isFolderSection ? "right-0 top-0 bottom-0" : " right-full sm:right-0 top-0 bottom-0"}`}
+				/>
+				<ExpenseList
+					className={`absolute flex-grow sm:relative transition-all duration-200 ${isFolderSection ? "left-full -right-full sm:left-0 sm:right-0 top-0 bottom-0" : "right-0  top-0 bottom-0"}`}
+				/>
 			</div>
 
 			<ExpenseForm />

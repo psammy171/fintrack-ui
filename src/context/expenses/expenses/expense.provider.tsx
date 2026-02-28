@@ -18,6 +18,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const [isLastPage, setIsLastPage] = useState<boolean>(false);
 	const [isFirstPage, setIsFirstPage] = useState<boolean>(true);
 	const [folder, setFolder] = useState<Folder | undefined>(undefined);
+	const [isFolderSection, setIsFolderSection] = useState<boolean>(true);
 
 	const [settlements, setSettlements] = useState<Settlement[]>([]);
 	const [showSettlements, setShowSettlements] = useState<boolean>(false);
@@ -118,6 +119,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				fetching,
 				fetchError,
 				settlements,
+				isFolderSection,
 				fetchExpenses,
 				addExpense,
 				updateExpense,
@@ -136,6 +138,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				setFolder,
 				fetchSettlements,
 				resolveSettlement,
+				setIsFolderSection,
 			}}
 		>
 			{children}

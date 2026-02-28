@@ -37,7 +37,7 @@ const Expenses = () => {
 
 	return (
 		<div className="mx-auto pt-13 h-full overflow-hidden overflow-y-scroll flex flex-col">
-			<span className="flex items-center mt-4 mx-4">
+			<span className="flex items-center mt-4 mx-2 sm:mx-4">
 				{!isFolderSection && (
 					<BackIcon
 						className="sm:hidden shrink-0 mr-2 cursor-pointer"
@@ -47,11 +47,19 @@ const Expenses = () => {
 				<p className="text-2xl font-semibold">Expenses</p>
 				<span className="flex-grow"></span>
 				{folder && folder.shared && (
-					<Button onClick={() => setShowSettlements(true)}>
+					<Button
+						className={`sm:flex ${isFolderSection ? "hidden" : ""}`}
+						onClick={() => setShowSettlements(true)}
+					>
 						Settlements
 					</Button>
 				)}
-				<Button onClick={openCreateExpensePopUp}>Add Expense</Button>
+				<Button
+					className={`sm:flex ${isFolderSection ? "hidden" : ""}`}
+					onClick={openCreateExpensePopUp}
+				>
+					Add Expense
+				</Button>
 			</span>
 
 			<div className="rounded-xs overflow-hidden m-2 sm:m-4 shadow-md flex-grow bg-gray-50 relative sm:flex flex-row justify-start">

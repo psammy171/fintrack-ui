@@ -62,13 +62,11 @@ const ExpenseForm = () => {
 				closeCreateExpensePopUp();
 				setUserShareTab(false);
 			}}
+			className="w-full mx-2 sm:w-sm"
 		>
-			<form
-				className="relative flex overflow-hidden"
-				onSubmit={onSubmitHandler}
-			>
+			<form className="relative w-full flex" onSubmit={onSubmitHandler}>
 				<div
-					className={`flex shrink-0 flex-col p-1 transform transition-transform top-0 w-full h-full duration-200 ${userShareTab ? "-translate-x-full" : ""}`}
+					className={`flex shrink-0 flex-col p-1 transform transition-transform top-0 w-full h-full duration-200 ${userShareTab ? "-translate-x-full hidden" : ""}`}
 				>
 					<h2 className="text-lg font-semibold mb-1">Add Expense</h2>
 					<label className="text-[12px]">Remark</label>
@@ -150,7 +148,7 @@ const ExpenseForm = () => {
 					</Button>
 				</div>
 				<div
-					className={`p-1 shrink-0 top-0 h-full w-full transform transition-transform duration-200 ${userShareTab ? "-translate-x-full" : ""}`}
+					className={`p-1 shrink-0 top-0 h-full w-full transform transition-transform duration-200 ${userShareTab ? "" : "hidden"}`}
 				>
 					<span className="flex items-center gap-x-4">
 						<BackIcon

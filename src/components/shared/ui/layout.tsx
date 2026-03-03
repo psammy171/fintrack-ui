@@ -58,7 +58,7 @@ const Layout: FC<Props> = ({ children }) => {
 			<div className="w-full h-full overflow-scroll flex-grow pl-0 sm:pl-12">
 				{children}
 			</div>
-			<div className="w-full flex justify-around border-t bg-slate-100 sm:hidden">
+			<div className="w-full flex justify-around border-t bg-slate-100 sm:hidden pb-4">
 				{menuItems.map((item) => (
 					<BottomNavigationItem
 						key={item.label}

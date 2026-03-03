@@ -55,10 +55,14 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 			);
 			return false;
 		}
-		if (!createExpense.amount || isNaN(createExpense.amount)) {
+		if (
+			!createExpense.amount ||
+			isNaN(createExpense.amount) ||
+			Number(createExpense.amount) <= 0
+		) {
 			setExpensePropertyError(
 				"amountError",
-				"Amount must be a valid number",
+				"Invalid amount. (Must be a number greater than 0)",
 			);
 			return false;
 		}

@@ -1,17 +1,17 @@
-import { useAuth } from '../hooks/use-auth'
-import { useEffect } from 'react'
-import type { UserContext } from '../../types/user-context'
-import apiClient from '../../lib/axios'
-import { useLocation } from 'react-router-dom'
+import { useAuth } from "../hooks/use-auth";
+import { useEffect } from "react";
+import type { UserContext } from "../../types/user-context";
+import apiClient from "../../lib/axios";
+import { useLocation } from "react-router-dom";
 
 interface Props {
-	children: React.ReactNode
+	children: React.ReactNode;
 }
 
 const AuthenticatedRoute = ({ children }: Props) => {
-	const location = useLocation()
-	const pathName = location.pathname
-	const authRoutes = ['/expenses', '/dashboard', '/settings']
+	const location = useLocation();
+	const pathName = location.pathname;
+	const authRoutes = ["/expenses", "/dashboard", "/tags"];
 	const {
 		isAuthenticating,
 		authenticated,
@@ -19,38 +19,38 @@ const AuthenticatedRoute = ({ children }: Props) => {
 		setUserContext,
 		setAuthenticated,
 		userContext,
-	} = useAuth()
+	} = useAuth();
 
 	useEffect(() => {
 		const checkAuth = async () => {
 			if (userContext && authenticated) {
-				return
+				return;
 			}
-			setAuthenticated(false)
-			setIsAuthenticating(true)
+			setAuthenticated(false);
+			setIsAuthenticating(true);
 
 			try {
-				const response = await apiClient.get('/profile')
-				const userContext: UserContext = response.data
-				setUserContext(userContext)
-				setAuthenticated(true)
+				const response = await apiClient.get("/profile");
+				const userContext: UserContext = response.data;
+				setUserContext(userContext);
+				setAuthenticated(true);
 			} catch (err) {
-				console.error(err)
-				setAuthenticated(false)
+				console.error(err);
+				setAuthenticated(false);
 			} finally {
-				setIsAuthenticating(false)
+				setIsAuthenticating(false);
 			}
-		}
-		checkAuth()
+		};
+		checkAuth();
 	}, [
 		authenticated,
 		setAuthenticated,
 		setIsAuthenticating,
 		setUserContext,
 		userContext,
-	])
+	]);
 
-	const isAuthRoute = () => authRoutes.includes(pathName)
+	const isAuthRoute = () => authRoutes.includes(pathName);
 
 	const getElement = () => {
 		if (isAuthenticating) {
@@ -58,17 +58,20 @@ const AuthenticatedRoute = ({ children }: Props) => {
 				<div className="h-screen w-full flex items-center justify-center">
 					<div>Loading...</div>
 				</div>
-			)
+			);
 		}
 
 		if (!authenticated && isAuthRoute()) {
-			window.location.href = import.meta.env.VITE_API_LOGIN_URL
+			window.location.href =
+				import.meta.env.VITE_API_LOGIN_URL +
+				"&state=" +
+				window.location.pathname;
 		}
 
-		return children
-	}
+		return children;
+	};
 
-	return getElement()
-}
+	return getElement();
+};
 
-export default AuthenticatedRoute
+export default AuthenticatedRoute;

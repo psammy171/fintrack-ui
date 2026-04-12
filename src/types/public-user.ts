@@ -1,5 +1,5 @@
 export interface PublicUser {
-	userId: string;
+	id: string;
 	firstName: string;
 	lastName: string;
 }

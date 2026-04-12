@@ -40,7 +40,10 @@ const ExpenseForm = () => {
 		if (folder && folder.shared) {
 			if (!userShareTab) {
 				if (userContext) {
-					setExpenseValue("paidBy", userContext);
+					setExpenseValue("paidBy", {
+						id: userContext.userId,
+						...userContext,
+					});
 				}
 				preFillUserShares(folder);
 				setUserShareTab(true);
@@ -165,7 +168,7 @@ const ExpenseForm = () => {
 						options={
 							folder?.sharedUsers
 								? folder.sharedUsers.map((user) => ({
-										id: user.userId,
+										id: user.id,
 										option:
 											user.firstName +
 											" " +
@@ -175,7 +178,7 @@ const ExpenseForm = () => {
 						}
 						onChange={(value) => {
 							const userValue = folder?.sharedUsers?.find(
-								(user) => user.userId === value.id,
+								(user) => user.id === value.id,
 							);
 
 							if (userValue) setExpenseValue("paidBy", userValue);
@@ -183,7 +186,7 @@ const ExpenseForm = () => {
 						value={
 							createExpense.paidBy
 								? {
-										id: createExpense.paidBy.userId,
+										id: createExpense.paidBy.id,
 										option:
 											createExpense.paidBy.firstName +
 											" " +
@@ -202,7 +205,7 @@ const ExpenseForm = () => {
 					<div className="border border-gray-200 rounded-sm">
 						{createExpense.userShares?.map((userShare) => (
 							<div
-								key={userShare.userId}
+								key={userShare.id}
 								className="flex p-2 gap-x-4 items-center border-b last:border-b-0"
 							>
 								<p className="grow-1">
@@ -213,7 +216,7 @@ const ExpenseForm = () => {
 									value={userShare.amount}
 									onChange={(e) =>
 										updateUserShares(
-											userShare.userId,
+											userShare.id,
 											parseInt(e.target.value),
 										)
 									}

@@ -198,7 +198,10 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 
 	const preFillUserShares = (folder?: Folder) => {
 		if (folder && folder.shared && folder.sharedUsers) {
-			const userShares: (PublicUser & { amount: number })[] = [];
+			const userShares: (PublicUser & {
+				userId: string;
+				amount: number;
+			})[] = [];
 
 			let totalAmount = 0;
 			const userCount = folder.sharedUsers.length;
@@ -209,6 +212,7 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 					const amount = createExpense.amount - totalAmount;
 					userShares.push({
 						...user,
+						userId: user.id,
 						amount,
 					});
 				} else {
@@ -220,6 +224,7 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 
 					userShares.push({
 						...user,
+						userId: user.id,
 						amount,
 					});
 				}

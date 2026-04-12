@@ -27,10 +27,7 @@ const Settlements = () => {
 				) : (
 					settlements.map((settlement) => (
 						<div
-							key={
-								settlement.creditor.userId +
-								settlement.debitor.userId
-							}
+							key={settlement.creditor.id + settlement.debitor.id}
 							className="border-b last:border-b-0 py-1.5 px-2 flex items-center gap-x-4"
 						>
 							<p>
@@ -39,15 +36,14 @@ const Settlements = () => {
 								{settlement.amount}
 							</p>
 							<span className="grow-1"></span>
-							{userContext?.userId ===
-								settlement.creditor.userId && (
+							{userContext?.userId === settlement.creditor.id && (
 								<span
 									className="text-sm text-blue-700 hover:scale-105 transition-all duration-100 cursor-pointer"
 									onClick={() => {
 										if (folder) {
 											resolveSettlement(
 												folder.id,
-												settlement.debitor.userId,
+												settlement.debitor.id,
 											);
 										}
 									}}

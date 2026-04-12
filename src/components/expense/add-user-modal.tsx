@@ -48,13 +48,13 @@ const AddUserModal = () => {
 
 	const selectUser = (user: PublicUser) => {
 		const isUserAlreadySelected = selectedUsers.some(
-			(selectedUser) => selectedUser.userId === user.userId,
+			(selectedUser) => selectedUser.id === user.id,
 		);
 
 		if (isUserAlreadySelected) {
 			setSelectedUsers((prevSelectedUsers) =>
 				prevSelectedUsers.filter(
-					(selectedUser) => selectedUser.userId !== user.userId,
+					(selectedUser) => selectedUser.id !== user.id,
 				),
 			);
 		} else {
@@ -79,7 +79,7 @@ const AddUserModal = () => {
 			const req = apiClient.patch(
 				`/folders/${shareFolder.id}/add-users`,
 				{
-					userIds: selectedUsers.map((user) => user.userId),
+					userIds: selectedUsers.map((user) => user.id),
 				},
 			);
 			toast.promise(req, {
@@ -146,7 +146,7 @@ const AddUserModal = () => {
 								<>
 									{sharedUsers.map((user) => (
 										<p
-											key={user.userId}
+											key={user.id}
 											className="border-b p-2"
 										>{`${user.firstName} ${user.lastName}`}</p>
 									))}

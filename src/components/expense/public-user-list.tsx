@@ -17,7 +17,7 @@ const PublicUserList: FC<Props> = ({
 }) => {
 	const isUserSelected = (user: PublicUser): boolean => {
 		return selectedUsers.some(
-			(selectedUser) => selectedUser.userId === user.userId,
+			(selectedUser) => selectedUser.id === user.id,
 		);
 	};
 
@@ -28,7 +28,7 @@ const PublicUserList: FC<Props> = ({
 		const searchedNonSelectedUsers = searchedUsers.filter(
 			(user) =>
 				!selectedUsers.some(
-					(selectedUser) => selectedUser.userId === user.userId,
+					(selectedUser) => selectedUser.id === user.id,
 				),
 		);
 
@@ -52,10 +52,9 @@ const PublicUserList: FC<Props> = ({
 								isUserSelected={isUserSelected(user)}
 								selectUser={selectUser}
 								isUserAlreadyShared={sharedUsers.some(
-									(sharedUser) =>
-										sharedUser.userId === user.userId,
+									(sharedUser) => sharedUser.id === user.id,
 								)}
-								key={user.userId}
+								key={user.id}
 							/>
 						),
 					)}
@@ -79,7 +78,7 @@ const UserComponent = ({
 	isUserAlreadyShared: boolean;
 }) => {
 	return (
-		<div key={user.userId} className="flex items-center gap-x-2">
+		<div key={user.id} className="flex items-center gap-x-2">
 			<CheckBox
 				disabled={isUserAlreadyShared}
 				checked={isUserAlreadyShared || isUserSelected}

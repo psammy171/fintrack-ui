@@ -20,7 +20,7 @@ const TagManager = () => {
 
 	return (
 		<div className=" md:rounded-xs flex flex-col sm:m-2">
-			<div className="flex items-center p-3 sm:py-2 sm:px-0">
+			<div className="flex items-center p-3 sm:py-2 sm:px-0 my-3">
 				<span className="relative">
 					<Input
 						placeholder="Search tags..."

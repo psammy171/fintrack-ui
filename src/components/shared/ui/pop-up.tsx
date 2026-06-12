@@ -20,7 +20,7 @@ const PopUp: FC<Props> = ({ open, close, children, title, className }) => {
 		>
 			<div
 				className={cn(
-					"bg-white rounded-lg shadow-lg p-6 sm:min-w-sm sm:max-w-fit relative mx-2",
+					"bg-white rounded-lg shadow-lg p-6 min-w-sm sm:max-w-fit relative mx-2",
 					className,
 				)}
 			>

@@ -4,7 +4,8 @@ import EditIcon from "../shared/icons/edit";
 import { useTagForm } from "../../hooks/tags";
 import cn from "../../lib/cn";
 import { useFolders } from "@/hooks/folders/use-folders";
-import SharedFolderIcon from "../shared/icons/shared-folder";
+import FolderIcon from "../shared/icons/folder";
+import PersonalIcon from "../shared/icons/personal";
 
 interface Props {
 	tag: Tag;
@@ -15,50 +16,64 @@ interface Props {
 const TagCard: FC<Props> = ({ tag, index, className }) => {
 	const { ownFolders } = useFolders();
 	const { openEditTagPopup } = useTagForm();
+	const folder = ownFolders.find((f) => f.id === tag.folderId);
+
+	const getShareStatus = () => {
+		if (folder) {
+			return (
+				<span className="sm:flex items-center gap-2 text-sm hidden">
+					<FolderIcon className="w-4 h-4 peer text-indigo-600" />
+					<p>{folder.name}</p>
+				</span>
+			);
+		}
+
+		return (
+			<span className="sm:flex items-center gap-2 text-sm hidden">
+				<PersonalIcon className="w-4 h-4 peer text-indigo-600" />
+				<p>Personal</p>
+			</span>
+		);
+	};
 
 	return (
-		<div
+		<tr
 			key={tag.id}
 			className={cn(
-				`border-b border-b-gray-200 py-1.5 pl-4 pr-5 cursor-pointer hover:bg-gray-200 transition-colors duration-300 flex items-center group gap-x-4 ${
+				`border-b border-b-gray-200 py-4 cursor-pointer hover:bg-gray-200 transition-colors duration-300 w-full first:border-t border-t-gray-200 ${
 					index % 2 === 0 ? "bg-white" : "bg-gray-100"
 				}`,
 				className,
 			)}
 		>
-			<span className="w-4 inline-block">{index + 1}.</span>
-			<span className="text-ellipsis line-clamp-1"> {tag.name}</span>
-			{tag.folderId && (
-				<span className="relative w-4 h-4">
-					<SharedFolderIcon className="w-4 h-4 peer" />
-					<div className="hidden peer-hover:block whitespace-nowrap absolute shadow-md rounded-md bg-gray-200 border border-gray-400 px-2 text-gray-700 bottom-5 left-1/2 -translate-x-1/2">
-						{ownFolders.find((f) => f.id === tag.folderId)?.name ||
-							"Folder"}
-					</div>
+			<td className="w-4 px-4 py-3 text-sm hidden sm:table-cell">
+				{index + 1}.
+			</td>
+			<td className="text-ellipsis line-clamp-1 px-4 py-3 flex items-center gap-1 text-sm">
+				<span className="sm:hidden bg-gray-300 rounded-lg flex items-center justify-center w-8 h-8 shrink-0 mr-2">
+					{folder ? (
+						<FolderIcon className="w-4 h-4 peer text-indigo-600" />
+					) : (
+						<PersonalIcon className="w-4 h-4 peer text-indigo-600" />
+					)}
 				</span>
-			)}
-			{/* {tag.budget && tag.tagBudgetPeriod && (
-				<span className="w-1/4">
-					{formatToINR(tag.budget)} /{" "}
-					{getDisplayValueOfEnum(tag.tagBudgetPeriod)}
+				<span>
+					<p className="">{tag.name}</p>
+					<p className="text-gray-500 text-xs sm:hidden">
+						{folder ? folder.name : "Personal"}
+					</p>
 				</span>
-			)} */}
-			<span className="flex-grow"></span>
-			<span
-				className="shrink-0 w-7 h-7 rounded-lg bg-gray-300 flex items-center justify-center invisible group-hover:visible"
+			</td>
+
+			<td className="flex-grow px-4 py-3 text-sm ">{getShareStatus()}</td>
+			<td
+				className="px-4 py-3"
 				onClick={() => openEditTagPopup(tag)}
 				title="Edit tag value"
 			>
-				<EditIcon className="text-blue-800" />
-			</span>
-			{/* <span
-				className="w-7 h-7 rounded-lg bg-gray-300 flex items-center justify-center invisible group-hover:visible"
-				onClick={() => openEditTagBudgetPopup(tag)}
-				title="Edit tag budget"
-			>
-				<GoalIcon className="text-[#11710D]" />
-			</span> */}
-		</div>
+				<EditIcon className="text-indigo-600" />
+			</td>
+		</tr>
 	);
 };
 

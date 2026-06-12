@@ -39,7 +39,7 @@ const Callback = () => {
 				console.error(error);
 			} finally {
 				const navigateTo = getRedirectUri();
-				navigate(navigateTo);
+				window.location.replace(navigateTo);
 			}
 		};
 

@@ -7,9 +7,25 @@ const AllTags = () => {
 
 	return (
 		<>
-			<div className="flex-grow h-full overflow-hidden overflow-y-scroll relative">
+			<table className="w-full border-collapse sm:rounded-lg sm:shadow-sm overflow-hidden">
+				<thead className="hidden sm:table-header-group">
+					<tr className="border-b border-b-gray-300 bg-gray-200 sticky top-0 z-10">
+						<th className="text-left text-sm font-extrabold text-gray-500 px-4 py-3 w-4">
+							#
+						</th>
+						<th className="text-left text-sm font-extrabold text-gray-500 px-4 py-3">
+							Name
+						</th>
+						<th className="text-left text-sm font-extrabold text-gray-500 px-4 py-3">
+							Folder
+						</th>
+						<th className="text-left text-sm font-extrabold text-gray-500 px-4 py-3">
+							Actions
+						</th>
+					</tr>
+				</thead>
 				{ownedTags.length > 0 ? (
-					<>
+					<tbody>
 						{ownedTags.map((tag, index) => (
 							<TagCard
 								key={tag.id}
@@ -18,7 +34,7 @@ const AllTags = () => {
 								className="last:border-b-transparent"
 							/>
 						))}
-					</>
+					</tbody>
 				) : (
 					<div className="w-full">
 						<p className="text-center my-10">
@@ -26,7 +42,7 @@ const AllTags = () => {
 						</p>
 					</div>
 				)}
-			</div>
+			</table>
 			<EditTagBudgetModal />
 		</>
 	);

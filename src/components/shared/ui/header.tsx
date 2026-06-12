@@ -1,12 +1,14 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useAuth } from "../../../auth/hooks/use-auth";
 import apiClient from "../../../lib/axios";
 import Login from "./login";
 import Button from "./button";
+import LogoIcon from "../icons/logo";
 
 const Header = () => {
+	const location = useLocation();
 	const { userContext } = useAuth();
 	const [open, setOpen] = useState(false);
 
@@ -41,6 +43,19 @@ const Header = () => {
 		}
 	};
 
+	const getTitle = () => {
+		switch (location.pathname) {
+			case "/dashboard":
+				return "Dashboard";
+			case "/expenses":
+				return "Expenses";
+			case "/tags":
+				return "Tags";
+			default:
+				return "FinTrack";
+		}
+	};
+
 	return (
 		<header className="flex items-center h-[50px] w-full gap-x-4 fixed z-10 top-0">
 			{/* <Link to={'/'}>
@@ -50,8 +65,9 @@ const Header = () => {
 			{userContext ? (
 				<div className="relative flex items-center p-3 justify-end gap-x-4 text-white bg-indigo-600 flex-grow">
 					<Link to={"/"}>
-						<p className="text-xl font-bold">FinTrack</p>
+						<LogoIcon className="w-6 h-6 text-white fill-indigo-600" />
 					</Link>
+					<p className="text-xl font-bold">{getTitle()}</p>
 					<span className="flex-grow"></span>
 					{/* <Link to="/dashboard">Dashboard</Link>
 					<Link to="/expenses">Expenses</Link>

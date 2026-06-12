@@ -21,16 +21,16 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 	const getShareStatus = () => {
 		if (folder) {
 			return (
-				<span className="sm:flex items-center gap-2 text-sm hidden">
-					<FolderIcon className="w-4 h-4 peer text-indigo-600" />
+				<span className="sm:flex items-center gap-2 text-[16px] hidden">
+					<FolderIcon className="w-5 h-5 peer text-indigo-600" />
 					<p>{folder.name}</p>
 				</span>
 			);
 		}
 
 		return (
-			<span className="sm:flex items-center gap-2 text-sm hidden">
-				<PersonalIcon className="w-4 h-4 peer text-indigo-600" />
+			<span className="sm:flex items-center gap-2 text-[16px] hidden">
+				<PersonalIcon className="w-5 h-5 peer text-indigo-600" />
 				<p>Personal</p>
 			</span>
 		);
@@ -50,22 +50,22 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 				{index + 1}.
 			</td>
 			<td className="text-ellipsis line-clamp-1 px-4 py-3 flex items-center gap-1 text-sm">
-				<span className="sm:hidden bg-gray-300 rounded-lg flex items-center justify-center w-8 h-8 shrink-0 mr-2">
+				<span className="sm:hidden bg-gray-300 rounded-lg flex items-center justify-center w-9 h-9 shrink-0 mr-2">
 					{folder ? (
-						<FolderIcon className="w-4 h-4 peer text-indigo-600" />
+						<FolderIcon className="w-5 h-5 peer text-indigo-600" />
 					) : (
-						<PersonalIcon className="w-4 h-4 peer text-indigo-600" />
+						<PersonalIcon className="w-5 h-5 peer text-indigo-600" />
 					)}
 				</span>
 				<span>
-					<p className="">{tag.name}</p>
-					<p className="text-gray-500 text-xs sm:hidden">
+					<p className="text-[16px]">{tag.name}</p>
+					<p className="text-gray-500 text-sm sm:hidden">
 						{folder ? folder.name : "Personal"}
 					</p>
 				</span>
 			</td>
 
-			<td className="flex-grow px-4 py-3 text-sm ">{getShareStatus()}</td>
+			<td className="flex-grow px-4 py-3">{getShareStatus()}</td>
 			<td
 				className="px-4 py-3"
 				onClick={() => openEditTagPopup(tag)}

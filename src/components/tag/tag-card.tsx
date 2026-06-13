@@ -46,10 +46,10 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 				className,
 			)}
 		>
-			<td className="w-4 px-4 py-3 text-sm hidden sm:table-cell">
+			<td className="w-4 px-4 py-3 sm:py-2.5 text-sm hidden sm:table-cell">
 				{index + 1}.
 			</td>
-			<td className="text-ellipsis line-clamp-1 px-4 py-3 flex items-center gap-1 text-sm">
+			<td className="text-ellipsis line-clamp-1 px-4 py-3 sm:py-2.5 flex items-center gap-1 text-sm">
 				<span className="sm:hidden bg-gray-300 rounded-lg flex items-center justify-center w-9 h-9 shrink-0 mr-2">
 					{folder ? (
 						<FolderIcon className="w-5 h-5 peer text-indigo-600" />
@@ -65,9 +65,11 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 				</span>
 			</td>
 
-			<td className="flex-grow px-4 py-3">{getShareStatus()}</td>
+			<td className="flex-grow px-4 py-3 sm:py-2.5">
+				{getShareStatus()}
+			</td>
 			<td
-				className="px-4 py-3"
+				className="px-4 py-3 sm:py-2.5"
 				onClick={() => openEditTagPopup(tag)}
 				title="Edit tag value"
 			>

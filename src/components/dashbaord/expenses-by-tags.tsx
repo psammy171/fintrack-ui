@@ -1,8 +1,8 @@
 import { useEffect, useState, type FC } from "react";
 import Loader from "../shared/ui/loader";
 import apiClient from "@/lib/axios";
-import BarChart from "./bar-chart";
-import type { ExpenseByDay } from "./interfaces/expense-by-day";
+import type { ExpenseByTag } from "./interfaces/expense-by-tag";
+import PieChart from "./pie-chart";
 
 interface Props {
 	startDate: string;
@@ -10,16 +10,16 @@ interface Props {
 	folderId?: string;
 }
 
-const ExpensesByDays: FC<Props> = ({ startDate, endDate, folderId }) => {
+const ExpensesByTags: FC<Props> = ({ startDate, endDate, folderId }) => {
 	const [fetching, setFetching] = useState(true);
-	const [data, setData] = useState<ExpenseByDay[]>([]);
+	const [data, setData] = useState<ExpenseByTag[]>([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			setFetching(true);
 			try {
-				const response = await apiClient.get<ExpenseByDay[]>(
-					"/analytics/expenses-by-days",
+				const response = await apiClient.get<ExpenseByTag[]>(
+					"/analytics/expenses-by-tags",
 					{
 						params: {
 							"start-date": startDate,
@@ -41,19 +41,19 @@ const ExpensesByDays: FC<Props> = ({ startDate, endDate, folderId }) => {
 	}, [endDate, folderId, startDate]);
 
 	return (
-		<div className="border inline-block w-full shadow-md rounded-sm my-4">
+		<div className="border inline-block w-full shadow-md rounded-sm mt-2 mb-4">
 			<p className="px-8 font-medium text-[18px] py-4">
-				Expenses By Days
+				Expenses By Tags
 			</p>
 			<div className="w-full relative px-4 pb-8 sm:px-8">
 				{fetching ? (
 					<Loader className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 				) : (
-					<BarChart data={data} className="h-[314px] w-full" />
+					<PieChart data={data} className="h-[314px] w-full" />
 				)}
 			</div>
 		</div>
 	);
 };
 
-export default ExpensesByDays;
+export default ExpensesByTags;

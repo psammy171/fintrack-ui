@@ -4,6 +4,7 @@ import type { Folder } from "@/types/folder";
 import { useEffect, useState } from "react";
 import DashboardFilters from "@/components/dashbaord/dashboard-filters";
 import { useFolders } from "@/hooks/folders/use-folders";
+import ExpensesByTags from "@/components/dashbaord/expenses-by-tags";
 
 const Dashboard = () => {
 	const now = new Date();
@@ -39,6 +40,11 @@ const Dashboard = () => {
 				folderId={folder?.id}
 			/>
 			<ExpensesByDays
+				startDate={startDate}
+				endDate={endDate}
+				folderId={folder?.id}
+			/>
+			<ExpensesByTags
 				startDate={startDate}
 				endDate={endDate}
 				folderId={folder?.id}

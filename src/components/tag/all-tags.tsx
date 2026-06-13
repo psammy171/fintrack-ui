@@ -10,16 +10,16 @@ const AllTags = () => {
 			<table className="w-full border-collapse sm:rounded-lg sm:shadow-sm overflow-hidden">
 				<thead className="hidden sm:table-header-group">
 					<tr className="border-b border-b-gray-300 bg-gray-200 sticky top-0 z-10">
-						<th className="text-left text-[15px] font-extrabold text-gray-500 px-4 py-3 w-4">
+						<th className="text-left text-[15px] font-extrabold text-gray-500 px-4 py-3 sm:py-2.5 w-4">
 							#
 						</th>
-						<th className="text-left text-[15px] font-extrabold text-gray-500 px-4 py-3">
+						<th className="text-left text-[15px] font-extrabold text-gray-500 px-4 py-3 sm:py-2.5">
 							Name
 						</th>
-						<th className="text-left text-[15px] font-extrabold text-gray-500 px-4 py-3">
+						<th className="text-left text-[15px] font-extrabold text-gray-500 px-4 py-3 sm:py-2.5">
 							Folder
 						</th>
-						<th className="text-left text-[15px] font-extrabold text-gray-500 px-4 py-3">
+						<th className="text-left text-[15px] font-extrabold text-gray-500 px-4 py-3 sm:py-2.5">
 							Actions
 						</th>
 					</tr>
@@ -36,11 +36,13 @@ const AllTags = () => {
 						))}
 					</tbody>
 				) : (
-					<div className="w-full">
-						<p className="text-center my-10">
-							No tags created yet!
-						</p>
-					</div>
+					<tbody>
+						<tr className="text-center my-10">
+							<td colSpan={4} className="py-10">
+								<p>No tags created yet!</p>
+							</td>
+						</tr>
+					</tbody>
 				)}
 			</table>
 			<EditTagBudgetModal />

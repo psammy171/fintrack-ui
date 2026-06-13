@@ -1,5 +1,5 @@
 import ExpenseSummary from "@/components/dashbaord/expense-summary";
-import DailyExpenseByMonth from "@/components/dashbaord/daily-expense-by-month";
+import ExpensesByDays from "@/components/dashbaord/expenses-by-days";
 import type { Folder } from "@/types/folder";
 import { useEffect, useState } from "react";
 import DashboardFilters from "@/components/dashbaord/dashboard-filters";
@@ -38,7 +38,11 @@ const Dashboard = () => {
 				endDate={endDate}
 				folderId={folder?.id}
 			/>
-			<DailyExpenseByMonth />
+			<ExpensesByDays
+				startDate={startDate}
+				endDate={endDate}
+				folderId={folder?.id}
+			/>
 		</div>
 	);
 };

@@ -58,7 +58,7 @@ const Dropdown = ({
 		<div className="relative" ref={ref}>
 			<div
 				className={cn(
-					"bg-gray-300 dark:bg-gray-800 dark:text-gray-300 transition-colors duration-300 px-3 h-9 border-none rounded-sm focus:ring-indigo-600 focus:ring-2 flex items-center cursor-pointer",
+					"bg-gray-300 dark:bg-gray-800 dark:text-gray-300 transition-colors duration-300 px-3 h-9 rounded-sm focus:ring-indigo-600 focus:ring-2 flex items-center cursor-pointer",
 					className,
 				)}
 				tabIndex={1}

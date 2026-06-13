@@ -38,6 +38,8 @@ export const FoldersProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	}, [folder, folders]);
 
 	const fetchFolders = useCallback(async () => {
+		if (folders.length > 0) return;
+
 		setFetching(true);
 		try {
 			const response = await apiClient.get("/folders");
@@ -47,9 +49,11 @@ export const FoldersProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		} finally {
 			setFetching(false);
 		}
-	}, []);
+	}, [folders.length]);
 
 	const fetchOwnFolders = useCallback(async () => {
+		if (ownFolders.length > 0) return;
+
 		try {
 			const response = await apiClient.get("/folders", {
 				params: { scope: "owned" },
@@ -60,7 +64,7 @@ export const FoldersProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				"Error fetching own folders : " + (error as Error).message,
 			);
 		}
-	}, []);
+	}, [ownFolders.length]);
 
 	const addFolder = (folder: Folder) => {
 		setFolders((prevFolders) => [...prevFolders, folder]);

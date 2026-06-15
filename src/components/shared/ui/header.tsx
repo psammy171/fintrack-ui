@@ -57,7 +57,10 @@ const Header = () => {
 	};
 
 	return (
-		<header className="flex items-center h-[50px] w-full gap-x-4 fixed z-10 top-0 bg-indigo-600">
+		<header
+			className="flex items-center h-[50px] w-full gap-x-4 fixed z-10 top-0 bg-indigo-600"
+			style={{ paddingTop: "env(safe-area-inset-top)" }}
+		>
 			{/* <Link to={'/'}>
 				<p className="text-xl font-bold">Welcome to FinTrack</p>
 			</Link> */}

@@ -10,14 +10,19 @@ export default defineConfig({
 		react(),
 		tailwindcss(),
 		VitePWA({
-			includeAssets: ["favicon.ico", "apple-touch-icon.png", "public/*"],
+			includeAssets: [
+				"favicon.ico",
+				"apple-touch-icon.png",
+				"public/*",
+				"splash/*",
+			],
 			registerType: "autoUpdate",
 			manifest: {
 				name: "Personal Finance Tool",
 				short_name: "Fintrack",
 				start_url: "/expenses",
 				background_color: "#ffffff",
-				theme_color: "#FFFFFF",
+				theme_color: "#4f39f6",
 				icons: [
 					{
 						src: "icon-192x192.png",
@@ -28,6 +33,12 @@ export default defineConfig({
 						src: "icon-512x512.png",
 						sizes: "512x512",
 						type: "image/png",
+					},
+					{
+						src: "icon-512x512.png",
+						sizes: "512x512",
+						type: "image/png",
+						purpose: "maskable",
 					},
 				],
 			},

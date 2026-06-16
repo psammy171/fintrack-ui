@@ -57,17 +57,7 @@ const Header = () => {
 	};
 
 	return (
-		<header
-			className="flex items-center w-full gap-x-4 fixed z-10 top-0 bg-indigo-600"
-			style={{
-				height: "calc(var(--header-height) + var(--safe-top))",
-				paddingTop: "var(--safe-top)",
-			}}
-		>
-			{/* <Link to={'/'}>
-				<p className="text-xl font-bold">Welcome to FinTrack</p>
-			</Link> */}
-			{/* <span className="flex-grow"></span> */}
+		<header className="flex items-center h-[50px] w-full gap-x-4 fixed z-10 top-0 bg-indigo-600">
 			{userContext ? (
 				<div className="relative flex items-center p-3 justify-end gap-x-4 text-white bg-indigo-600 flex-grow">
 					<Link to={"/"}>

@@ -57,7 +57,9 @@ const Layout: FC<Props> = ({ children }) => {
 			</div>
 			<div
 				className="w-full h-full overflow-scroll flex-grow pl-0 sm:pl-12 min-w-sm"
-				style={{ paddingTop: "calc(50px + env(safe-area-inset-top))" }}
+				style={{
+					paddingTop: "calc(var(--header-height) + var(--safe-top))",
+				}}
 			>
 				{children}
 			</div>

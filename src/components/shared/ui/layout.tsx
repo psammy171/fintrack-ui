@@ -19,6 +19,11 @@ const Layout: FC<Props> = ({ children }) => {
 	const location = useLocation();
 	const pathName = location.pathname;
 
+	const isPWA =
+		window.matchMedia("(display-mode: standalone)").matches ||
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		(window.navigator as any).standalone === true;
+
 	const menuItems: MenuItem[] = [
 		{
 			icon: (
@@ -58,7 +63,14 @@ const Layout: FC<Props> = ({ children }) => {
 			<div className="w-full h-full overflow-scroll flex-grow pl-0 sm:pl-12 min-w-sm">
 				{children}
 			</div>
-			<div className="w-full grid grid-cols-3 bg-slate-100 sm:hidden">
+			<div
+				className="w-full grid grid-cols-3 bg-slate-100 sm:hidden"
+				style={{
+					paddingBottom: isPWA
+						? "12px"
+						: "env(safe-area-inset-bottom)",
+				}}
+			>
 				{menuItems.map((item) => (
 					<BottomNavigationItem
 						key={item.label}

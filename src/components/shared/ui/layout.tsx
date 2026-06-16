@@ -49,7 +49,7 @@ const Layout: FC<Props> = ({ children }) => {
 	];
 
 	return (
-		<div className="w-full min-w-sm inset-0 flex flex-col overflow-hidden overflow-y-scroll fixed">
+		<div className="w-full h-screen min-w-sm inset-0 flex flex-col overflow-hidden overflow-y-scroll fixed">
 			<Header />
 			<div className="fixed hidden sm:block top-[51px] bg-gray-200 left-0 bottom-0 w-12 hover:w-52 z-20 overflow-hidden transition-all duration-200">
 				{menuItems.map((item) => (
@@ -60,14 +60,14 @@ const Layout: FC<Props> = ({ children }) => {
 					/>
 				))}
 			</div>
-			<div className="w-full h-full overflow-scroll flex-grow pl-0 sm:pl-12 min-w-sm">
+			<div className="w-full flex-1 overflow-y-auto pl-0 sm:pl-12 min-w-sm">
 				{children}
 			</div>
 			<div
-				className="w-full grid grid-cols-3 bg-slate-100 sm:hidden"
+				className="w-full grid grid-cols-3 bg-slate-100 sm:hidden shrink-0"
 				style={{
 					paddingBottom: isPWA
-						? "12px"
+						? "4px"
 						: "env(safe-area-inset-bottom)",
 				}}
 			>

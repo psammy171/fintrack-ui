@@ -49,7 +49,7 @@ const Layout: FC<Props> = ({ children }) => {
 	];
 
 	return (
-		<div className="w-full min-w-sm h-screen flex flex-col overflow-hidden overflow-y-scroll fixed">
+		<div className="w-full min-w-sm inset-0 flex flex-col overflow-hidden overflow-y-scroll fixed">
 			<Header />
 			<div className="fixed hidden sm:block top-[51px] bg-gray-200 left-0 bottom-0 w-12 hover:w-52 z-20 overflow-hidden transition-all duration-200">
 				{menuItems.map((item) => (

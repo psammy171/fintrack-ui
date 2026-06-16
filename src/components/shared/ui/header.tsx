@@ -60,8 +60,8 @@ const Header = () => {
 		<header
 			className="flex items-center w-full gap-x-4 fixed z-10 top-0 bg-indigo-600"
 			style={{
-				paddingTop: "env(safe-area-inset-top)",
-				height: "calc(50px + env(safe-area-inset-top))",
+				height: "calc(var(--header-height) + var(--safe-top))",
+				paddingTop: "var(--safe-top)",
 			}}
 		>
 			{/* <Link to={'/'}>

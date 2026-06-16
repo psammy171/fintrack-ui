@@ -122,3 +122,13 @@ html {
 		@apply bg-background text-foreground;
 	}
 }
+
+:root {
+	/* A simple reusable value — change in one place, updates everywhere */
+	--header-height: 50px;
+
+	/* env() reads the device's safe area inset */
+	/* 0px is the fallback if the browser doesn't support it */
+	--safe-top: env(safe-area-inset-top, 0px);
+	--safe-bottom: env(safe-area-inset-bottom, 0px);
+}

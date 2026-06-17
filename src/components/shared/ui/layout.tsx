@@ -66,7 +66,9 @@ const Layout: FC<Props> = ({ children }) => {
 					paddingTop: isPWA
 						? "env(safe-area-inset-top) + 50px"
 						: "0px",
-					marginTop: "20px",
+					marginTop: isPWA
+						? "env(safe-area-inset-top) + 50px"
+						: "0px",
 				}}
 			>
 				{children}

@@ -12,11 +12,6 @@ const Header = () => {
 	const { userContext } = useAuth();
 	const [open, setOpen] = useState(false);
 
-	const isPWA =
-		window.matchMedia("(display-mode: standalone)").matches ||
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		(window.navigator as any).standalone === true;
-
 	const closeProfile = useCallback(() => {
 		setOpen(false);
 	}, []);
@@ -64,9 +59,6 @@ const Header = () => {
 	return (
 		<header
 			className={`flex items-center w-full gap-x-4 fixed z-10 top-0 bg-indigo-600`}
-			style={{
-				paddingTop: isPWA ? "env(safe-area-inset-top) + 50px" : "0px",
-			}}
 		>
 			{userContext ? (
 				<div className="relative h-12.5 flex items-center p-3 justify-end gap-x-4 text-white bg-indigo-600 flex-grow">

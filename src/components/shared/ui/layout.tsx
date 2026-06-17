@@ -50,7 +50,7 @@ const Layout: FC<Props> = ({ children }) => {
 
 	return (
 		<div
-			className="w-full min-w-sm inset-0 flex flex-col overflow-hidden overflow-y-scroll fixed bg-indigo-600"
+			className="w-full min-w-[300px] inset-0 flex flex-col overflow-hidden overflow-y-scroll fixed bg-indigo-600"
 			style={{
 				paddingTop: isPWA ? "env(safe-area-inset-top)" : "0px",
 			}}

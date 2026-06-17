@@ -73,7 +73,7 @@ const Layout: FC<Props> = ({ children }) => {
 					<BottomNavigationItem
 						key={item.label}
 						item={item}
-						pathName={pathName}
+						pathName={pathName + "s" + isPWA.toString() + "s"}
 					/>
 				))}
 			</div>

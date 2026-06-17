@@ -49,14 +49,16 @@ const Layout: FC<Props> = ({ children }) => {
 	];
 
 	return (
-		<div
-			className="w-full min-w-sm inset-0 flex flex-col overflow-hidden overflow-y-scroll fixed bg-indigo-600"
-			style={{
-				paddingTop: isPWA ? "env(safe-area-inset-top) + 50px" : "0px",
-			}}
-		>
+		<div className="w-full min-w-sm inset-0 flex flex-col overflow-hidden overflow-y-scroll fixed bg-indigo-600">
 			<Header />
-			<div className="fixed hidden sm:block top-[51px] bg-gray-200 left-0 bottom-0 w-12 hover:w-52 z-20 overflow-hidden transition-all duration-200">
+			<div
+				className="fixed hidden sm:block top-[51px] bg-gray-200 left-0 bottom-0 w-12 hover:w-52 z-20 overflow-hidden transition-all duration-200"
+				style={{
+					paddingTop: isPWA
+						? "env(safe-area-inset-top) + 50px"
+						: "0px",
+				}}
+			>
 				{menuItems.map((item) => (
 					<SideBarItem
 						key={item.label}

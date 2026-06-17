@@ -36,7 +36,7 @@ const Expenses = () => {
 	}, [folder]);
 
 	return (
-		<div className="mx-auto pt-13 h-full overflow-hidden overflow-y-scroll flex flex-col">
+		<div className="mx-auto pt-2 h-full overflow-hidden overflow-y-scroll flex flex-col">
 			<span className="flex items-center mt-4 mx-2 sm:mx-4">
 				{!isFolderSection && (
 					<BackIcon

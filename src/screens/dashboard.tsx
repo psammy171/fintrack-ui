@@ -25,7 +25,7 @@ const Dashboard = () => {
 	}, [fetchFolders]);
 
 	return (
-		<div className="max-w-4xl pt-12 px-2 sm:mx-auto flex flex-col">
+		<div className="max-w-4xl pt-2 px-2 sm:mx-auto flex flex-col">
 			<DashboardFilters
 				startDate={startDate}
 				endDate={endDate}

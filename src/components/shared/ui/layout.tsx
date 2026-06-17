@@ -65,10 +65,13 @@ const Layout: FC<Props> = ({ children }) => {
 					/>
 				))}
 			</div>
-			<div className="w-full flex-1 overflow-y-auto pl-0 sm:pl-12 min-w-sm bg-white">
+			<div className="w-full flex-1 overflow-y-auto pl-0 sm:pl-12 min-w-sm bg-white rounded-t-lg sm:rounded-t-none">
 				{children}
 			</div>
-			<div className="w-full grid grid-cols-3 bg-slate-100 sm:hidden shrink-0">
+			<div className="w-full grid grid-cols-3 bg-slate-100 sm:hidden shrink-0 relative">
+				<span
+					className={`h-[3px] w-1/3 absolute bg-indigo-600 rounded-b-sm transition-all ${pathName.startsWith("/expenses") ? "left-0" : pathName.startsWith("/dashboard") ? "left-1/3" : "left-2/3"}`}
+				></span>
 				{menuItems.map((item) => (
 					<BottomNavigationItem
 						key={item.label}
@@ -119,7 +122,7 @@ const BottomNavigationItem = ({
 		<Link
 			to={item.path}
 			key={item.label}
-			className={`flex items-center gap-1 p-2 flex-col border-t-2 font-semibold ${pathName.startsWith(item.path) ? "text-indigo-600 border-t-indigo-600" : "text-gray-600 hover:text-gray-900"} transition-colors duration-200`}
+			className={`flex items-center gap-1 p-2 flex-col border-t font-semibold ${pathName.startsWith(item.path) ? "text-indigo-600" : "text-gray-600"} transition-colors duration-200`}
 		>
 			{item.icon}
 			<p className="text-sm">{item.label}</p>

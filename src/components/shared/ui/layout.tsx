@@ -64,26 +64,23 @@ const Layout: FC<Props> = ({ children }) => {
 				className="w-full flex-1 overflow-y-auto pl-0 sm:pl-12 min-w-sm bg-white"
 				style={{
 					paddingTop: isPWA
-						? "env(safe-area-inset-top) + 50px"
+						? "env(safe-area-inset-top) + 50"
 						: "0px",
 					marginTop: isPWA
-						? "env(safe-area-inset-top) + 50px"
+						? "env(safe-area-inset-top) + 50"
 						: "0px",
 				}}
 			>
 				{children}
 			</div>
 			<div
-				className="w-full grid grid-cols-3 bg-slate-100 sm:hidden shrink-0"
-				style={{
-					paddingBottom: "env(safe-area-inset-bottom)",
-				}}
+				className="w-full grid grid-cols-3 bg-slate-100 sm:hidden shrink-0 pb-4"
 			>
 				{menuItems.map((item) => (
 					<BottomNavigationItem
 						key={item.label}
 						item={item}
-						pathName={pathName}
+						pathName={pathName + "s" + isPWA.toString() + "s"}
 					/>
 				))}
 			</div>

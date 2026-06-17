@@ -65,7 +65,7 @@ const Header = () => {
 		<header
 			className={`flex items-center w-full gap-x-4 fixed z-10 top-0 bg-indigo-600`}
 			style={{
-				paddingTop: isPWA ? "env(safe-area-inset-top)" : "0px",
+				paddingTop: isPWA ? "env(safe-area-inset-top) + 50px" : "0px",
 			}}
 		>
 			{userContext ? (

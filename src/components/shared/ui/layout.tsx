@@ -19,6 +19,11 @@ const Layout: FC<Props> = ({ children }) => {
 	const location = useLocation();
 	const pathName = location.pathname;
 
+	const isPWA =
+		window.matchMedia("(display-mode: standalone)").matches ||
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		(window.navigator as any).standalone === true;
+
 	const menuItems: MenuItem[] = [
 		{
 			icon: (
@@ -44,7 +49,12 @@ const Layout: FC<Props> = ({ children }) => {
 	];
 
 	return (
-		<div className="w-full min-w-sm inset-0 flex flex-col overflow-hidden overflow-y-scroll fixed">
+		<div
+			className="w-full min-w-sm inset-0 flex flex-col overflow-hidden overflow-y-scroll fixed bg-indigo-600"
+			style={{
+				paddingTop: isPWA ? "env(safe-area-inset-top) + 50px" : "0px",
+			}}
+		>
 			<Header />
 			<div className="fixed hidden sm:block top-[51px] bg-gray-200 left-0 bottom-0 w-12 hover:w-52 z-20 overflow-hidden transition-all duration-200">
 				{menuItems.map((item) => (
@@ -55,7 +65,7 @@ const Layout: FC<Props> = ({ children }) => {
 					/>
 				))}
 			</div>
-			<div className="w-full flex-1 overflow-y-auto pl-0 sm:pl-12 min-w-sm">
+			<div className="w-full flex-1 overflow-y-auto pl-0 sm:pl-12 min-w-sm bg-white">
 				{children}
 			</div>
 			<div

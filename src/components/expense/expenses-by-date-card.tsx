@@ -9,7 +9,7 @@ interface Props {
 
 const ExpensesByDateCard: FC<Props> = ({ expense }) => {
 	return (
-		<div className="mt-4 first:mt-0">
+		<div>
 			<div className="flex bg-gray-300 px-3 py-2 font-semibold text-[16px]">
 				<p>
 					{new Date(expense.time).toLocaleDateString("en-GB", {

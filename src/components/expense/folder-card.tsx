@@ -15,6 +15,7 @@ import EditIcon from "../shared/icons/edit";
 import SharedUserIcon from "../shared/icons/shared-user";
 import { useAuth } from "@/auth/hooks/use-auth";
 import SharedFolderIcon from "../shared/icons/shared-folder";
+import SettlementIcon from "../shared/icons/settlement";
 
 interface Props {
 	folder: Folder;
@@ -29,6 +30,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 		setFolder,
 		folder: selectedFolder,
 		setIsFolderSection,
+		setShowSettlements,
 	} = useExpenses();
 	const { openEditForm, openDeleteConfirmationPopUp, openAddUserModal } =
 		useCreateFolders();
@@ -115,7 +117,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 			</span>
 			<div
 				onClick={(e) => e.stopPropagation()}
-				className={`absolute text-sm group-hover:bg-gray-100 overflow-hidden bg-gray-100 w-28 shadow-lg z-10 top-8 rounded-lg border border-gray-300 right-5 ${showOptions ? "block" : "hidden"}`}
+				className={`absolute text-sm group-hover:bg-gray-100 overflow-hidden bg-gray-100 w-32 shadow-lg z-10 top-8 rounded-lg border border-gray-300 right-5 ${showOptions ? "block" : "hidden"}`}
 			>
 				<span
 					onClick={() => {
@@ -128,13 +130,22 @@ const FolderCard: FC<Props> = ({ folder }) => {
 					<p>Edit</p>
 				</span>
 				{folder.shared && (
-					<span
-						onClick={() => openAddUserModal(folder)}
-						className={`flex items-center px-2 py-1.5 gap-x-2 border-b border-b-gray-300 hover:bg-gray-200 cursor-pointer text-green-700`}
-					>
-						<SharedUserIcon />
-						<p>Users</p>
-					</span>
+					<>
+						<span
+							onClick={() => openAddUserModal(folder)}
+							className={`flex items-center px-2 py-1.5 gap-x-2 border-b border-b-gray-300 hover:bg-gray-200 cursor-pointer text-green-700`}
+						>
+							<SharedUserIcon />
+							<p>Users</p>
+						</span>
+						<span
+							onClick={() => setShowSettlements(true)}
+							className={`flex items-center px-2 py-1.5 gap-x-2 border-b border-b-gray-300 hover:bg-gray-200 cursor-pointer text-violet-700`}
+						>
+							<SettlementIcon />
+							<p>Settlements</p>
+						</span>
+					</>
 				)}
 				<span
 					onClick={() => {

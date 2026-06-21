@@ -47,7 +47,9 @@ const ExpensesByTags: FC<Props> = ({ startDate, endDate, folderId }) => {
 			</p>
 			<div className="w-full relative px-4 pb-8 sm:px-8">
 				{fetching ? (
-					<Loader className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+					<div className="h-[314px]">
+						<Loader className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+					</div>
 				) : (
 					<PieChart data={data} className="h-[314px] w-full" />
 				)}

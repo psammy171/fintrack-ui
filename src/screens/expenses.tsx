@@ -33,6 +33,9 @@ const Expenses = () => {
 	return (
 		<div className="mx-auto pt-2 h-full overflow-hidden overflow-y-scroll flex flex-col">
 			<span className="flex items-center mt-4 mx-2 sm:mx-4">
+				<p className="text-xl hidden sm:block font-semibold">
+					Expenses
+				</p>
 				{!isFolderSection && (
 					<div className="sm:hidden flex items-center">
 						<BackIcon
@@ -58,7 +61,7 @@ const Expenses = () => {
 					className={`absolute sm:relative w-full transition-all duration-200 ${isFolderSection ? "right-0 top-0 bottom-0" : " right-full sm:right-0 top-0 bottom-0"}`}
 				/>
 				<ExpenseList
-					className={`absolute flex-grow sm:relative transition-all duration-200 mt-2 ${isFolderSection ? "left-full -right-full sm:left-0 sm:right-0 top-0 bottom-0" : "right-0  top-0 bottom-0"}`}
+					className={`absolute flex-grow sm:relative transition-all duration-200 mt-2 sm:mt-0 ${isFolderSection ? "left-full -right-full sm:left-0 sm:right-0 top-0 bottom-0" : "right-0  top-0 bottom-0"}`}
 				/>
 			</div>
 

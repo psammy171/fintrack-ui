@@ -44,7 +44,6 @@ const Expenses = () => {
 						onClick={() => setIsFolderSection(true)}
 					/>
 				)}
-				<p className="text-2xl font-semibold">Expenses</p>
 				<span className="flex-grow"></span>
 				{folder && folder.shared && (
 					<Button
@@ -62,7 +61,7 @@ const Expenses = () => {
 				</Button>
 			</span>
 
-			<div className="rounded-xs overflow-hidden m-2 sm:m-4 shadow-md flex-grow bg-gray-50 relative sm:flex flex-row justify-start">
+			<div className="rounded-xs overflow-hidden m-0 sm:m-2 shadow-md flex-grow bg-gray-50 relative sm:flex flex-row justify-start">
 				<ExpenseFolders
 					className={`absolute sm:relative w-full transition-all duration-200 ${isFolderSection ? "right-0 top-0 bottom-0" : " right-full sm:right-0 top-0 bottom-0"}`}
 				/>

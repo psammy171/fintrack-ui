@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type FC } from "react";
 import toast from "react-hot-toast";
 import { useAuth } from "../../../auth/hooks/use-auth";
 import apiClient from "../../../lib/axios";
@@ -7,10 +7,19 @@ import Login from "./login";
 import Button from "./button";
 import LogoIcon from "../icons/logo";
 
-const Header = () => {
+interface Props {
+	isHome?: boolean;
+}
+
+const Header: FC<Props> = ({ isHome }) => {
 	const location = useLocation();
 	const { userContext } = useAuth();
 	const [open, setOpen] = useState(false);
+
+	const isPWA =
+		window.matchMedia("(display-mode: standalone)").matches ||
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		(window.navigator as any).standalone === true;
 
 	const closeProfile = useCallback(() => {
 		setOpen(false);
@@ -59,6 +68,10 @@ const Header = () => {
 	return (
 		<header
 			className={`flex items-center w-full gap-x-4 sticky z-10 top-0 bg-indigo-600`}
+			style={{
+				paddingTop:
+					isHome && isPWA ? "env(safe-area-inset-top)" : "0px",
+			}}
 		>
 			{userContext ? (
 				<div className="relative h-12.5 flex items-center p-3 justify-end gap-x-4 text-white bg-indigo-600 flex-grow">

@@ -12,13 +12,8 @@ import Settlements from "@/components/expense/settlements";
 import BackIcon from "@/components/shared/icons/back";
 
 const Expenses = () => {
-	const {
-		folder,
-		fetchSettlements,
-		setShowSettlements,
-		isFolderSection,
-		setIsFolderSection,
-	} = useExpenses();
+	const { folder, fetchSettlements, isFolderSection, setIsFolderSection } =
+		useExpenses();
 	const { fetchFolders } = useFolders();
 	const { fetchUserOrSharedFolderTags } = useTags();
 	const { openCreateExpensePopUp } = useCreateExpense();
@@ -39,21 +34,17 @@ const Expenses = () => {
 		<div className="mx-auto pt-2 h-full overflow-hidden overflow-y-scroll flex flex-col">
 			<span className="flex items-center mt-4 mx-2 sm:mx-4">
 				{!isFolderSection && (
-					<BackIcon
-						className="sm:hidden shrink-0 mr-2 cursor-pointer"
-						onClick={() => setIsFolderSection(true)}
-					/>
+					<div className="sm:hidden flex items-center">
+						<BackIcon
+							className="sm:hidden shrink-0 mr-2 cursor-pointer"
+							onClick={() => setIsFolderSection(true)}
+						/>
+						<p className="text-lg font-semibold">
+							{folder ? folder.name : "Root"}
+						</p>
+					</div>
 				)}
-				<p className="text-2xl font-semibold">Expenses</p>
 				<span className="flex-grow"></span>
-				{folder && folder.shared && (
-					<Button
-						className={`sm:flex ${isFolderSection ? "hidden" : ""}`}
-						onClick={() => setShowSettlements(true)}
-					>
-						Settlements
-					</Button>
-				)}
 				<Button
 					className={`sm:flex ${isFolderSection ? "hidden" : ""}`}
 					onClick={openCreateExpensePopUp}
@@ -62,12 +53,12 @@ const Expenses = () => {
 				</Button>
 			</span>
 
-			<div className="rounded-xs overflow-hidden m-2 sm:m-4 shadow-md flex-grow bg-gray-50 relative sm:flex flex-row justify-start">
+			<div className="rounded-xs overflow-hidden m-0 sm:m-2 shadow-md flex-grow bg-gray-50 relative sm:flex flex-row justify-start">
 				<ExpenseFolders
 					className={`absolute sm:relative w-full transition-all duration-200 ${isFolderSection ? "right-0 top-0 bottom-0" : " right-full sm:right-0 top-0 bottom-0"}`}
 				/>
 				<ExpenseList
-					className={`absolute flex-grow sm:relative transition-all duration-200 ${isFolderSection ? "left-full -right-full sm:left-0 sm:right-0 top-0 bottom-0" : "right-0  top-0 bottom-0"}`}
+					className={`absolute flex-grow sm:relative transition-all duration-200 mt-2 ${isFolderSection ? "left-full -right-full sm:left-0 sm:right-0 top-0 bottom-0" : "right-0  top-0 bottom-0"}`}
 				/>
 			</div>
 

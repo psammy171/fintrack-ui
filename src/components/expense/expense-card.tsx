@@ -13,26 +13,20 @@ const ExpenseCard: FC<Props> = ({ expense, index, className }) => {
 	return (
 		<div
 			className={cn(
-				`flex flex-wrap px-2 py-2 border-b last:border-b-transparent cursor-pointer hover:bg-gray-200 transition-colors ${
+				`flex flex-wrap p-3 border-b last:border-b-transparent cursor-pointer hover:bg-gray-200 transition-colors ${
 					index % 2 === 0 ? "bg-white" : "bg-gray-100"
 				}`,
 				className,
 			)}
 		>
-			<p className="w-[10%] sm:w-[3%]">{index + 1}</p>
-			<p className="w-[40%] sm:w-[19%]">{expense.tagLabel}</p>
-			<p className="w-[50%] sm:w-[40%]">{expense.remark}</p>
-			<p className="w-[10%] invisible sm:hidden">{index + 1}</p>
-			<p className="w-[30%] mt-1 sm:mt-0 sm:w-[19%]">
-				{formatToINR(expense.amount)}
-			</p>
-			<p className="w-[40%] mt-1 sm:mt-0 sm:w-[19%]">
-				{new Date(expense.time).toLocaleDateString("en-GB", {
-					day: "2-digit",
-					month: "short",
-					year: "numeric",
-				})}
-			</p>
+			<p className="hidden sm:block sm:w-[4%]">{index + 1}</p>
+			<span className="w-[72%] sm:w-[68%] sm:flex">
+				<p className="w-full sm:w-[59%]">{expense.remark}</p>
+				<p className="w-full sm:w-[31%] text-gray-500 text-sm sm:text-base">
+					{expense.tagLabel}
+				</p>
+			</span>
+			<p className="w-[28%] text-right">{formatToINR(expense.amount)}</p>
 		</div>
 	);
 };

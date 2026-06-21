@@ -1,8 +1,8 @@
 import { useExpenses } from "@/hooks/expenses/use-expenses";
 import Loader from "../shared/ui/loader";
 import { useEffect } from "react";
-import ExpenseCard from "./expense-card";
 import cn from "@/lib/cn";
+import ExpensesByDateCard from "./expenses-by-date-card";
 
 const ExpenseList = ({ className }: { className?: string }) => {
 	const { expenses, fetching, fetchExpenses, pageNumber } = useExpenses();
@@ -13,8 +13,8 @@ const ExpenseList = ({ className }: { className?: string }) => {
 
 	const getExpenseList = () => {
 		return expenses.length > 0 ? (
-			expenses.map((expense, index) => (
-				<ExpenseCard key={expense.id} expense={expense} index={index} />
+			expenses.map((expense) => (
+				<ExpensesByDateCard key={expense.time} expense={expense} />
 			))
 		) : (
 			<p className="text-center my-[10%] text-indigo-700">
@@ -36,14 +36,13 @@ const ExpenseList = ({ className }: { className?: string }) => {
 
 	return (
 		<div className={cn("overflow-y-scroll w-full", className)}>
-			<span className="flex py-2 px-3 font-semibold bg-indigo-600 text-[18px] text-white sticky top-0">
-				<p className="w-[3%]"></p>
-				<p className="w-[19%]">Tag</p>
+			<div className="flex py-2 px-3 font-semibold bg-indigo-600 text-[18px] text-white sticky top-0">
+				<p className="hidden sm:block w-[4%]"></p>
 				<p className="w-[40%]">Remark</p>
-				<p className="w-[19%]">Amount</p>
-				<p className="w-[19%]">Date</p>
-			</span>
-			{getLoaderOrExpenseList()}
+				<p className="w-[28%] invisible sm:visible">Tag</p>
+				<p className="w-[28%] text-right">Amount</p>
+			</div>
+			<div>{getLoaderOrExpenseList()}</div>
 		</div>
 	);
 };

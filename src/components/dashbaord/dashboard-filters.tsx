@@ -29,7 +29,7 @@ const DashboardFilters: FC<Props> = ({
 
 	return (
 		<span className="flex flex-col sm:flex-row sm:items-center gap-4 mt-4 border-b pb-4 mb-6">
-			<span className="flex w-full gap-x-4">
+			<span className="grid grid-cols-2 gap-x-4">
 				<span className="flex-grow sm:flex-initial">
 					<label
 						htmlFor="start-date"

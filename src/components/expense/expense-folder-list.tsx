@@ -15,18 +15,29 @@ const ExpenseFolderList: FC<Props> = ({ folders }) => {
 		<>
 			<div
 				key={0}
-				className={`flex border-b border-l-[3px] p-2 items-center gap-x-2 cursor-pointer ${
+				className={`flex border-y sm:border-t-0 mt-3 sm:mt-0 p-2 items-center gap-x-2 cursor-pointer ${
 					undefined === folder?.id
-						? "border-l-indigo-600 bg-indigo-100 text-indigo-600 font-semibold"
-						: "border-l-transparent hover:bg-gray-200"
+						? "bg-indigo-100 text-indigo-600"
+						: "hover:bg-gray-100 font-light "
 				}`}
 				onClick={() => {
 					setFolder(undefined);
 					setIsFolderSection(false);
 				}}
 			>
-				<FolderIcon />
-				Root
+				<span
+					className={` rounded-lg flex items-center justify-center w-9 h-9 shrink-0 mr-2 bg-gray-300`}
+				>
+					<FolderIcon />
+				</span>
+				<span>
+					<p
+						className={`${folder?.id === undefined ? "text-indigo-600 font-extrabold" : ""}`}
+					>
+						Root
+					</p>
+					<p className="text-sm text-gray-500">Personal</p>
+				</span>
 			</div>
 			{folders.map((folder) => (
 				<FolderCard folder={folder} key={folder.id} />

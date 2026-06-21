@@ -15,6 +15,7 @@ import EditIcon from "../shared/icons/edit";
 import SharedUserIcon from "../shared/icons/shared-user";
 import { useAuth } from "@/auth/hooks/use-auth";
 import SharedFolderIcon from "../shared/icons/shared-folder";
+import SettlementIcon from "../shared/icons/settlement";
 
 interface Props {
 	folder: Folder;
@@ -29,6 +30,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 		setFolder,
 		folder: selectedFolder,
 		setIsFolderSection,
+		setShowSettlements,
 	} = useExpenses();
 	const { openEditForm, openDeleteConfirmationPopUp, openAddUserModal } =
 		useCreateFolders();
@@ -71,20 +73,39 @@ const FolderCard: FC<Props> = ({ folder }) => {
 	return (
 		<div
 			key={folder.id}
-			className={`flex group border-b border-l-[3px] py-2 pr-1 pl-2 items-center cursor-pointer relative ${
+			className={`flex group border-b py-2.5 sm:py-2 pr-1 pl-2 items-start sm:items-center cursor-pointer relative ${
 				folder.id === selectedFolder?.id
-					? "border-l-indigo-600 bg-indigo-100 text-indigo-600 font-semibold"
-					: "border-l-transparent hover:bg-gray-200"
+					? " bg-indigo-100"
+					: "border-l-transparent hover:bg-gray-100 font-light"
 			}`}
 			ref={folderCardRef}
 			onClick={(e: React.MouseEvent) => openFolder(e)}
 		>
-			{folder.shared ? <SharedFolderIcon /> : <FolderIcon />}
+			<span
+				className={` rounded-lg flex items-center justify-center w-9 h-9 shrink-0 mr-2 bg-gray-300`}
+			>
+				{folder?.shared ? (
+					<SharedFolderIcon
+						className={`${folder.id === selectedFolder?.id ? "text-indigo-600" : ""}`}
+					/>
+				) : (
+					<FolderIcon
+						className={`${folder.id === selectedFolder?.id ? "text-indigo-600" : ""}`}
+					/>
+				)}
+			</span>
 			<span
 				className="flex-1 truncate text-ellipsis mr-1 ml-2"
 				title={folder.name}
 			>
-				{folder.name}
+				<p
+					className={`${folder.id === selectedFolder?.id ? "text-indigo-600 font-extrabold" : ""}`}
+				>
+					{folder.name}
+				</p>
+				<p className="text-sm text-gray-500">
+					{folder.shared ? "Shared" : "Personal"}
+				</p>
 			</span>
 			<span
 				ref={folderOptionsRef}
@@ -96,26 +117,35 @@ const FolderCard: FC<Props> = ({ folder }) => {
 			</span>
 			<div
 				onClick={(e) => e.stopPropagation()}
-				className={`absolute text-sm group-hover:bg-gray-100 overflow-hidden bg-gray-100 w-28 shadow-lg z-10 top-8 rounded-lg border border-gray-300 right-5 ${showOptions ? "block" : "hidden"}`}
+				className={`absolute text-sm group-hover:bg-gray-100 overflow-hidden bg-gray-100 w-32 shadow-lg z-10 top-8 rounded-lg border border-gray-300 right-5 ${showOptions ? "block" : "hidden"}`}
 			>
 				<span
 					onClick={() => {
 						if (userContext?.userId === folder.userId)
 							openEditForm(folder);
 					}}
-					className={`flex items-center px-2 py-1.5 gap-x-2 ${userContext?.userId === folder.userId ? `hover:bg-gray-200 cursor-pointer text-blue-700` : "cursor-not-allowed bg-gray-100 text-gray-400"}`}
+					className={`flex items-center px-2 py-1.5 gap-x-2 border-b border-b-gray-300 ${userContext?.userId === folder.userId ? `hover:bg-gray-200 cursor-pointer text-blue-700` : "cursor-not-allowed bg-gray-100 text-gray-400"}`}
 				>
 					<EditIcon />
 					<p>Edit</p>
 				</span>
 				{folder.shared && (
-					<span
-						onClick={() => openAddUserModal(folder)}
-						className={`flex items-center px-2 py-1.5 gap-x-2 border-y border-y-gray-300 hover:bg-gray-200 cursor-pointer text-green-700`}
-					>
-						<SharedUserIcon />
-						<p>Users</p>
-					</span>
+					<>
+						<span
+							onClick={() => openAddUserModal(folder)}
+							className={`flex items-center px-2 py-1.5 gap-x-2 border-b border-b-gray-300 hover:bg-gray-200 cursor-pointer text-green-700`}
+						>
+							<SharedUserIcon />
+							<p>Users</p>
+						</span>
+						<span
+							onClick={() => setShowSettlements(true)}
+							className={`flex items-center px-2 py-1.5 gap-x-2 border-b border-b-gray-300 hover:bg-gray-200 cursor-pointer text-violet-700`}
+						>
+							<SettlementIcon />
+							<p>Settlements</p>
+						</span>
+					</>
 				)}
 				<span
 					onClick={() => {

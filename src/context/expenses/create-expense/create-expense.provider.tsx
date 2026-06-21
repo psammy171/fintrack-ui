@@ -17,7 +17,7 @@ import type { CreateExpensePayload } from "@/types/create-expense-payload";
 export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 	children,
 }) => {
-	const { addExpense, folder } = useExpenses();
+	const { folder } = useExpenses();
 	const [createExpense, setCreateExpense] = useState<CreateExpense>({
 		remark: "",
 		amount: 0,
@@ -155,8 +155,7 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 					success: "Expense created successfully!",
 					error: "Error creating expense",
 				});
-				const res = await req;
-				addExpense(res.data);
+				await req;
 				resetForm();
 			} catch (error) {
 				console.error("Error creating expense:", error);

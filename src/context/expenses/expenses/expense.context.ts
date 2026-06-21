@@ -1,12 +1,12 @@
 import { createContext } from "react";
-import type { ExpenseResponse } from "@/types/expense";
 import type { Folder } from "@/types/folder";
 import type { Settlement } from "@/types/settlements";
+import type { ExpensesByDate } from "@/types/expense-by-date";
 
 interface IExpenseContext {
 	fetching: boolean;
 	fetchError?: string;
-	expenses: ExpenseResponse[];
+	expenses: ExpensesByDate[];
 	total: number;
 	pageNumber: number;
 	isLastPage: boolean;
@@ -24,9 +24,6 @@ interface IExpenseContext {
 	resolveSettlement: (folderId: string, userId: string) => void;
 
 	setIsFolderSection: (value: boolean) => void;
-
-	addExpense: (expense: ExpenseResponse) => void;
-	updateExpense: (expenseId: string, expense: ExpenseResponse) => void;
 
 	setFetching: (isFetching: boolean) => void;
 	setFetchError: (error: string) => void;

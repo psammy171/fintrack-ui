@@ -1,15 +1,15 @@
-import { motion } from 'framer-motion'
-import Button from '@/components/shared/ui/button'
-import SetGoalIcon from '@/components/shared/icons/set-goal'
-import BarGraphIcon from '@/components/shared/icons/bar-graph'
-import WalletIcon from '@/components/shared/icons/wallet'
-import { Link } from 'react-router-dom'
-import Header from '@/components/shared/ui/header'
+import { motion } from "framer-motion";
+import Button from "@/components/shared/ui/button";
+import SetGoalIcon from "@/components/shared/icons/set-goal";
+import BarGraphIcon from "@/components/shared/icons/bar-graph";
+import WalletIcon from "@/components/shared/icons/wallet";
+import { Link } from "react-router-dom";
+import Header from "@/components/shared/ui/header";
 
 export default function Homepage() {
 	return (
 		<div className="bg-gradient-to-br from-blue-50 to-indigo-100">
-			<Header />
+			<Header isHome={true} />
 
 			{/* Hero Section */}
 			<section className="text-center pt-28 pb-20 px-6">
@@ -87,5 +87,5 @@ export default function Homepage() {
 				</Link>
 			</section>
 		</div>
-	)
+	);
 }

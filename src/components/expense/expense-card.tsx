@@ -13,16 +13,14 @@ const ExpenseCard: FC<Props> = ({ expense, index, className }) => {
 	return (
 		<div
 			className={cn(
-				`flex flex-wrap p-3 border-b last:border-b-transparent cursor-pointer hover:bg-gray-200 transition-colors ${
-					index % 2 === 0 ? "bg-white" : "bg-gray-100"
-				}`,
+				`flex flex-wrap p-3 border-b last:border-b-transparent cursor-pointer hover:bg-gray-200 transition-colors bg-white`,
 				className,
 			)}
 		>
 			<p className="hidden sm:block sm:w-[4%]">{index + 1}</p>
 			<span className="w-[72%] sm:w-[68%] sm:flex">
 				<p className="w-full sm:w-[59%]">{expense.remark}</p>
-				<p className="w-full sm:w-[31%] text-gray-500 text-sm sm:text-base">
+				<p className="w-full sm:w-[31%] text-gray-500 sm:text-black text-sm sm:text-base">
 					{expense.tagLabel}
 				</p>
 			</span>

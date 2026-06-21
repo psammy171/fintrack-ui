@@ -39,10 +39,15 @@ const Expenses = () => {
 		<div className="mx-auto pt-2 h-full overflow-hidden overflow-y-scroll flex flex-col">
 			<span className="flex items-center mt-4 mx-2 sm:mx-4">
 				{!isFolderSection && (
-					<BackIcon
-						className="sm:hidden shrink-0 mr-2 cursor-pointer"
-						onClick={() => setIsFolderSection(true)}
-					/>
+					<div className="sm:hidden flex items-center">
+						<BackIcon
+							className="sm:hidden shrink-0 mr-2 cursor-pointer"
+							onClick={() => setIsFolderSection(true)}
+						/>
+						<p className="text-lg font-semibold">
+							{folder ? folder.name : "Root"}
+						</p>
+					</div>
 				)}
 				<span className="flex-grow"></span>
 				{folder && folder.shared && (

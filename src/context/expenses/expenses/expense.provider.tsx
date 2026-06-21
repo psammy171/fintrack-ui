@@ -2,13 +2,13 @@ import { useCallback, useState, type FC } from "react";
 import type { IDefaultComponentProps } from "../../../interfaces/default-component-props.interface";
 import apiClient from "../../../lib/axios";
 import { ExpenseContext } from "./expense.context";
-import type { ExpenseResponse } from "@/types/expense";
 import type { Folder } from "@/types/folder";
 import type { Settlement } from "@/types/settlements";
 import toast from "react-hot-toast";
+import type { ExpensesByDate } from "@/types/expense-by-date";
 
 export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
-	const [expenses, setExpenses] = useState<ExpenseResponse[]>([]);
+	const [expenses, setExpenses] = useState<ExpensesByDate[]>([]);
 	const [fetching, setFetching] = useState<boolean>(false);
 	const [fetchError, setFetchError] = useState<string | undefined>(undefined);
 	const [pageNumber, setPageNumber] = useState<number>(0);
@@ -56,18 +56,6 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const prevPage = () => {
 		if (!isFirstPage)
 			setPageNumber((prevPage) => Math.max(prevPage - 1, 0));
-	};
-
-	const addExpense = (expense: ExpenseResponse) => {
-		setExpenses((prevExpenses) => [...prevExpenses, expense]);
-	};
-
-	const updateExpense = (expenseId: string, expense: ExpenseResponse) => {
-		setExpenses((prevExpenses) =>
-			prevExpenses.map((e) =>
-				e.id === expenseId ? { ...e, ...expense } : e,
-			),
-		);
 	};
 
 	const fetchSettlements = async (folder?: Folder) => {
@@ -121,8 +109,6 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				settlements,
 				isFolderSection,
 				fetchExpenses,
-				addExpense,
-				updateExpense,
 				setFetchError,
 				setFetching,
 				nextPage,

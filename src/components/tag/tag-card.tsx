@@ -40,9 +40,7 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 		<tr
 			key={tag.id}
 			className={cn(
-				`border-b border-b-gray-200 py-4 cursor-pointer hover:bg-gray-200 transition-colors duration-300 w-full first:border-t border-t-gray-200 ${
-					index % 2 === 0 ? "bg-white" : "bg-gray-100"
-				}`,
+				`border-b border-b-gray-200 py-4 cursor-pointer hover:bg-gray-200 transition-colors duration-300 w-full first:border-t border-t-gray-200 bg-white`,
 				className,
 			)}
 		>

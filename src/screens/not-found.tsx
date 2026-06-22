@@ -1,10 +1,8 @@
-import Header from '@/components/shared/ui/header'
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 function NotFound() {
 	return (
-		<div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-white to-gray-50 text-gray-900 px-6">
-			<Header />
+		<div className="flex flex-col justify-center items-center bg-white text-gray-900 px-6 mt-[20%] sm:mt-[10%]">
 			<h1 className="text-6xl md:text-8xl font-bold mb-6">404</h1>
 			<h2 className="text-2xl md:text-4xl font-semibold mb-4">
 				Page Not Found
@@ -20,7 +18,7 @@ function NotFound() {
 				Go to Home
 			</Link>
 		</div>
-	)
+	);
 }
 
-export default NotFound
+export default NotFound;

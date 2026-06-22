@@ -7,6 +7,7 @@ import { useFolders } from "@/hooks/folders/use-folders";
 import Input from "../shared/ui/input";
 import AddIcon from "../shared/icons/add";
 import SearchIcon from "../shared/icons/search";
+import TagLoader from "../shared/ui/loaders/tag-loader";
 
 const TagManager = () => {
 	const { fetchOwnFolders } = useFolders();
@@ -20,7 +21,7 @@ const TagManager = () => {
 
 	return (
 		<div className=" md:rounded-xs flex flex-col sm:m-2">
-			<div className="flex items-center p-3 sm:py-2 sm:px-0 my-3">
+			<div className="flex items-center p-3 sm:py-2 sm:px-0 my-3 sticky top-0 bg-white z-10">
 				<span className="relative">
 					<Input
 						placeholder="Search tags..."
@@ -41,9 +42,11 @@ const TagManager = () => {
 			</div>
 			<TagForm />
 			{fetching ? (
-				<div className="w-full">
-					<p className="text-center my-10">Loading...</p>
-				</div>
+				<>
+					{Array.from({ length: 10 }).map(() => (
+						<TagLoader />
+					))}
+				</>
 			) : (
 				<AllTags />
 			)}

@@ -15,7 +15,7 @@ const ExpenseFolderList: FC<Props> = ({ folders }) => {
 		<>
 			<div
 				key={0}
-				className={`flex border-y sm:border-t-0 mt-3 sm:mt-0 p-2 items-center gap-x-2 cursor-pointer ${
+				className={`flex border-y sm:border-t-0  py-3 sm:py-2.5 px-4 items-center gap-x-2 cursor-pointer ${
 					undefined === folder?.id
 						? "bg-indigo-100 text-indigo-600"
 						: "hover:bg-gray-100 font-light "
@@ -28,7 +28,7 @@ const ExpenseFolderList: FC<Props> = ({ folders }) => {
 				<span
 					className={` rounded-lg flex items-center justify-center w-9 h-9 shrink-0 mr-2 bg-gray-300`}
 				>
-					<FolderIcon />
+					<FolderIcon className="w-5 h-5" />
 				</span>
 				<span>
 					<p

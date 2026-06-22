@@ -73,7 +73,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 	return (
 		<div
 			key={folder.id}
-			className={`flex group border-b py-2.5 sm:py-2 pr-1 pl-2 items-start sm:items-center cursor-pointer relative ${
+			className={`flex group border-b py-3 sm:py-2.5 px-4 items-start sm:items-center cursor-pointer relative ${
 				folder.id === selectedFolder?.id
 					? " bg-indigo-100"
 					: "border-l-transparent hover:bg-gray-100 font-light"
@@ -86,11 +86,11 @@ const FolderCard: FC<Props> = ({ folder }) => {
 			>
 				{folder?.shared ? (
 					<SharedFolderIcon
-						className={`${folder.id === selectedFolder?.id ? "text-indigo-600" : ""}`}
+						className={`w-5 h-5 ${folder.id === selectedFolder?.id ? "text-indigo-600" : ""}`}
 					/>
 				) : (
 					<FolderIcon
-						className={`${folder.id === selectedFolder?.id ? "text-indigo-600" : ""}`}
+						className={`w-5 h-5 ${folder.id === selectedFolder?.id ? "text-indigo-600" : ""}`}
 					/>
 				)}
 			</span>

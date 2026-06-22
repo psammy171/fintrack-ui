@@ -42,11 +42,11 @@ const TagManager = () => {
 			</div>
 			<TagForm />
 			{fetching ? (
-				<>
+				<span className="rounded-sm overflow-hidden">
 					{Array.from({ length: 10 }).map(() => (
 						<TagLoader />
 					))}
-				</>
+				</span>
 			) : (
 				<AllTags />
 			)}

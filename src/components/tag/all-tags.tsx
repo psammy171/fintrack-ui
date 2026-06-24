@@ -1,4 +1,5 @@
 import { useTags } from "../../hooks/tags";
+import DeleteTagModal from "./delete-tag-modal";
 import EditTagBudgetModal from "./edit-tag-budget-modal";
 import TagCard from "./tag-card";
 
@@ -46,6 +47,7 @@ const AllTags = () => {
 				)}
 			</table>
 			<EditTagBudgetModal />
+			<DeleteTagModal />
 		</>
 	);
 };

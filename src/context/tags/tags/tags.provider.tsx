@@ -61,6 +61,11 @@ export const TagsProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		);
 	};
 
+	const deleteTag = (tagId: string) => {
+		setTags((prevTags) => prevTags.filter((tag) => tag.id !== tagId));
+		setOwnedTags((prevTags) => prevTags.filter((tag) => tag.id !== tagId));
+	};
+
 	return (
 		<TagsContext.Provider
 			value={{
@@ -76,6 +81,7 @@ export const TagsProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				updateTag,
 				setFetchError,
 				setFetching,
+				deleteTag,
 			}}
 		>
 			{children}

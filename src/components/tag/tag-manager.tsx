@@ -11,7 +11,7 @@ import TagLoader from "../shared/ui/loaders/tag-loader";
 
 const TagManager = () => {
 	const { fetchOwnFolders } = useFolders();
-	const { fetching, fetchOwnedTags } = useTags();
+	const { fetchingOwnedTags, fetchOwnedTags } = useTags();
 	const { openCreateTagPopup } = useTagForm();
 
 	useEffect(() => {
@@ -41,7 +41,7 @@ const TagManager = () => {
 				</Button>
 			</div>
 			<TagForm />
-			{fetching ? (
+			{fetchingOwnedTags ? (
 				<span className="rounded-sm overflow-hidden">
 					{Array.from({ length: 10 }).map(() => (
 						<TagLoader />

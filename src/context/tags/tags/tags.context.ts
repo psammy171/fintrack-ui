@@ -14,6 +14,8 @@ interface ITagsContext {
 	fetchUserOrSharedFolderTags: (folder?: Folder) => void;
 	fetchOwnedTags: () => void;
 
+	deleteTag: (tagId: string) => void;
+
 	addTag: (tag: Tag) => void;
 	updateTag: (tagId: string, tag: Tag) => void;
 

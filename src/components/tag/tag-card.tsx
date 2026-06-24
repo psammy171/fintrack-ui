@@ -6,6 +6,7 @@ import cn from "../../lib/cn";
 import { useFolders } from "@/hooks/folders/use-folders";
 import FolderIcon from "../shared/icons/folder";
 import PersonalIcon from "../shared/icons/personal";
+import DeleteIcon from "../shared/icons/delete";
 
 interface Props {
 	tag: Tag;
@@ -15,7 +16,7 @@ interface Props {
 
 const TagCard: FC<Props> = ({ tag, index, className }) => {
 	const { ownFolders } = useFolders();
-	const { openEditTagPopup } = useTagForm();
+	const { openEditTagPopup, openDeleteTagPopup } = useTagForm();
 	const folder = ownFolders.find((f) => f.id === tag.folderId);
 
 	const getShareStatus = () => {
@@ -40,7 +41,7 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 		<tr
 			key={tag.id}
 			className={cn(
-				`border-b border-b-gray-200 py-4 cursor-pointer hover:bg-gray-200 transition-colors duration-300 w-full first:border-t border-t-gray-200 bg-white`,
+				`border-b border-b-gray-200 py-4 cursor-pointer hover:bg-gray-100 transition-colors duration-300 w-full first:border-t border-t-gray-200 bg-white`,
 				className,
 			)}
 		>
@@ -67,11 +68,21 @@ const TagCard: FC<Props> = ({ tag, index, className }) => {
 				{getShareStatus()}
 			</td>
 			<td
-				className="px-4 py-3 sm:py-2.5"
-				onClick={() => openEditTagPopup(tag)}
+				className="px-4 py-1 sm:py-1.5 flex gap-x-6"
 				title="Edit tag value"
 			>
-				<EditIcon className="text-indigo-600" />
+				<span
+					className="w-6 h-6 flex items-center justify-center hover:bg-gray-200 rounded-sm"
+					onClick={() => openEditTagPopup(tag)}
+				>
+					<EditIcon className="text-indigo-600" />
+				</span>
+				<span
+					className="w-6 h-6 flex items-center justify-center hover:bg-gray-200 rounded-sm"
+					onClick={() => openDeleteTagPopup(tag)}
+				>
+					<DeleteIcon className="text-red-800" />
+				</span>
 			</td>
 		</tr>
 	);

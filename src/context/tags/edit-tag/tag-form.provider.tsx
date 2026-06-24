@@ -7,10 +7,14 @@ import { TagFormContext } from "./tag-form.context";
 import { useTags } from "../../../hooks/tags";
 
 export const TagFormProvider: FC<IDefaultComponentProps> = ({ children }) => {
-	const { updateTag, addTag } = useTags();
+	const { updateTag, addTag, deleteTag: deleteTagFromContext } = useTags();
 	const [editTagId, setEditTagId] = useState<string | undefined>(undefined);
+	const [deleteTagId, setDeleteTagId] = useState<string | undefined>(
+		undefined,
+	);
 	const [tagName, setTagName] = useState<string>("");
 	const [tagFormPopup, setTagFormPopup] = useState<boolean>(false);
+	const [deleteTagPopup, setDeleteTagPopup] = useState<boolean>(false);
 	const [tagError, setTagError] = useState<string | undefined>(undefined);
 	const [folderId, setFolderId] = useState<string | undefined>(undefined);
 
@@ -77,6 +81,25 @@ export const TagFormProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		addTag(tag);
 	};
 
+	const deleteTag = async (tagId: string) => {
+		const request = apiClient.delete(`/tags/${tagId}`);
+
+		toast.promise(request, {
+			success: "Tag deleted successfully",
+			error: "Error deleting tag",
+			loading: "Deleting tag...",
+		});
+
+		try {
+			await request;
+			deleteTagFromContext(tagId);
+		} catch {
+			console.error("Error deleting tag");
+		}
+
+		closeDeleteTagPopup();
+	};
+
 	const openCreateTagPopup = () => {
 		setTagError(undefined);
 		setEditTagId(undefined);
@@ -93,8 +116,20 @@ export const TagFormProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		setTagFormPopup(true);
 	};
 
+	const openDeleteTagPopup = (tag: Tag) => {
+		setFolderId(undefined);
+		setTagError(undefined);
+		setDeleteTagId(tag.id);
+		setTagName(tag.name);
+		setDeleteTagPopup(true);
+	};
+
 	const closeTagFormPopup = () => {
 		setTagFormPopup(false);
+	};
+
+	const closeDeleteTagPopup = () => {
+		setDeleteTagPopup(false);
 	};
 
 	return (
@@ -105,14 +140,19 @@ export const TagFormProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				editTagId,
 				tagFormPopup,
 				tagError,
+				deleteTagId,
+				deleteTagPopup,
 				setTagName,
 				updateTagValue,
 				setTagError,
 				openEditTagPopup,
 				closeTagFormPopup,
 				openCreateTagPopup,
+				openDeleteTagPopup,
+				closeDeleteTagPopup,
 				createTag,
 				setFolderId,
+				deleteTag,
 			}}
 		>
 			{children}

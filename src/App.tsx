@@ -11,6 +11,11 @@ import Tags from "./screens/tags";
 import ContextProviderWrapper from "./context/context-provider-wrapper";
 
 function App() {
+	const isPWA =
+		window.matchMedia("(display-mode: standalone)").matches ||
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		(window.navigator as any).standalone === true;
+
 	return (
 		<AuthProvider>
 			<Router>
@@ -55,7 +60,12 @@ function App() {
 					</Routes>
 				</div>
 			</Router>
-			<Toaster position="top-right" />
+			<Toaster
+				position="top-right"
+				containerStyle={{
+					marginTop: isPWA ? "env(safe-area-inset-top)" : "0px",
+				}}
+			/>
 		</AuthProvider>
 	);
 }

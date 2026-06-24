@@ -1,5 +1,5 @@
 import { useExpenses } from "@/hooks/expenses/use-expenses";
-import Loader from "../shared/ui/loader";
+import ExpenseLoader from "../shared/ui/loaders/expense-loader";
 import { useEffect } from "react";
 import cn from "@/lib/cn";
 import ExpensesByDateCard from "./expenses-by-date-card";
@@ -27,7 +27,9 @@ const ExpenseList = ({ className }: { className?: string }) => {
 		if (fetching)
 			return (
 				<span className="w-full">
-					<Loader className="mx-auto my-[10%]" />
+					{Array.from({ length: 4 }).map(() => (
+						<ExpenseLoader />
+					))}
 				</span>
 			);
 
@@ -36,7 +38,7 @@ const ExpenseList = ({ className }: { className?: string }) => {
 
 	return (
 		<div className={cn("overflow-y-scroll w-full", className)}>
-			<div className="flex py-2 px-3 font-semibold bg-indigo-600 text-[18px] text-white sticky top-0">
+			<div className="flex py-2 px-3 font-semibold bg-indigo-600 text-[18px] text-white sticky top-0 z-10">
 				<p className="hidden sm:block w-[4%]"></p>
 				<p className="w-[40%]">Remark</p>
 				<p className="w-[28%] invisible sm:visible">Tag</p>

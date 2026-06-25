@@ -31,7 +31,7 @@ const Expenses = () => {
 	}, [folder]);
 
 	return (
-		<div className="mx-auto pt-2 h-full overflow-hidden overflow-y-scroll flex flex-col">
+		<div className="mx-auto sm:pt-2 h-full overflow-hidden overflow-y-scroll flex flex-col">
 			<span className="flex items-center mt-4 mx-2 sm:mx-4">
 				<p className="text-xl hidden sm:block font-semibold">
 					Expenses

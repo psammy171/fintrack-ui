@@ -67,7 +67,7 @@ const Header: FC<Props> = ({ isHome }) => {
 
 	return (
 		<header
-			className={`flex items-center w-full gap-x-4 sticky z-10 top-0 bg-indigo-600`}
+			className={`flex items-center w-full gap-x-4 sticky z-20 top-0 bg-indigo-600`}
 			style={{
 				paddingTop:
 					isHome && isPWA ? "env(safe-area-inset-top)" : "0px",
@@ -94,7 +94,7 @@ const Header: FC<Props> = ({ isHome }) => {
 						} transition-all duration-300 p-4 rounded-lg text-gray-800 shadow-lg`}
 						onClick={(e) => e.stopPropagation()}
 					>
-						<span className="flex items-center gap-x-3">
+						<span className="flex items-center gap-x-3 z-20">
 							<span className="border-2 border-gray-700 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer peer text-lg">
 								{userContext.firstName.charAt(0)}
 							</span>

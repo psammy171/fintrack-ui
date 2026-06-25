@@ -1,11 +1,13 @@
 import type { PublicUser } from "@/types/public-user";
 import type { FC } from "react";
 import CheckBox from "../shared/ui/check-box";
+import UserLoader from "../shared/ui/loaders/user-loader";
 
 interface Props {
 	searchedUsers: PublicUser[];
 	selectedUsers: PublicUser[];
 	sharedUsers: PublicUser[];
+	searching: boolean;
 	selectUser: (user: PublicUser) => void;
 }
 
@@ -14,6 +16,7 @@ const PublicUserList: FC<Props> = ({
 	selectedUsers,
 	sharedUsers,
 	selectUser,
+	searching,
 }) => {
 	const isUserSelected = (user: PublicUser): boolean => {
 		return selectedUsers.some(
@@ -41,22 +44,34 @@ const PublicUserList: FC<Props> = ({
 
 	return (
 		<div className="flex flex-col gap-y-2">
-			{searchedUsers.length === 0 && selectedUsers.length === 0 ? (
-				<p className="text-center my-4">No users found</p>
+			{searching ? (
+				<span>
+					{Array.from({ length: 3 }).map(() => (
+						<UserLoader />
+					))}
+				</span>
 			) : (
 				<>
-					{getCombinedUsers(selectedUsers, searchedUsers).map(
-						(user) => (
-							<UserComponent
-								user={user}
-								isUserSelected={isUserSelected(user)}
-								selectUser={selectUser}
-								isUserAlreadyShared={sharedUsers.some(
-									(sharedUser) => sharedUser.id === user.id,
-								)}
-								key={user.id}
-							/>
-						),
+					{searchedUsers.length === 0 &&
+					selectedUsers.length === 0 ? (
+						<p className="text-center my-4">No users found</p>
+					) : (
+						<>
+							{getCombinedUsers(selectedUsers, searchedUsers).map(
+								(user) => (
+									<UserComponent
+										user={user}
+										isUserSelected={isUserSelected(user)}
+										selectUser={selectUser}
+										isUserAlreadyShared={sharedUsers.some(
+											(sharedUser) =>
+												sharedUser.id === user.id,
+										)}
+										key={user.id}
+									/>
+								),
+							)}
+						</>
 					)}
 				</>
 			)}
@@ -78,20 +93,27 @@ const UserComponent = ({
 	isUserAlreadyShared: boolean;
 }) => {
 	return (
-		<div key={user.id} className="flex items-center gap-x-2">
+		<div
+			key={user.id}
+			className="flex items-start gap-x-2 border-b pb-3 px-2"
+		>
 			<CheckBox
 				disabled={isUserAlreadyShared}
 				checked={isUserAlreadyShared || isUserSelected}
 				onChange={() => !isUserAlreadyShared && selectUser(user)}
+				className="mt-1.5"
 			/>
 			<span
 				className="cursor-pointer"
 				onClick={() => !isUserAlreadyShared && selectUser(user)}
 			>
-				{user.firstName} {user.lastName}
+				<p>
+					{user.firstName} {user.lastName}
+				</p>
+				<p className="text-sm text-gray-500">@{user.userName}</p>
 			</span>
 			{isUserAlreadyShared && (
-				<span className="text-xs border rounded-lg px-2 bg-indigo-100 text-indigo-600 border-indigo-600">
+				<span className="text-xs border rounded-lg px-2 bg-indigo-100 text-indigo-600 border-indigo-600 mt-1">
 					Shared
 				</span>
 			)}

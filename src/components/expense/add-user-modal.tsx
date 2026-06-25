@@ -12,13 +12,17 @@ import shareWithUser from "@/assets/share-with-user.png";
 import BackIcon from "../shared/icons/back";
 import toast from "react-hot-toast";
 import { useAuth } from "@/auth/hooks/use-auth";
+import UserLoader from "../shared/ui/loaders/user-loader";
 
 const AddUserModal = () => {
 	const { userContext } = useAuth();
 	const [search, setSearch] = useState("");
+	const [searching, setSearching] = useState(false);
 	const [searchedUsers, setSearchedUsers] = useState<PublicUser[]>([]);
 	const [selectedUsers, setSelectedUsers] = useState<PublicUser[]>([]);
 	const [sharedUsers, setSharedUsers] = useState<PublicUser[]>([]);
+	const [fetchingSharedFolderUsers, setFetchingSharedFolderUsers] =
+		useState(false);
 	const { shareFolder, addUserModal, closeAddUserModal } = useCreateFolders();
 	const [addUserTab, setAddUserTab] = useState<boolean>(false);
 
@@ -26,10 +30,17 @@ const AddUserModal = () => {
 		const fetchSharedUsers = async () => {
 			if (!shareFolder || !addUserModal) return;
 
-			const response = await apiClient.get(
-				`/folders/${shareFolder.id}/shared-users`,
-			);
-			setSharedUsers(response.data.data);
+			setFetchingSharedFolderUsers(true);
+			try {
+				const response = await apiClient.get(
+					`/folders/${shareFolder.id}/shared-users`,
+				);
+				setSharedUsers(response.data.data);
+			} catch {
+				console.error("Error while fetching shared folder users");
+			} finally {
+				setFetchingSharedFolderUsers(false);
+			}
 		};
 		fetchSharedUsers();
 	}, [shareFolder, addUserModal]);
@@ -40,8 +51,16 @@ const AddUserModal = () => {
 				setSearchedUsers([]);
 				return;
 			}
-			const response = await apiClient.get(`/users?search=${search}`);
-			setSearchedUsers(response.data.data);
+
+			setSearching(true);
+			try {
+				const response = await apiClient.get(`/users?search=${search}`);
+				setSearchedUsers(response.data.data);
+			} catch {
+				console.error("Error while searching users");
+			} finally {
+				setSearching(false);
+			}
 		};
 		searchUsers();
 	}, [search]);
@@ -132,24 +151,51 @@ const AddUserModal = () => {
 							)}
 						</span>
 						<div className="flex-grow">
-							{sharedUsers.length === 0 ? (
-								<div className="flex flex-col items-center gap-y-2 py-4">
-									<p className="mt-10">No users yet!</p>
-									<Button
-										variant="primary"
-										onClick={() => setAddUserTab(true)}
-									>
-										Add user
-									</Button>
-								</div>
+							{fetchingSharedFolderUsers ? (
+								<span>
+									{Array.from({ length: 3 }).map(() => (
+										<UserLoader />
+									))}
+								</span>
 							) : (
 								<>
-									{sharedUsers.map((user) => (
-										<p
-											key={user.id}
-											className="border-b p-2"
-										>{`${user.firstName} ${user.lastName}`}</p>
-									))}
+									{sharedUsers.length === 0 ? (
+										<div className="flex flex-col items-center gap-y-2 py-4">
+											<p className="mt-10">
+												No users yet!
+											</p>
+											<Button
+												variant="primary"
+												onClick={() =>
+													setAddUserTab(true)
+												}
+											>
+												Add user
+											</Button>
+										</div>
+									) : (
+										<>
+											{sharedUsers.map((user) => (
+												<div
+													key={user.id}
+													className="border-b px-3 py-2"
+												>
+													<span className="flex">
+														<p>{`${user.firstName} ${user.lastName}`}</p>
+														{user.id ===
+														user.ownerId ? (
+															<p className="h-4.5 border rounded-full border-green-800 text-green-800 ml-2 mt-1 px-2 text-xs bg-green-100">
+																Admin
+															</p>
+														) : null}
+													</span>
+													<p className="text-gray-500 text-sm">
+														@{user.userName}
+													</p>
+												</div>
+											))}
+										</>
+									)}
 								</>
 							)}
 						</div>
@@ -185,12 +231,13 @@ const AddUserModal = () => {
 								</p>
 							</span>
 						) : (
-							<div className="p-2 h-full overflow-hidden overflow-y-scroll">
+							<div className="py-2 h-full overflow-hidden overflow-y-scroll border-t">
 								<PublicUserList
 									searchedUsers={searchedUsers}
 									selectedUsers={selectedUsers}
 									selectUser={selectUser}
 									sharedUsers={sharedUsers}
+									searching={searching}
 								/>
 							</div>
 						)}

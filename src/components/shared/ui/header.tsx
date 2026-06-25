@@ -67,7 +67,7 @@ const Header: FC<Props> = ({ isHome }) => {
 
 	return (
 		<header
-			className={`flex items-center w-full gap-x-4 sticky z-10 top-0 bg-indigo-600`}
+			className={`flex items-center w-full gap-x-4 sticky z-20 top-0 bg-indigo-600`}
 			style={{
 				paddingTop:
 					isHome && isPWA ? "env(safe-area-inset-top)" : "0px",

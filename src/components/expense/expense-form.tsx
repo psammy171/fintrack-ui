@@ -9,6 +9,7 @@ import { useState } from "react";
 import BackIcon from "../shared/icons/back";
 import { useExpenses } from "@/hooks/expenses/use-expenses";
 import { useAuth } from "@/auth/hooks/use-auth";
+import type { PublicUser } from "@/types/public-user";
 
 const ExpenseForm = () => {
 	const [userShareTab, setUserShareTab] = useState(false);
@@ -40,10 +41,15 @@ const ExpenseForm = () => {
 		if (folder && folder.shared) {
 			if (!userShareTab) {
 				if (userContext) {
-					setExpenseValue("paidBy", {
+					const user: PublicUser = {
 						id: userContext.userId,
+						userName: "",
+						folderId: "",
+						ownerId: "",
 						...userContext,
-					});
+					};
+
+					setExpenseValue("paidBy", user);
 				}
 				preFillUserShares(folder);
 				setUserShareTab(true);

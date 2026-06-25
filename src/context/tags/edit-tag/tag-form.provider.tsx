@@ -96,8 +96,6 @@ export const TagFormProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		} catch {
 			console.error("Error deleting tag");
 		}
-
-		closeDeleteTagPopup();
 	};
 
 	const openCreateTagPopup = () => {

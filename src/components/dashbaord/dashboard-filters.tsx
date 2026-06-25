@@ -27,6 +27,33 @@ const DashboardFilters: FC<Props> = ({
 		setFolder(folders.find((f) => f.id === option.id));
 	};
 
+	const onStartDateChangeHandler = (
+		e: React.ChangeEvent<HTMLInputElement>,
+	) => {
+		const dateString = e.target.value;
+		if (!dateString || dateString.trim() === "") {
+			const now = new Date();
+			setStartDate(
+				new Date(
+					now.getFullYear(),
+					now.getMonth(),
+					1,
+				).toLocaleDateString("en-CA"),
+			);
+		} else {
+			setStartDate(e.target.value);
+		}
+	};
+
+	const onEndDateChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const dateString = e.target.value;
+		if (!dateString || dateString.trim() === "") {
+			setEndDate(new Date().toLocaleDateString("en-CA"));
+		} else {
+			setEndDate(e.target.value);
+		}
+	};
+
 	return (
 		<span className="flex flex-col sm:flex-row sm:items-center gap-4 mt-4 border-b pb-4 mb-6">
 			<span className="grid grid-cols-2 gap-x-4">
@@ -42,7 +69,7 @@ const DashboardFilters: FC<Props> = ({
 						id="start-date"
 						value={startDate}
 						max={endDate}
-						onChange={(e) => setStartDate(e.target.value)}
+						onChange={onStartDateChangeHandler}
 						className="bg-white border w-full sm:w-auto"
 					/>
 				</span>
@@ -59,7 +86,7 @@ const DashboardFilters: FC<Props> = ({
 						id="end-date"
 						value={endDate}
 						min={startDate}
-						onChange={(e) => setEndDate(e.target.value)}
+						onChange={onEndDateChangeHandler}
 						className="bg-white border w-full sm:w-auto"
 					/>
 				</span>

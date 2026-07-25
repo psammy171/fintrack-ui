@@ -28,12 +28,7 @@ const AllTags = () => {
 				{ownedTags.length > 0 ? (
 					<tbody>
 						{ownedTags.map((tag, index) => (
-							<TagCard
-								key={tag.id}
-								tag={tag}
-								index={index}
-								className="last:border-b-transparent"
-							/>
+							<TagCard key={tag.id} tag={tag} index={index} />
 						))}
 					</tbody>
 				) : (

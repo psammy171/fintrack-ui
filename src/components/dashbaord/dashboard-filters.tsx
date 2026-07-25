@@ -64,14 +64,16 @@ const DashboardFilters: FC<Props> = ({
 					>
 						Start Date
 					</label>
-					<Input
-						type="date"
-						id="start-date"
-						value={startDate}
-						max={endDate}
-						onChange={onStartDateChangeHandler}
-						className="bg-white border w-full sm:w-auto"
-					/>
+					<span className="flex">
+						<Input
+							type="date"
+							id="start-date"
+							value={startDate}
+							max={endDate}
+							onChange={onStartDateChangeHandler}
+							className="bg-white border w-full sm:w-auto"
+						/>
+					</span>
 				</span>
 
 				<span className="flex-grow">
@@ -81,14 +83,16 @@ const DashboardFilters: FC<Props> = ({
 					>
 						End Date
 					</label>
-					<Input
-						type="date"
-						id="end-date"
-						value={endDate}
-						min={startDate}
-						onChange={onEndDateChangeHandler}
-						className="bg-white border w-full sm:w-auto"
-					/>
+					<span className="flex">
+						<Input
+							type="date"
+							id="end-date"
+							value={endDate}
+							min={startDate}
+							onChange={onEndDateChangeHandler}
+							className="bg-white border w-full sm:w-auto"
+						/>
+					</span>
 				</span>
 			</span>
 			<span className="flex-grow hidden sm:block"></span>

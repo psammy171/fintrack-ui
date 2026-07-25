@@ -30,6 +30,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 		setFolder,
 		folder: selectedFolder,
 		setIsFolderSection,
+		fetchSettlements,
 		setShowSettlements,
 	} = useExpenses();
 	const { openEditForm, openDeleteConfirmationPopUp, openAddUserModal } =
@@ -68,6 +69,11 @@ const FolderCard: FC<Props> = ({ folder }) => {
 			setFolder(folder);
 			setIsFolderSection(false);
 		}
+	};
+
+	const openSettlements = (folder: Folder) => {
+		fetchSettlements(folder);
+		setShowSettlements(true);
 	};
 
 	return (
@@ -139,7 +145,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 							<p>Users</p>
 						</span>
 						<span
-							onClick={() => setShowSettlements(true)}
+							onClick={() => openSettlements(folder)}
 							className={`flex items-center px-2 py-1.5 gap-x-2 border-b border-b-gray-300 hover:bg-gray-200 cursor-pointer text-violet-700`}
 						>
 							<SettlementIcon />

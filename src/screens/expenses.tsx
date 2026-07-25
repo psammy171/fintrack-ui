@@ -12,8 +12,7 @@ import Settlements from "@/components/expense/settlements";
 import BackIcon from "@/components/shared/icons/back";
 
 const Expenses = () => {
-	const { folder, fetchSettlements, isFolderSection, setIsFolderSection } =
-		useExpenses();
+	const { folder, isFolderSection, setIsFolderSection } = useExpenses();
 	const { fetchFolders } = useFolders();
 	const { fetchUserOrSharedFolderTags } = useTags();
 	const { openCreateExpensePopUp } = useCreateExpense();
@@ -25,10 +24,6 @@ const Expenses = () => {
 	useEffect(() => {
 		fetchUserOrSharedFolderTags(folder);
 	}, [fetchUserOrSharedFolderTags, folder]);
-
-	useEffect(() => {
-		fetchSettlements(folder);
-	}, [folder]);
 
 	return (
 		<div className="mx-auto sm:pt-2 h-full overflow-hidden overflow-y-scroll flex flex-col">

@@ -17,6 +17,7 @@ interface IExpenseContext {
 	settlements: Settlement[];
 	showSettlements: boolean;
 	isFolderSection: boolean;
+	fetchingSettlements: boolean;
 
 	fetchExpenses: () => void;
 	fetchSettlements: (folder?: Folder) => void;

@@ -19,6 +19,8 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const [isFirstPage, setIsFirstPage] = useState<boolean>(true);
 	const [folder, setFolder] = useState<Folder | undefined>(undefined);
 	const [isFolderSection, setIsFolderSection] = useState<boolean>(true);
+	const [fetchingSettlements, setFetchingSettlements] =
+		useState<boolean>(false);
 
 	const [settlements, setSettlements] = useState<Settlement[]>([]);
 	const [showSettlements, setShowSettlements] = useState<boolean>(false);
@@ -59,8 +61,10 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	};
 
 	const fetchSettlements = async (folder?: Folder) => {
+		setFetchingSettlements(true);
 		if (!folder || !folder.shared) {
 			setSettlements([]);
+			setFetchingSettlements(false);
 			return;
 		}
 		try {
@@ -73,6 +77,8 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 			console.error(
 				"Error fetching settlements : " + (error as Error).message,
 			);
+		} finally {
+			setFetchingSettlements(false);
 		}
 	};
 
@@ -113,6 +119,7 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 				setFetching,
 				nextPage,
 				prevPage,
+				fetchingSettlements,
 				setShowSettlements,
 				pageNumber,
 				isLastPage,

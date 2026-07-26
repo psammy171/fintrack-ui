@@ -1,4 +1,4 @@
-import { useCallback, useState, type FC } from "react";
+import { useCallback, useRef, useState, type FC } from "react";
 import type { Tag } from "../../../types/tag";
 import type { IDefaultComponentProps } from "../../../interfaces/default-component-props.interface";
 import apiClient from "../../../lib/axios";
@@ -6,6 +6,7 @@ import { TagsContext } from "./tags.context";
 import type { Folder } from "@/types/folder";
 
 export const TagsProvider: FC<IDefaultComponentProps> = ({ children }) => {
+	const searchRef = useRef<string>("");
 	const [tags, setTags] = useState<Tag[]>([]);
 	const [fetching, setFetching] = useState<boolean>(false);
 	const [fetchError, setFetchError] = useState<string | undefined>(undefined);
@@ -32,13 +33,15 @@ export const TagsProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		}
 	}, []);
 
-	const fetchOwnedTags = useCallback(async () => {
+	const fetchOwnedTags = async (search?: string) => {
 		try {
-			if (ownedTags.length > 0) return;
+			if (ownedTags.length > 0 && searchRef.current === search) return;
+			searchRef.current = search || "";
 			setFetchingOwnedTags(true);
 			const response = await apiClient.get("/tags", {
 				params: {
 					scope: "owned",
+					search,
 				},
 			});
 			setOwnedTags(response.data);
@@ -49,7 +52,7 @@ export const TagsProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		} finally {
 			setFetchingOwnedTags(false);
 		}
-	}, [ownedTags.length]);
+	};
 
 	const addTag = (tag: Tag) => {
 		setOwnedTags((prevTags) => [...prevTags, tag]);

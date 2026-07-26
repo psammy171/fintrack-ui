@@ -12,7 +12,7 @@ interface ITagsContext {
 	ownedTags: Tag[];
 
 	fetchUserOrSharedFolderTags: (folder?: Folder) => void;
-	fetchOwnedTags: () => void;
+	fetchOwnedTags: (search?: string) => void;
 
 	deleteTag: (tagId: string) => void;
 

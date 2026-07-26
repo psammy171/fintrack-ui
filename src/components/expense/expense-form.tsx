@@ -5,7 +5,7 @@ import PopUp from "../shared/ui/pop-up";
 import Dropdown from "../shared/ui/dropdown";
 import Input from "../shared/ui/input";
 import Button from "../shared/ui/button";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BackIcon from "../shared/icons/back";
 import { useExpenses } from "@/hooks/expenses/use-expenses";
 import { useAuth } from "@/auth/hooks/use-auth";
@@ -13,6 +13,7 @@ import type { PublicUser } from "@/types/public-user";
 
 const ExpenseForm = () => {
 	const [userShareTab, setUserShareTab] = useState(false);
+	const nameInputRef = useRef<HTMLInputElement | null>(null);
 
 	const { folder } = useExpenses();
 	const {
@@ -31,6 +32,12 @@ const ExpenseForm = () => {
 
 	const { tags } = useTags();
 	const { userContext } = useAuth();
+
+	useEffect(() => {
+		if (createExpensePopUp && nameInputRef.current) {
+			nameInputRef.current.focus();
+		}
+	}, [createExpensePopUp]);
 
 	const onSubmitHandler = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -81,6 +88,7 @@ const ExpenseForm = () => {
 					<label className="text-[12px]">Remark</label>
 					<Input
 						type="text"
+						ref={nameInputRef}
 						value={createExpense.remark}
 						placeholder="Dinner at bluestone"
 						onFocus={() =>

@@ -69,7 +69,7 @@ const Layout: FC<Props> = ({ children }) => {
 				{children}
 			</div>
 			<div
-				className="w-full grid grid-cols-3 bg-white sm:hidden shrink-0 relative shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
+				className="w-full grid grid-cols-3 bg-gray-100 sm:hidden shrink-0 relative"
 				style={{
 					paddingBottom: isPWA
 						? "env(safe-area-inset-bottom)"

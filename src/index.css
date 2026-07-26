@@ -9,20 +9,16 @@ html {
 
 html,
 body {
-	height: 100%;
+	height: 100vh;
 	margin: 0;
 	width: 100%;
 	overscroll-behavior: none;
-	position: fixed;
-	overflow: hidden;
 }
 
 #root {
 	height: 100%;
 	margin: 0;
 	width: 100%;
-	overscroll-behavior: none;
-	overflow: hidden;
 }
 
 @theme inline {

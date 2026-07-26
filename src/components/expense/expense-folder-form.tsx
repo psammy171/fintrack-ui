@@ -1,12 +1,14 @@
 import { useCreateFolders } from "@/hooks/folders/use-create-folder";
 import PopUp from "../shared/ui/pop-up";
-import type { FormEvent } from "react";
+import { useEffect, useRef, type FormEvent } from "react";
 import Input from "../shared/ui/input";
 import Button from "../shared/ui/button";
 import Switch from "../shared/ui/switch";
 import WarnIcon from "../shared/icons/warn";
 
 const ExpenseFolderForm = () => {
+	const nameInputRef = useRef<HTMLInputElement | null>(null);
+
 	const {
 		isShared,
 		setIsShared,
@@ -25,6 +27,12 @@ const ExpenseFolderForm = () => {
 		submitForm();
 	};
 
+	useEffect(() => {
+		if (formModal && nameInputRef.current) {
+			nameInputRef.current.focus();
+		}
+	}, [formModal]);
+
 	return (
 		<PopUp
 			open={formModal}
@@ -39,6 +47,7 @@ const ExpenseFolderForm = () => {
 					type="text"
 					id="folderName"
 					name="folderName"
+					ref={nameInputRef}
 					value={folderName}
 					placeholder="Fuel"
 					onFocus={() => setFolderNameErr("")}

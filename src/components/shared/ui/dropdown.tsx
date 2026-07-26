@@ -77,7 +77,7 @@ const Dropdown = ({
 			/>
 			{/* ${false ? '-top-20' : 'top-10'} */}
 			<div
-				className={`w-full bg-gray-200 dark:bg-gray-700 shadow-md absolute max-h-72 overflow-y-scroll ${
+				className={`w-full bg-gray-100 dark:bg-gray-700 shadow-md absolute max-h-72 overflow-y-scroll ${
 					isOpen ? "visible" : "hidden"
 				} 
 				 top-10 rounded-sm`}
@@ -87,8 +87,8 @@ const Dropdown = ({
 						key={opt.id}
 						className={`px-2 py-1 dark:text-gray-300 ${
 							selectedValue?.id === opt.id
-								? "bg-violet-700/20"
-								: "hover:bg-violet-100"
+								? "bg-indigo-200"
+								: "hover:bg-indigo-50"
 						} cursor-pointer ${
 							indx !== 0 ? "border-t" : ""
 						} border-t-gray-300 dark:border-t-gray-500`}

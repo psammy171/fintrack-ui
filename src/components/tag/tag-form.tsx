@@ -1,4 +1,4 @@
-import { type FormEvent } from "react";
+import { useEffect, useRef, type FormEvent } from "react";
 import { useTagForm } from "../../hooks/tags";
 import Input from "../shared/ui/input";
 import PopUp from "../shared/ui/pop-up";
@@ -8,6 +8,8 @@ import Dropdown from "../shared/ui/dropdown";
 import WarnIcon from "../shared/icons/warn";
 
 const TagForm = () => {
+	const nameInputRef = useRef<HTMLInputElement | null>(null);
+
 	const {
 		folderId,
 		tagFormPopup,
@@ -21,6 +23,12 @@ const TagForm = () => {
 		updateTagValue,
 		setFolderId,
 	} = useTagForm();
+
+	useEffect(() => {
+		if (tagFormPopup && nameInputRef.current) {
+			nameInputRef.current.focus();
+		}
+	}, [tagFormPopup]);
 
 	const { ownFolders } = useFolders();
 
@@ -52,6 +60,7 @@ const TagForm = () => {
 					<label className="text-[12px]">Tag Name</label>
 					<Input
 						type="text"
+						ref={nameInputRef}
 						placeholder="Enter tag"
 						value={tagName}
 						className="w-full"

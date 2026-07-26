@@ -19,46 +19,44 @@ function App() {
 	return (
 		<AuthProvider>
 			<Router>
-				<div className="bg">
-					<Routes>
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<AuthenticatedRoute>
+								<Home />
+							</AuthenticatedRoute>
+						}
+					/>
+					<Route path="/callback" element={<Callback />} />
+					<Route element={<ContextProviderWrapper />}>
 						<Route
-							path="/"
+							path="/dashboard"
 							element={
 								<AuthenticatedRoute>
-									<Home />
+									<Dashboard />
 								</AuthenticatedRoute>
 							}
 						/>
-						<Route path="/callback" element={<Callback />} />
-						<Route element={<ContextProviderWrapper />}>
-							<Route
-								path="/dashboard"
-								element={
-									<AuthenticatedRoute>
-										<Dashboard />
-									</AuthenticatedRoute>
-								}
-							/>
-							<Route
-								path="/expenses"
-								element={
-									<AuthenticatedRoute>
-										<Expenses />
-									</AuthenticatedRoute>
-								}
-							/>
-							<Route
-								path="/tags"
-								element={
-									<AuthenticatedRoute>
-										<Tags />
-									</AuthenticatedRoute>
-								}
-							/>
-							<Route path="*" element={<NotFound />} />
-						</Route>
-					</Routes>
-				</div>
+						<Route
+							path="/expenses"
+							element={
+								<AuthenticatedRoute>
+									<Expenses />
+								</AuthenticatedRoute>
+							}
+						/>
+						<Route
+							path="/tags"
+							element={
+								<AuthenticatedRoute>
+									<Tags />
+								</AuthenticatedRoute>
+							}
+						/>
+						<Route path="*" element={<NotFound />} />
+					</Route>
+				</Routes>
 			</Router>
 			<Toaster
 				position="top-right"

@@ -68,7 +68,14 @@ const Layout: FC<Props> = ({ children }) => {
 			<div className="w-full flex-1 overflow-y-auto pl-0 sm:pl-12 bg-white rounded-t-lg sm:rounded-t-none">
 				{children}
 			</div>
-			<div className="w-full grid grid-cols-3 bg-white sm:hidden shrink-0 relative shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+			<div
+				className="w-full grid grid-cols-3 bg-white sm:hidden shrink-0 relative shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
+				style={{
+					paddingBottom: isPWA
+						? "env(safe-area-inset-bottom)"
+						: "8px",
+				}}
+			>
 				<span
 					className={`h-[3px] w-1/3 absolute bg-indigo-600 rounded-b-sm transition-all ${pathName.startsWith("/expenses") ? "left-0" : pathName.startsWith("/dashboard") ? "left-1/3" : "left-2/3"}`}
 				></span>
@@ -122,7 +129,7 @@ const BottomNavigationItem = ({
 		<Link
 			to={item.path}
 			key={item.label}
-			className={`flex items-center gap-1 p-2 flex-col border-t font-semibold ${pathName.startsWith(item.path) ? "text-indigo-600" : "text-gray-600"} transition-colors duration-200`}
+			className={`flex items-center gap-1 px-2 pt-2 flex-col border-t font-semibold ${pathName.startsWith(item.path) ? "text-indigo-600" : "text-gray-600"} transition-colors duration-200`}
 		>
 			{item.icon}
 			<p className="text-sm">{item.label}</p>

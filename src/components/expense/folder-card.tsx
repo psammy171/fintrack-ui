@@ -16,6 +16,8 @@ import SharedUserIcon from "../shared/icons/shared-user";
 import { useAuth } from "@/auth/hooks/use-auth";
 import SharedFolderIcon from "../shared/icons/shared-folder";
 import SettlementIcon from "../shared/icons/settlement";
+import ExitIcon from "../shared/icons/exit";
+import { useExitFolder } from "@/store/folder/folder.store";
 
 interface Props {
 	folder: Folder;
@@ -23,6 +25,7 @@ interface Props {
 
 const FolderCard: FC<Props> = ({ folder }) => {
 	const { userContext } = useAuth();
+	const { setFolderToExit } = useExitFolder();
 
 	const folderCardRef = useRef<HTMLDivElement>(null);
 	const folderOptionsRef = useRef<HTMLDivElement>(null);
@@ -135,7 +138,7 @@ const FolderCard: FC<Props> = ({ folder }) => {
 					<EditIcon />
 					<p>Edit</p>
 				</span>
-				{folder.shared && (
+				{folder.shared ? (
 					<>
 						<span
 							onClick={() => openAddUserModal(folder)}
@@ -151,17 +154,26 @@ const FolderCard: FC<Props> = ({ folder }) => {
 							<SettlementIcon />
 							<p>Settlements</p>
 						</span>
+						<span
+							onClick={() => setFolderToExit(folder)}
+							className={`flex items-center px-2 py-1.5 gap-x-2 border-b border-b-gray-300 hover:bg-gray-200 cursor-pointer text-red-700`}
+						>
+							<ExitIcon />
+							<p>Exit</p>
+						</span>
 					</>
+				) : (
+					<span
+						onClick={() => {
+							if (!folder.shared)
+								openDeleteConfirmationPopUp(folder);
+						}}
+						className={`flex items-center px-2 py-1.5 gap-x-2 hover:bg-gray-200 cursor-pointer text-red-800`}
+					>
+						<DeleteIcon />
+						<p>Delete</p>
+					</span>
 				)}
-				<span
-					onClick={() => {
-						if (!folder.shared) openDeleteConfirmationPopUp(folder);
-					}}
-					className={`flex items-center px-2 py-1.5 gap-x-2 ${folder.shared ? "cursor-not-allowed bg-gray-100 text-gray-400" : "hover:bg-gray-200 cursor-pointer text-red-800"}`}
-				>
-					<DeleteIcon />
-					<p>Delete</p>
-				</span>
 			</div>
 		</div>
 	);

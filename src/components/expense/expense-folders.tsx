@@ -8,6 +8,7 @@ import AddUserModal from "./add-user-modal";
 import cn from "@/lib/cn";
 import Button from "../shared/ui/button";
 import FolderLoader from "../shared/ui/loaders/folder-loader";
+import ExitFolderModal from "./exit-folder-modal";
 
 const ExpenseFolders = ({ className }: { className?: string }) => {
 	const { fetching, folders } = useFolders();
@@ -54,6 +55,7 @@ const ExpenseFolders = ({ className }: { className?: string }) => {
 			<ExpenseFolderForm />
 			<AddUserModal />
 			<DeleteFolderConfirmation />
+			<ExitFolderModal />
 		</div>
 	);
 };

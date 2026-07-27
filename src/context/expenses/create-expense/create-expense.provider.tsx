@@ -188,7 +188,6 @@ export const CreateExpenseProvider: FC<IDefaultComponentProps> = ({
 		key: keyof CreateExpense,
 		value: string | number | Tag | Date | PublicUser | UserShareAmount[],
 	) => {
-		console.log("Setting expense value:", key, value);
 		setCreateExpense((prevValue) => ({
 			...prevValue,
 			[key]: value,

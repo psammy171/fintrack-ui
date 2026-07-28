@@ -10,12 +10,7 @@ export default defineConfig({
 		react(),
 		tailwindcss(),
 		VitePWA({
-			includeAssets: [
-				"favicon.ico",
-				"apple-touch-icon.png",
-				"public/*",
-				"splash/*",
-			],
+			includeAssets: ["favicon.ico", "apple-touch-icon.png", "splash/*"],
 			registerType: "autoUpdate",
 			manifest: {
 				name: "Personal Finance Tool",
@@ -23,6 +18,8 @@ export default defineConfig({
 				start_url: "/expenses",
 				background_color: "#ffffff",
 				theme_color: "#4f39f6",
+				display: "standalone",
+				scope: "/",
 				icons: [
 					{
 						src: "icon-192x192.png",
@@ -44,7 +41,10 @@ export default defineConfig({
 			},
 			workbox: {
 				// defining cached files formats
-				globPatterns: ["**/*.{js,css,html,ico,png,svg,webmanifest}"],
+				globPatterns: [
+					"**/*.{js,css,html,ico,png,jpg,svg,webmanifest}",
+				],
+				navigateFallback: "/index.html",
 				skipWaiting: true,
 				clientsClaim: true,
 				cleanupOutdatedCaches: true,

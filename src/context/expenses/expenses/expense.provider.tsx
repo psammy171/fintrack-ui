@@ -6,10 +6,16 @@ import type { Folder } from "@/types/folder";
 import type { Settlement } from "@/types/settlements";
 import toast from "react-hot-toast";
 import type { ExpensesByDate } from "@/types/expense-by-date";
+import type { ExpenseResponse } from "@/types/expense";
 
 export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 	const [expenses, setExpenses] = useState<ExpensesByDate[]>([]);
 	const [fetching, setFetching] = useState<boolean>(false);
+	const [deleteExpense, setDeleteExpense] = useState<
+		ExpenseResponse | undefined
+	>(undefined);
+	const [deleteExpenseModal, setDeleteExpenseModal] =
+		useState<boolean>(false);
 	const [fetchError, setFetchError] = useState<string | undefined>(undefined);
 	const [pageNumber, setPageNumber] = useState<number>(0);
 	const [pageSize] = useState<number>(50);
@@ -105,9 +111,41 @@ export const ExpenseProvider: FC<IDefaultComponentProps> = ({ children }) => {
 		}
 	};
 
+	const closeDeleteExpenseModal = () => {
+		setDeleteExpense(undefined);
+		setDeleteExpenseModal(false);
+	};
+
+	const openDeleteExpenseModal = (expense: ExpenseResponse) => {
+		setDeleteExpense(expense);
+		setDeleteExpenseModal(true);
+	};
+
+	const deleteExpenseById = async (expenseId: string) => {
+		try {
+			const req = apiClient.delete(`/expenses/${expenseId}`);
+			toast.promise(req, {
+				loading: "Deleting expense...",
+				success: "Expense deleted successfully!",
+				error: "Failed to delete expense.",
+			});
+			await req;
+			fetchExpenses();
+		} catch (error: unknown) {
+			console.error(
+				"Error deleting expense : " + (error as Error).message,
+			);
+		}
+	};
+
 	return (
 		<ExpenseContext.Provider
 			value={{
+				deleteExpense,
+				deleteExpenseModal,
+				closeDeleteExpenseModal,
+				openDeleteExpenseModal,
+				deleteExpenseById,
 				showSettlements,
 				expenses,
 				fetching,

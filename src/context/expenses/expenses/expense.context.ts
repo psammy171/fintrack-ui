@@ -2,12 +2,18 @@ import { createContext } from "react";
 import type { Folder } from "@/types/folder";
 import type { Settlement } from "@/types/settlements";
 import type { ExpensesByDate } from "@/types/expense-by-date";
+import type { ExpenseResponse } from "@/types/expense";
 
 interface IExpenseContext {
 	fetching: boolean;
 	fetchError?: string;
 	expenses: ExpensesByDate[];
 	total: number;
+	deleteExpense?: ExpenseResponse;
+	deleteExpenseModal: boolean;
+	openDeleteExpenseModal: (expense: ExpenseResponse) => void;
+	closeDeleteExpenseModal: () => void;
+	deleteExpenseById: (expenseId: string) => void;
 	pageNumber: number;
 	isLastPage: boolean;
 	isFirstPage: boolean;

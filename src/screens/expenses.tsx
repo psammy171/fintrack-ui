@@ -10,6 +10,7 @@ import { useTags } from "@/hooks/tags";
 import { useExpenses } from "@/hooks/expenses/use-expenses";
 import Settlements from "@/components/expense/settlements";
 import BackIcon from "@/components/shared/icons/back";
+import DeleteExpenseModal from "@/components/expense/delete-expense-modal";
 
 const Expenses = () => {
 	const { folder, isFolderSection, setIsFolderSection } = useExpenses();
@@ -64,6 +65,7 @@ const Expenses = () => {
 			<Settlements />
 
 			<ExpensePagination />
+			<DeleteExpenseModal />
 		</div>
 	);
 };
